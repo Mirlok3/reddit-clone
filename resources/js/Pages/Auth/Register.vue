@@ -8,6 +8,7 @@ import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 
 const form = useForm({
     name: '',
+    username: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -28,25 +29,31 @@ const submit = () => {
         <form @submit.prevent="submit">
             <div>
                 <BreezeLabel for="name" value="Name" />
-                <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
+                <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus autocomplete="name" />
+                <BreezeInputError class="mt-2" :message="form.errors.name" />
+            </div>
+
+            <div>
+                <BreezeLabel for="username" value="Username" />
+                <BreezeInput id="username" type="text" class="mt-1 block w-full" v-model="form.username" autofocus autocomplete="username" />
                 <BreezeInputError class="mt-2" :message="form.errors.name" />
             </div>
 
             <div class="mt-4">
                 <BreezeLabel for="email" value="Email" />
-                <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autocomplete="username" />
+                <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" autocomplete="username" />
                 <BreezeInputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
                 <BreezeLabel for="password" value="Password" />
-                <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
+                <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" autocomplete="new-password" />
                 <BreezeInputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="mt-4">
                 <BreezeLabel for="password_confirmation" value="Confirm Password" />
-                <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+                <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" autocomplete="new-password" />
                 <BreezeInputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
 
