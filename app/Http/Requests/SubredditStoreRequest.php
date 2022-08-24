@@ -13,7 +13,7 @@ class SubredditStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class SubredditStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'unique:subreddits'],
+            'slug' => ['required', 'unique:subreddits'],
+            'description' => ['required', 'min:5'],
         ];
     }
 }

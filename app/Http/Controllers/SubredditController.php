@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use App\Models\Subreddit;
 use Illuminate\Http\Request;
+use App\Http\Requests\SubredditStoreRequest;
 
 class SubredditController extends Controller
 {
@@ -23,7 +26,7 @@ class SubredditController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Subreddits/Create');
     }
 
     /**
@@ -32,9 +35,11 @@ class SubredditController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubredditStoreRequest $request)
     {
-        //
+        Subreddit::create($request->validated() + ['user_id' => auth()->id()]);
+
+        return back();
     }
 
     /**
