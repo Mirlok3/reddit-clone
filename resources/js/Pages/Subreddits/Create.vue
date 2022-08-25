@@ -1,8 +1,10 @@
 <template>
+    <Head title="Create a Subreddit"></Head>
+
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create a subreddit.
+                Create a Subreddit.
             </h2>
         </template>
 

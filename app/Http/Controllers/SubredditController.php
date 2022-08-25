@@ -16,7 +16,9 @@ class SubredditController extends Controller
      */
     public function index()
     {
-        //
+        $subreddits = Subreddit::all();
+
+        return Inertia::render('Subreddits/Index', compact('subreddits'));
     }
 
     /**
@@ -39,7 +41,7 @@ class SubredditController extends Controller
     {
         Subreddit::create($request->validated() + ['user_id' => auth()->id()]);
 
-        return back();
+        return to_route('subreddits.index');
     }
 
     /**
