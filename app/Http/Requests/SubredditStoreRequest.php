@@ -25,7 +25,6 @@ class SubredditStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'unique:subreddits'],
-            'slug' => ['required', 'unique:subreddits'],
             'description' => ['required', 'min:5'],
         ];
     }

@@ -1,10 +1,10 @@
 <template>
-    <Head title="Create a Subreddit"></Head>
+    <Head title="Edit a Subreddit"></Head>
 
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create a Subreddit.
+                Edit a Subreddit.
             </h2>
         </template>
 
@@ -29,7 +29,7 @@
                         <div class="flex items-center justify-end mt-4">
                             <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }"
                                 :disabled="form.processing">
-                                Store
+                                Edit
                             </BreezeButton>
                         </div>
                     </form>
@@ -49,18 +49,15 @@ import BreezeInputError from '@/Components/InputError.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
 
-defineProps({
-    errors:Object,
+const props = defineProps({
+    subreddit: Object,
+    errors: Object,
 });
 
-const form = useForm({
-    name: '',
-    description: '',
-    slug: '',
-});
+const form = useForm(props.subreddit);
 
 const submit = () => {
-    form.post(route('subreddits.store'));
+    form.put(route("subreddits.update", props.subreddit.id));
 };
 
 </script>

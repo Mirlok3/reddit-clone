@@ -61,9 +61,9 @@ class SubredditController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Subreddit $subreddit)
     {
-        //
+        return Inertia::render('Subreddits/Edit', compact('subreddit'));
     }
 
     /**
@@ -73,9 +73,11 @@ class SubredditController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SubredditStoreRequest $request,Subreddit $subreddit)
     {
-        //
+        $subreddit->update($request->validated());
+
+        return to_route('subreddits.index');
     }
 
     /**

@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Subreddit extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     protected $fillable = [
         'user_id',
@@ -15,4 +16,13 @@ class Subreddit extends Model
         'description',
         'slug',
     ];
+
+    public function sluggable(): array
+    {
+        return[
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }
