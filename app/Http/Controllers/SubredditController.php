@@ -41,7 +41,7 @@ class SubredditController extends Controller
     {
         Subreddit::create($request->validated() + ['user_id' => auth()->id()]);
 
-        return to_route('subreddits.index');
+        return to_route('subreddits.index')->with('message', 'Subreddit created succesfully.');
     }
 
     /**
@@ -77,7 +77,7 @@ class SubredditController extends Controller
     {
         $subreddit->update($request->validated());
 
-        return to_route('subreddits.index');
+        return to_route('subreddits.index')->with('message', 'Subreddit updated succesfully.');
     }
 
     /**
@@ -86,8 +86,10 @@ class SubredditController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Subreddit $subreddit)
     {
-        //
+        $subreddit->delete();
+
+        return back()->with('message', 'Subreddit deleted succesfully.');
     }
 }
