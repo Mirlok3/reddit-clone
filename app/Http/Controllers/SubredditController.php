@@ -16,7 +16,11 @@ class SubredditController extends Controller
      */
     public function index()
     {
-        $subreddits = Subreddit::all();
+        $subreddits = Subreddit::paginate(5)->through(fn($subreddit) => [
+            'id' => $subreddit->id,
+            'name' => $subreddit->name,
+            'slug' => $subreddit->slug,
+        ]);
 
         return Inertia::render('Subreddits/Index', compact('subreddits'));
     }

@@ -36,7 +36,7 @@
                                             </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-200 bg-white">
-                                            <tr v-for="subreddit in subreddits" :key="subreddit.id">
+                                            <tr v-for="subreddit in subreddits.data" :key="subreddit.id">
                                                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ subreddit.name }}</td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ subreddit.slug }}</td>
 
@@ -49,6 +49,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <div class="m-2 p-2">
+                                        <Pagination :links="subreddits.links"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -62,6 +65,7 @@
 <script setup>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import Pagination from '../../Components/Pagination.vue';
 
 defineProps({
     subreddits: Object
