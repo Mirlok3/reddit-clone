@@ -3,8 +3,9 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-use App\Http\Controllers\SubredditController;
-use App\Http\Controllers\Frontend\CommunityController;
+use App\Http\Controllers\Backend\SubredditController;
+use App\Http\Controllers\Backend\SubredditPostController;
+use App\Http\Controllers\Frontend\SubredditController as FrontendSubredditController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -15,14 +16,15 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/r/{slug}', [CommunityController::class, 'show'])->name('community.show');
+Route::get('/r/{slug}', [FrontendSubredditController::class, 'show'])->name('community.show');
 
 Route::group(['middleware' => ['auth', 'verified']], function (){
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
+    })->name('dashboard');
 
     Route::resource('/dashboard/subreddits', SubredditController::class);
+    Route::resource('/dashboard/subreddits.posts', SubredditPostController::class);
 });
 
 require __DIR__.'/auth.php';

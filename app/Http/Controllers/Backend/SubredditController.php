@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use Inertia\Inertia;
 use App\Models\Subreddit;
 use Illuminate\Http\Request;
 use App\Http\Requests\SubredditStoreRequest;
+use App\Http\Controllers\Controller;
 
 class SubredditController extends Controller
 {
