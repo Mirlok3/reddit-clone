@@ -16,7 +16,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/r/{slug}', [FrontendSubredditController::class, 'show'])->name('community.show');
+Route::get('/r/{slug}', [FrontendSubredditController::class, 'show'])->name('frontend.subreddits.show');
 
 Route::group(['middleware' => ['auth', 'verified']], function (){
     Route::get('/dashboard', function () {

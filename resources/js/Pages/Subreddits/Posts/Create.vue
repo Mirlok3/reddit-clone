@@ -4,7 +4,7 @@
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create a Subreddit.
+                Create a post for r/{{ subreddit.name }}.
             </h2>
         </template>
 
@@ -12,11 +12,18 @@
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="max-w-md mx-auto bg-white m-2 p-6">
                     <form @submit.prevent="submit">
+                        <div>
+                            <BreezeLabel for="title" value="Title" />
+                            <BreezeInput id="title" type="text" class="mt-1 block w-full" v-model="form.title" autofocus
+                                autocomplete="title" />
+                            <BreezeInputError class="mt-2" :message="form.errors.title" />
+                        </div>
+
                         <div class="mt-4">
-                            <BreezeLabel for="name" value="Name" />
-                            <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus
-                                autocomplete="name" />
-                            <BreezeInputError class="mt-2" :message="form.errors.name" />
+                            <BreezeLabel for="url" value="Url" />
+                            <BreezeInput id="url" type="text" class="mt-1 block w-full" v-model="form.url" autofocus
+                                autocomplete="url" />
+                            <BreezeInputError class="mt-2" :message="form.errors.url" />
                         </div>
 
                         <div class="mt-4">
@@ -29,7 +36,7 @@
                         <div class="flex items-center justify-end mt-4">
                             <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }"
                                 :disabled="form.processing">
-                                Store
+                                Post
                             </BreezeButton>
                         </div>
                     </form>
@@ -49,18 +56,19 @@ import BreezeInputError from '@/Components/InputError.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
 
-defineProps({
-    errors:Object,
+const props = defineProps({
+    subreddit: Object,
+    errors: Object,
 });
 
 const form = useForm({
-    name: '',
-    description: '',
-    slug: '',
+    title: "",
+    description: "",
+    url: "",
 });
 
 const submit = () => {
-    form.post(route('subreddits.store'));
+    form.post(route("subreddits.posts.store", props.subreddit.slug));
 };
 
 </script>

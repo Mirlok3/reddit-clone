@@ -26,7 +26,7 @@ const submit = () => {
     <BreezeGuestLayout>
         <Head title="Register" />
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" class="max-w-md mx-auto bg-white shadow rounded-md p-6">
             <div>
                 <BreezeLabel for="name" value="Name" />
                 <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus autocomplete="name" />
