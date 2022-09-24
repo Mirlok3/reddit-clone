@@ -13,7 +13,7 @@ class SubredditController extends Controller
     function show($slug)
     {
         $subreddit = Subreddit::where('slug', $slug)->first();
-        $posts = SubredditPostResource::collection($subreddit->posts()->paginate(12));
+        $posts = SubredditPostResource::collection($subreddit->posts()->with('user')->paginate(3));
 
         return Inertia::render('Frontend/Subreddits/Show', compact('subreddit', 'posts'));
     }
