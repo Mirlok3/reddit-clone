@@ -13,15 +13,8 @@
 
         <section class="flex md:flex-row m-2 p-2">
             <div class="w-8/12">
-                <PostCard v-for="post in posts.data"
-                    :post="post"
-                    :subreddit="subreddit.slug"
-                    :key="post.id"
-                />
-
-                <div class="mt-4 p-2">
-                    <Pagination :links="posts.meta.links" />
-                </div>
+                <h1>{{ post.title }}</h1>
+                Post Details
             </div>
             <div class="w-4/12 p-4">
                 <div class="m-2 p-2 bg-slate-500 text-white">
@@ -40,6 +33,6 @@ import Pagination from "@/Components/Pagination.vue";
 
 defineProps({
     subreddit: Object,
-    posts: Object,
+    post: Object,
 })
 </script>

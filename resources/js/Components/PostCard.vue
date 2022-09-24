@@ -18,20 +18,23 @@
 
             <div class="flex m-2 p-2">
                 <p class="mr-4 p-2">Comments(2)</p>
-                <a href="#" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800">
+                <Link :href="route('frontend.subreddits.posts.show', [subreddit, post.slug])"
+                class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800">
                     Read More
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" strokeWidth={1.5} stroke="currentColor" class="ml-2 mr-1 w-4 h-4">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" />
                     </svg>
-                </a>
+                </Link>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+    import {Link} from "@inertiajs/inertia-vue3"
+
     defineProps({
         post: Object,
         subreddit: String,

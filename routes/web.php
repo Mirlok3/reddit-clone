@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\Backend\SubredditController;
 use App\Http\Controllers\Backend\SubredditPostController;
 use App\Http\Controllers\Frontend\SubredditController as FrontendSubredditController;
@@ -17,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/r/{slug}', [FrontendSubredditController::class, 'show'])->name('frontend.subreddits.show');
+Route::get('/r/{subreddit_slug}/posts/{post:slug}', [PostController::class, 'show'])->name('frontend.subreddits.posts.show');
 
 Route::group(['middleware' => ['auth', 'verified']], function (){
     Route::get('/dashboard', function () {
