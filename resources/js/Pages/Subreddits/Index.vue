@@ -5,7 +5,7 @@
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Subreddits.
+                Your Subreddits
             </h2>
         </template>
 
@@ -41,9 +41,9 @@
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ subreddit.slug }}</td>
 
                                                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                    <Link :href="route('subreddits.edit', subreddit.id)" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</Link>
+                                                    <Link :href="route('subreddits.edit', subreddit.slug)" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</Link>
 
-                                                    <Link :href="route('subreddits.destroy', subreddit.id)"
+                                                    <Link :href="route('subreddits.destroy', subreddit.slug)"
                                                     method="delete" as="button" type="button" class="text-red-600 hover:text-indigo-900">Delete</Link>
                                                 </td>
                                             </tr>

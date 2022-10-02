@@ -57,7 +57,7 @@ const props = defineProps({
 const form = useForm(props.subreddit);
 
 const submit = () => {
-    form.put(route("subreddits.update", props.subreddit.id));
+    form.put(route("subreddits.update", props.subreddit.slug));
 };
 
 </script>

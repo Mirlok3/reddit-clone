@@ -21,12 +21,8 @@ Route::get('/r/{slug}', [FrontendSubredditController::class, 'show'])->name('fro
 Route::get('/r/{subreddit_slug}/posts/{post:slug}', [PostController::class, 'show'])->name('frontend.subreddits.posts.show');
 
 Route::group(['middleware' => ['auth', 'verified']], function (){
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-
-    Route::resource('/dashboard/subreddits', SubredditController::class);
-    Route::resource('/dashboard/subreddits.posts', SubredditPostController::class);
+    Route::resource('/subreddits', SubredditController::class);
+    Route::resource('/subreddits.posts', SubredditPostController::class);
 });
 
 require __DIR__.'/auth.php';
