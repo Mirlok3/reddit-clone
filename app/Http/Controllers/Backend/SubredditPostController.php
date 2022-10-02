@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Post;
 use Inertia\Inertia;
 use App\Models\Subreddit;
 use Illuminate\Http\Request;
@@ -24,6 +25,25 @@ class SubredditPostController extends Controller
             'url' => $request->url,
             'description' => $request->description,
         ]);
+
+        return Redirect::route('frontend.subreddits.show', $subreddit->slug);
+    }
+
+    public function edit(Subreddit $subreddit, Post $post)
+    {
+        return Inertia::render('Subreddits/Posts/Edit', compact('subreddit', 'post'));
+    }
+
+    public function update(StorePostRequest $request, Subreddit $subreddit, Post $post)
+    {
+        $post->update($request->validated());
+
+        return Redirect::route('frontend.subreddits.posts.show', [$subreddit->slug, $post->slug]);
+    }
+
+    public function destroy(Subreddit $subreddit, Post $post)
+    {
+        $post->delete();
 
         return Redirect::route('frontend.subreddits.show', $subreddit->slug);
     }
