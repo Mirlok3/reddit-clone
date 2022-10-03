@@ -17,7 +17,7 @@ class SubredditController extends Controller
      */
     public function index()
     {
-        $subreddits = Subreddit::where('user_id', auth()->id())->paginate(5)->through(fn($subreddit) => [
+        $subreddits = Subreddit::/* where('user_id', auth()->id())-> */paginate(5)->through(fn($subreddit) => [
             'id' => $subreddit->id,
             'name' => $subreddit->name,
             'slug' => $subreddit->slug,

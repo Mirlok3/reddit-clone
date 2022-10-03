@@ -62,6 +62,10 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
+                                        <BreezeDropdownLink :href="route('subreddits.index')" :active="route().current('dashboard')">
+                                            Subreddits
+                                        </BreezeDropdownLink>
+
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out
                                         </BreezeDropdownLink>

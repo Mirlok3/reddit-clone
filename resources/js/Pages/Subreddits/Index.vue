@@ -5,7 +5,7 @@
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Your Subreddits
+                Subreddits
             </h2>
         </template>
 
@@ -37,7 +37,13 @@
                                         </thead>
                                         <tbody class="divide-y divide-gray-200 bg-white">
                                             <tr v-for="subreddit in subreddits.data" :key="subreddit.id">
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ subreddit.name }}</td>
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                    <Link :href="route('frontend.subreddits.show', subreddit.slug)"
+                                                        class="text-blue-500 hover:text-blue-700 font-semibold">
+                                                        {{ subreddit.name }}
+                                                    </Link>
+                                                </td>
+
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ subreddit.slug }}</td>
 
                                                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
