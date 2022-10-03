@@ -68,6 +68,7 @@ class SubredditController extends Controller
      */
     public function edit(Subreddit $subreddit)
     {
+        $this->authorize('update', $subreddit);
         return Inertia::render('Subreddits/Edit', compact('subreddit'));
     }
 
@@ -80,6 +81,7 @@ class SubredditController extends Controller
      */
     public function update(SubredditStoreRequest $request,Subreddit $subreddit)
     {
+        $this->authorize('update', $subreddit);
         $subreddit->update($request->validated());
 
         return to_route('subreddits.index')->with('message', 'Subreddit updated succesfully.');
@@ -93,6 +95,7 @@ class SubredditController extends Controller
      */
     public function destroy(Subreddit $subreddit)
     {
+        $this->authorize('delete', $subreddit);
         $subreddit->delete();
 
         return back()->with('message', 'Subreddit deleted succesfully.');

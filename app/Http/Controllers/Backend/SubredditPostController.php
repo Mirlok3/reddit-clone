@@ -31,11 +31,13 @@ class SubredditPostController extends Controller
 
     public function edit(Subreddit $subreddit, Post $post)
     {
+        $this->authorize('update', $post);
         return Inertia::render('Subreddits/Posts/Edit', compact('subreddit', 'post'));
     }
 
     public function update(StorePostRequest $request, Subreddit $subreddit, Post $post)
     {
+        $this->authorize('update', $post);
         $post->update($request->validated());
 
         return Redirect::route('frontend.subreddits.posts.show', [$subreddit->slug, $post->slug]);
@@ -43,6 +45,7 @@ class SubredditPostController extends Controller
 
     public function destroy(Subreddit $subreddit, Post $post)
     {
+        $this->authorize('delete', $post);
         $post->delete();
 
         return Redirect::route('frontend.subreddits.show', $subreddit->slug);
