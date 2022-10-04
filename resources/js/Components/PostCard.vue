@@ -1,7 +1,7 @@
 <template>
     <div class="p-6 max-w-4xl flex bg-white rounded-lg border border-gray-200 shadow-md mt-4">
         <div class="mr-3">
-            <PostVote />
+            <PostVote :post="post.slug"/>
         </div>
         <div>
             <div class="flex m-2 p-2 text-sm">
