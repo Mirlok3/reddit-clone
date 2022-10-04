@@ -45,8 +45,39 @@
                         <p class="text-slate-700 my-2">{{ post.data.description }}</p>
                         <a :href="post.data.url" class="font-semibold text-blue-500 text-sm hover:text-blue-300">{{ post.data.url }}</a>
                     </div>
+                    <!-- Comments -->
+                    <hr>
+                    <ul role="list" class="divide-y divide-gray-200 m-2 p-2">
+                        <li v-for="(comment, index) in post.data.comments"  :key="index" class="py-4 flex flex-col">
+                            <div class="text-sm text-gray-600">
+                                Commented by<span class="font-semibold ml-1 text-slate-700">{{ comment.username }}</span>
+                            </div>
+
+                            <div class="text-slate-600 m-2 p-2">
+                                {{ comment.content }}
+                            </div>
+                        </li>
+                    </ul>
+                    <div v-if="$page.props.auth.auth_check">
+                        <hr>
+                        <form class="m-2 p-2 max-w-md" @submit.prevent="submit">
+                            <div class="mt-2">
+                                <label for="comment" class="block mb-2 text-sm font-medium text-gray-900">Your Comment</label>
+
+                                <textarea v-model="form.content" id="comment" placeholder="Your comment..."
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300">
+                                </textarea>
+                            </div>
+
+                            <div class="mt-2">
+                                <button class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">Comment</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+
+            <!-- Sidebar -->
             <div class="w-full md:w-4/12 p-4">
                 <div class="m-2 p-2 bg-slate-500 text-white">
                     <h2>Latest Subreddits</h2>
@@ -58,12 +89,23 @@
 
 <script setup>
 import GuestLayout from "@/Layouts/Guest.vue";
-import { Link } from "@inertiajs/inertia-vue3";
-import PostCard from "@/Components/PostCard.vue";
-import Pagination from "@/Components/Pagination.vue";
+import { Link, useForm} from "@inertiajs/inertia-vue3";
 
-defineProps({
+
+const  props = defineProps({
     subreddit: Object,
     post: Object,
 })
+
+const form = useForm({
+    content: ""
+});
+
+const submit = () => {
+    form.post(
+        route("frontend.posts.comments", [props.subreddit.slug, props.post.data.slug]), {
+            onSuccess: () => form.reset('content')
+        }
+    );
+};
 </script>
