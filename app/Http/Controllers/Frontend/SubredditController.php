@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Subreddit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SubredditResource;
 use App\Http\Resources\SubredditPostResource;
 
 class SubredditController extends Controller
@@ -17,6 +18,8 @@ class SubredditController extends Controller
             $query->where('user_id', auth()->id());
         }])->withCount('comments')->paginate(3));
 
-        return Inertia::render('Frontend/Subreddits/Show', compact('subreddit', 'posts'));
+        $subreddits = SubredditResource::collection(Subreddit::withCount('posts')->orderBy('posts_count', 'desc')->take(4)->get());
+
+        return Inertia::render('Frontend/Subreddits/Show', compact('subreddit', 'posts', 'subreddits'));
     }
 }

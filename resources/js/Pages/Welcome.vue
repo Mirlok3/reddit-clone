@@ -12,8 +12,8 @@
                 </div> -->
             </div>
             <div class="w-4/12 p-4">
-                <div class="m-2 p-2 bg-slate-500 text-white">
-                    <h2>Top Subreddits</h2>
+                <div class="m-2 p-2">
+                    <SubredditList :subreddits="subreddits.data" />
                 </div>
             </div>
         </section>
@@ -24,6 +24,7 @@
 import GuestLayout from "@/Layouts/Guest.vue";
 import PostCard from "@/Components/PostCard.vue";
 import Pagination from "@/Components/Pagination.vue";
+import SubredditList from "@/Components/SubredditList.vue";
 
 defineProps({
     subreddits: Object,

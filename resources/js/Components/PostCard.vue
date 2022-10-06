@@ -5,7 +5,9 @@
         </div>
         <div>
             <div class="flex m-2 p-2 text-sm">
-                <span class="font-semibold mr-3 hover:text-indigo-700">r/{{ subreddit }}</span>
+                <Link :href="route('frontend.subreddits.show', subreddit)" class="font-semibold mr-3 hover:text-indigo-700">
+                    r/{{ subreddit }}
+                </Link>
 
                 <div class="flex">
                     Posted by <span class="font-semibold mx-1">{{ post.username }}</span>

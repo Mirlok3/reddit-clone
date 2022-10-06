@@ -8,6 +8,7 @@ use App\Models\Subreddit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostShowResource;
+use App\Http\Resources\SubredditResource;
 
 class PostController extends Controller
 {
@@ -18,6 +19,8 @@ class PostController extends Controller
             $query->where('user_id', auth()->id());
         }])->where('slug', $slug)->first());
 
-        return Inertia::render('Frontend/Posts/Show', compact('subreddit', 'post'));
+        $subreddits = SubredditResource::collection(Subreddit::withCount('posts')->orderBy('posts_count', 'desc')->take(4)->get());
+
+        return Inertia::render('Frontend/Posts/Show', compact('subreddit', 'post', 'subreddits'));
     }
 }

@@ -24,8 +24,18 @@
                 </div>
             </div>
             <div class="w-4/12 p-4">
-                <div class="m-2 p-2 bg-slate-500 text-white">
-                    <h2>Latest Subreddits</h2>
+                <div class="m-2 p-2">
+                    <div class="shadow-md">
+                        <h2 class="font-semibold text-large p-4 bg-indigo-700 text-white rounded-t-lg">
+                            About {{ subreddit.name }}
+                        </h2>
+                        <p class="p-4 bg-white rounded-b-lg">
+                            {{ subreddit.description }}
+                        </p>
+                    </div>
+                </div>
+                <div class="m-2 p-2 mt-6">
+                    <SubredditList :subreddits="subreddits.data" />
                 </div>
             </div>
         </section>
@@ -37,9 +47,11 @@ import GuestLayout from "@/Layouts/Guest.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 import PostCard from "@/Components/PostCard.vue";
 import Pagination from "@/Components/Pagination.vue";
+import SubredditList from "@/Components/SubredditList.vue";
 
 defineProps({
     subreddit: Object,
+    subreddits: Object,
     posts: Object,
 })
 </script>

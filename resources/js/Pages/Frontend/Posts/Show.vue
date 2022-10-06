@@ -54,6 +54,25 @@
                 </div>
                 <!-- Comments -->
                 <div class="m-2 p-2 bg-white shadow-md rounded-lg">
+                    <div v-if="$page.props.auth.auth_check">
+                        <form class="m-2 p-2" @submit.prevent="submit">
+                            <div class="mb-4 w-full bg-gray-50 rounded-lg border border-black">
+                                <div class="flex justify-end bg-slate-200 rounded-t-lg">
+                                    <button class="m-1.5 mr-3 px-4 py-2 bg-gray-500 hover:bg-gray-700 text-white rounded-full text-sm font-bold">
+                                        Comment
+                                    </button>
+                                </div>
+
+                                <div>
+                                    <textarea v-model="form.content" id="comment" placeholder="Say something..." rows="4"
+                                        class="block p-2 w-full text-sm text-gray-800 bg-white border-0 focus:ring-0 rounded-lg">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <hr>
+                    </div>
+
                     <ul role="list" class="divide-y divide-gray-200 m-2 p-2">
                         <li v-for="(comment, index) in post.data.comments"  :key="index" class="py-4 flex flex-col">
                             <div class="text-sm text-gray-600">
@@ -65,29 +84,23 @@
                             </div>
                         </li>
                     </ul>
-                    <div v-if="$page.props.auth.auth_check">
-                        <hr>
-                        <form class="m-2 p-2 max-w-md" @submit.prevent="submit">
-                            <div class="mt-2">
-                                <label for="comment" class="block mb-2 text-sm font-medium text-gray-900">Your Comment</label>
-
-                                <textarea v-model="form.content" id="comment" placeholder="Your comment..."
-                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300">
-                                </textarea>
-                            </div>
-
-                            <div class="mt-2">
-                                <button class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">Comment</button>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
 
             <!-- Sidebar -->
-            <div class="w-full md:w-4/12 p-4">
-                <div class="m-2 p-2 bg-slate-500 text-white">
-                    <h2>Latest Subreddits</h2>
+            <div class="w-4/12 p-4">
+                <div class="m-2 p-2">
+                    <div class="shadow-md">
+                        <h2 class="font-semibold text-large p-4 bg-indigo-700 text-white rounded-t-lg">
+                            About {{ subreddit.name }}
+                        </h2>
+                        <p class="p-4 bg-white rounded-b-lg">
+                            {{ subreddit.description }}
+                        </p>
+                    </div>
+                </div>
+                <div class="m-2 p-2 mt-6">
+                    <SubredditList :subreddits="subreddits.data" />
                 </div>
             </div>
         </section>
@@ -98,9 +111,11 @@
 import GuestLayout from "@/Layouts/Guest.vue";
 import { Link, useForm } from "@inertiajs/inertia-vue3";
 import PostVote from "@/Components/PostVote.vue";
+import SubredditList from "@/Components/SubredditList.vue";
 
 const props = defineProps({
     subreddit: Object,
+    subreddits: Object,
     post: Object,
 });
 
