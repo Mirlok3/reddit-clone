@@ -13,40 +13,47 @@
 
         <section class="flex flex-col md:flex-row m-2 p-2">
             <div class="w-full md:w-8/12">
-                <div class="m-2 p-2 bg-white">
+                <div class="m-2 p-2 bg-white shadow-md rounded-lg">
                     <h2 class="font-semibold text-2xl text-black">
                         <Link :href="route('frontend.subreddits.show', subreddit.slug)">
                             r/{{ subreddit.name }}
                         </Link>
                     </h2>
                 </div>
-                <div class="m-2 p-2 bg-white ">
-                    <div class="flex flex-col justify-between md:flex-row text-sm m-2">
-                        <div class="text-sm text-slate-400">
-                            Posted by
-                            <span class="text-slate-600 ml-1"> {{ post.data.username }}</span>
+                <div class="flex m-2 bg-white shadow-md rounded-lg">
+                    <div>
+                        <PostVote :post="post.data" />
+                    </div>
+                    <div class="w-full">
+                        <div class="flex flex-col justify-between md:flex-row text-sm m-2">
+                            <div class="text-sm text-slate-400">
+                                Posted by
+                                <span class="text-slate-600 ml-1"> {{ post.data.username }}</span>
+                            </div>
+
+                            <div v-if="$page.props.auth.auth_check && post.data.owner">
+                                <Link :href="route('subreddits.posts.edit', [subreddit.slug, post.data.slug])"
+                                    class="font-semibold bg-blue-500 hover:bg-blue-700 rounded-md text-white px-4 py-2">
+                                    Edit
+                                </Link>
+                                <Link :href="route('subreddits.posts.destroy', [subreddit.slug, post.data.slug])"
+                                    method="delete" as="button" type="button"
+                                    class="font-semibold bg-red-500 hover:bg-red-700 rounded-md text-white px-4 py-2 ml-2">
+                                    Delete
+                                </Link>
+                            </div>
                         </div>
 
-                        <div v-if="$page.props.auth.auth_check && post.data.owner">
-                            <Link :href="route('subreddits.posts.edit', [subreddit.slug, post.data.slug])"
-                                class="font-semibold bg-blue-500 hover:bg-blue-700 rounded-md text-white px-4 py-2">
-                                Edit
-                            </Link>
-                            <Link :href="route('subreddits.posts.destroy', [subreddit.slug, post.data.slug])"
-                                method="delete" as="button" type="button"
-                                class="font-semibold bg-red-500 hover:bg-red-700 rounded-md text-white px-4 py-2 ml-2">
-                                Delete
-                            </Link>
+                        <div class="p-2">
+                            <h1 class="font-semibold text-3xl text-black">{{ post.data.title }}</h1>
+                            <p class="text-slate-700 my-2">{{ post.data.description }}</p>
+                            <a :href="post.data.url" class="font-semibold text-blue-500 text-sm hover:text-blue-300">{{ post.data.url }}</a>
                         </div>
-                    </div>
 
-                    <div class="p-2">
-                        <h1 class="font-semibold text-3xl text-black">{{ post.data.title }}</h1>
-                        <p class="text-slate-700 my-2">{{ post.data.description }}</p>
-                        <a :href="post.data.url" class="font-semibold text-blue-500 text-sm hover:text-blue-300">{{ post.data.url }}</a>
                     </div>
-                    <!-- Comments -->
-                    <hr>
+                </div>
+                <!-- Comments -->
+                <div class="m-2 p-2 bg-white shadow-md rounded-lg">
                     <ul role="list" class="divide-y divide-gray-200 m-2 p-2">
                         <li v-for="(comment, index) in post.data.comments"  :key="index" class="py-4 flex flex-col">
                             <div class="text-sm text-gray-600">
@@ -89,22 +96,22 @@
 
 <script setup>
 import GuestLayout from "@/Layouts/Guest.vue";
-import { Link, useForm} from "@inertiajs/inertia-vue3";
+import { Link, useForm } from "@inertiajs/inertia-vue3";
+import PostVote from "@/Components/PostVote.vue";
 
-
-const  props = defineProps({
+const props = defineProps({
     subreddit: Object,
     post: Object,
-})
+});
 
 const form = useForm({
-    content: ""
+    content: "",
 });
 
 const submit = () => {
     form.post(
         route("frontend.posts.comments", [props.subreddit.slug, props.post.data.slug]), {
-            onSuccess: () => form.reset('content')
+            onSuccess: () => form.reset("content")
         }
     );
 };

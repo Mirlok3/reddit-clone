@@ -14,7 +14,9 @@ class PostController extends Controller
     public function show($subreddit_slug, $slug)
     {
         $subreddit = Subreddit::where('slug', $subreddit_slug)->first();
-        $post = new PostShowResource(Post::with('comments')->where('slug', $slug)->first());
+        $post = new PostShowResource(Post::with(['comments', 'postVotes' => function ($query) {
+            $query->where('user_id', auth()->id());
+        }])->where('slug', $slug)->first());
 
         return Inertia::render('Frontend/Posts/Show', compact('subreddit', 'post'));
     }

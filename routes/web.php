@@ -27,8 +27,8 @@ Route::group(['middleware' => ['auth', 'verified']], function (){
     Route::resource('/subreddits', SubredditController::class);
     Route::resource('/subreddits.posts', SubredditPostController::class);
 
-    Route::post('/post/{post:slug}/upVote', [PostVoteController::class, 'upVote'])->name('posts.upVote');
-    Route::post('/post/{post:slug}/downVote', [PostVoteController::class, 'downVote'])->name('posts.downVote');
+    Route::post('/posts/{post:slug}/upVote', [PostVoteController::class, 'upVote'])->name('posts.upVote');
+    Route::post('/posts/{post:slug}/downVote', [PostVoteController::class, 'downVote'])->name('posts.downVote');
 });
 
 require __DIR__.'/auth.php';

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Vote;
 use App\Models\Comment;
 use App\Models\Subreddit;
 use Illuminate\Database\Eloquent\Model;
@@ -50,5 +51,10 @@ class Post extends Model
     public function subreddit()
     {
         return $this->belongsTo(Subreddit::class);
+    }
+
+    public function postVotes()
+    {
+        return $this->hasMany(Vote::class);
     }
 }

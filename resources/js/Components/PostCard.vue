@@ -1,7 +1,7 @@
 <template>
-    <div class="p-6 max-w-4xl flex bg-white rounded-lg border border-gray-200 shadow-md mt-4">
+    <div class=" max-w-4xl flex bg-white rounded-lg border border-gray-200 shadow-md mt-4">
         <div class="mr-3">
-            <PostVote :post="post.slug"/>
+            <PostVote :post="post"/>
         </div>
         <div>
             <div class="flex m-2 p-2 text-sm">
@@ -12,9 +12,9 @@
                 </div>
             </div>
 
-            <a href="#">
+            <Link :href="route('frontend.subreddits.posts.show', [subreddit, post.slug])">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:text-indigo-700">{{ post.title }}</h5>
-            </a>
+            </Link>
 
             <p class="mb-3 font-normal text-gray-700">{{ post.description }}</p>
 

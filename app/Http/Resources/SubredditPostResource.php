@@ -20,6 +20,8 @@ class SubredditPostResource extends JsonResource
             'description' => $this->description,
             'username' => $this->user->username,
             'slug' => $this->slug,
+            'votes' => $this->votes,
+            'postVotes' => $this->whenLoaded('postVotes'),
         ];
     }
 }
