@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\Subreddit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\PostShowResource;
 use App\Http\Resources\SubredditResource;
 
@@ -15,12 +16,18 @@ class PostController extends Controller
     public function show($subreddit_slug, $slug)
     {
         $subreddit = Subreddit::where('slug', $subreddit_slug)->first();
-        $post = new PostShowResource(Post::with(['comments', 'postVotes' => function ($query) {
+
+        $subreddit_post = Post::with(['comments', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());
-        }])->where('slug', $slug)->first());
+        }])->where('slug', $slug)->first();
+
+        $post = new PostShowResource($subreddit_post);
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('posts')->orderBy('posts_count', 'desc')->take(4)->get());
 
-        return Inertia::render('Frontend/Posts/Show', compact('subreddit', 'post', 'subreddits'));
+        $can_update = Auth::user()->can('update', $subreddit_post);
+        $can_delete = Auth::user()->can('delete', $subreddit_post);
+
+        return Inertia::render('Frontend/Posts/Show', compact('subreddit', 'post', 'subreddits','can_update' ,'can_delete'));
     }
 }

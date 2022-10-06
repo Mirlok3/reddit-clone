@@ -31,12 +31,13 @@
                                 <span class="text-slate-600 ml-1"> {{ post.data.username }}</span>
                             </div>
 
-                            <div v-if="$page.props.auth.auth_check && post.data.owner">
-                                <Link :href="route('subreddits.posts.edit', [subreddit.slug, post.data.slug])"
+                            <!-- Edit and delete -->
+                            <div v-if="$page.props.auth.auth_check">
+                                <Link :href="route('subreddits.posts.edit', [subreddit.slug, post.data.slug])" v-if="can_update"
                                     class="font-semibold bg-blue-500 hover:bg-blue-700 rounded-md text-white px-4 py-2">
                                     Edit
                                 </Link>
-                                <Link :href="route('subreddits.posts.destroy', [subreddit.slug, post.data.slug])"
+                                <Link :href="route('subreddits.posts.destroy', [subreddit.slug, post.data.slug])" v-if="can_delete"
                                     method="delete" as="button" type="button"
                                     class="font-semibold bg-red-500 hover:bg-red-700 rounded-md text-white px-4 py-2 ml-2">
                                     Delete
@@ -117,6 +118,8 @@ const props = defineProps({
     subreddit: Object,
     subreddits: Object,
     post: Object,
+    can_update: Boolean,
+    can_delete: Boolean,
 });
 
 const form = useForm({
