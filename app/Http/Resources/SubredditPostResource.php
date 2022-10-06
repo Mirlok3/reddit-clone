@@ -22,6 +22,8 @@ class SubredditPostResource extends JsonResource
             'slug' => $this->slug,
             'votes' => $this->votes,
             'postVotes' => $this->whenLoaded('postVotes'),
+            'subreddit_slug' => $this->subreddit->slug,
+            'comments_count' => $this->comments_count,
         ];
     }
 }

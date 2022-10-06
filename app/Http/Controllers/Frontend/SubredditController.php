@@ -15,7 +15,7 @@ class SubredditController extends Controller
         $subreddit = Subreddit::where('slug', $slug)->firstOrFail();
         $posts = SubredditPostResource::collection($subreddit->posts()->with(['user', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());
-        }])->paginate(3));
+        }])->withCount('comments')->paginate(3));
 
         return Inertia::render('Frontend/Subreddits/Show', compact('subreddit', 'posts'));
     }
