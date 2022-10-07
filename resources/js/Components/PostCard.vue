@@ -9,8 +9,9 @@
                     r/{{ subreddit }}
                 </Link>
 
-                <div class="flex">
-                    Posted by <span class="font-semibold mx-1">{{ post.username }}</span>
+                <div class="flex text-gray-500">
+                    Posted by <span class="text-gray-700 font-semibold mx-1">{{ post.username }}</span>
+                    {{ post.created_at }}
                 </div>
             </div>
 

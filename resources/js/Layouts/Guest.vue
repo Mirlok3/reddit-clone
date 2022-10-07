@@ -20,9 +20,21 @@
                             <div class="flex">
                                 <!-- Logo -->
                                 <div class="shrink-0 flex items-center">
-                                    <Link :href="route('subreddits.index')">
-                                        <BreezeApplicationLogo class="block h-9 w-auto" />
-                                    </Link>
+                                    <div class="flex">
+                                         <!-- Logo -->
+                                        <div class="shrink-0 flex items-center">
+                                            <Link href="/">
+                                                <BreezeApplicationLogo class="block h-9 w-auto" />
+                                            </Link>
+                                        </div>
+
+                                        <!-- Navigation Links -->
+                                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                            <BreezeNavLink :href="route('subreddits.index')" :active="route().current('subreddits.index')">
+                                                Subreddits
+                                            </BreezeNavLink>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- Navigation Links

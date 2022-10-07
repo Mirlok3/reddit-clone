@@ -25,8 +25,8 @@ class PostController extends Controller
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('posts')->orderBy('posts_count', 'desc')->take(4)->get());
 
-        $can_update = Auth::user()->can('update', $subreddit_post);
-        $can_delete = Auth::user()->can('delete', $subreddit_post);
+        $can_update = Auth::check() ? Auth::user()->can('update', $subreddit_post) : false;
+        $can_delete = Auth::check() ? Auth::user()->can('delete', $subreddit_post) : false;
 
         return Inertia::render('Frontend/Posts/Show', compact('subreddit', 'post', 'subreddits','can_update' ,'can_delete'));
     }

@@ -19,8 +19,14 @@ class PostVoteController extends Controller
                 $post->increment('votes', 2);
                 return redirect()->back();
             } elseif ($isVoted->vote === 1) {
+                $isVoted->update(['vote' => null]);
+                $post->decrement('votes', 1);
                 return redirect()->back();
+            }elseif ($isVoted->vote === null){
+                $isVoted->update(['vote' => 1]);
+                $post->increment('votes', 1);
             }
+
         } else {
             Vote::create([
                 'post_id' => $post->id,
@@ -42,8 +48,14 @@ class PostVoteController extends Controller
                 $post->decrement('votes', 2);
                 return redirect()->back();
             } elseif ($isVoted->vote === -1) {
+                $isVoted->update(['vote' => null]);
+                $post->increment('votes', 1);
                 return redirect()->back();
+            }elseif ($isVoted->vote === null){
+                $isVoted->update(['vote' => -1]);
+                $post->decrement('votes', 1);
             }
+
         } else {
             Vote::create([
                 'post_id' => $post->id,

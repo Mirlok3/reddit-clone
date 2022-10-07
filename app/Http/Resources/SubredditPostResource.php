@@ -24,6 +24,7 @@ class SubredditPostResource extends JsonResource
             'postVotes' => $this->whenLoaded('postVotes'),
             'subreddit_slug' => $this->subreddit->slug,
             'comments_count' => $this->comments_count,
+            'created_at' => $this->created_at->diffForHumans(),
         ];
     }
 }

@@ -26,9 +26,10 @@
                     </div>
                     <div class="w-full">
                         <div class="flex flex-col justify-between md:flex-row text-sm m-2">
-                            <div class="text-sm text-slate-400">
+                            <div class="text-sm text-gray-500">
                                 Posted by
-                                <span class="text-slate-600 ml-1"> {{ post.data.username }}</span>
+                                <span class="text-gray-700 font-semibold mx-1"> {{ post.data.username }}</span>
+                                {{ post.data.created_at }}
                             </div>
 
                             <!-- Edit and delete -->
