@@ -15,11 +15,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // Password for both users: password
         User::factory()->create([
                 'name' => 'Admin',
                 'username' => 'admin',
                 'email' => 'admin@admin.com',
-                'password' => 'password',
                 'is_admin' => true,
         ]);
 
@@ -27,7 +27,6 @@ class UserSeeder extends Seeder
             'name' => 'Test',
             'username' => 'test',
             'email' => 'test@test.com',
-            'password' => 'password',
         ]);
 
         User::factory()->count(10)->create();

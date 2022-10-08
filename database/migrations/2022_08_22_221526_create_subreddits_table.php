@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->text('description');
             $table->string('slug')->unique();
+            $table->string('subreddit_image')->nullable();
             $table->timestamps();
         });
     }

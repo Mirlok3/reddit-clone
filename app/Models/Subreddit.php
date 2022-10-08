@@ -16,6 +16,7 @@ class Subreddit extends Model
         'name',
         'description',
         'slug',
+        'subreddit_image',
     ];
 
     public function sluggable(): array

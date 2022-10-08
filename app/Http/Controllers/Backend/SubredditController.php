@@ -20,6 +20,7 @@ class SubredditController extends Controller
         $subreddits = Subreddit::/* where('user_id', auth()->id())-> */paginate(5)->through(fn($subreddit) => [
             'id' => $subreddit->id,
             'name' => $subreddit->name,
+            'subreddit_subreddit_image' => $subreddit->subreddit_subreddit_image,
             'slug' => $subreddit->slug,
         ]);
 
@@ -44,7 +45,23 @@ class SubredditController extends Controller
      */
     public function store(SubredditStoreRequest $request)
     {
-        Subreddit::create($request->validated() + ['user_id' => auth()->id()]);
+        $subreddit = Subreddit::create($request->validated() + ['user_id' => auth()->id()]);
+
+        // Image save
+        if ($request->hasFile('subreddit_image')) {
+            $imagename = $request->subreddit_image->getClientOriginalName();
+            $request->subreddit_image->move(public_path("subreddit_images"), $imagename);
+            $path = '/subreddit_images/' . $imagename;
+            $subreddit->subreddit_image = $path;
+            $subreddit->save();
+        }
+
+        if ($request->subreddit_image == null) // If there is no image added
+        {
+            $path = '/subreddit_images/raddit-1521490-1288232.png';
+            $subreddit->subreddit_image = $path;
+            $subreddit->save();
+        }
 
         return to_route('subreddits.index')->with('message', 'Subreddit created succesfully.');
     }

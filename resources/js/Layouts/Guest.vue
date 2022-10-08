@@ -28,6 +28,8 @@
                                             </Link>
                                         </div>
 
+                                        <h2 class="font-semibold text-xl my-auto ml-10">Home</h2>
+
                                         <!-- Navigation Links -->
                                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                             <BreezeNavLink :href="route('subreddits.index')" :active="route().current('subreddits.index')">

@@ -20,6 +20,13 @@
                         </div>
 
                         <div class="mt-4">
+                            <BreezeLabel for="subreddit_image" value="Subreddit Logo" />
+                            <BreezeInput id="subreddit_image" type="file" class="mt-1 block w-full"
+                                @input="form.subreddit_image = $event.target.files[0]"/>
+                            <BreezeInputError class="mt-2" :message="form.errors.subreddit_image" />
+                        </div>
+
+                        <div class="mt-4">
                             <BreezeLabel for="description" value="Description" />
                             <BreezeInput id="description" type="text" class="mt-1 block w-full" v-model="form.description"
                                 autofocus autocomplete="description" />
@@ -57,10 +64,10 @@ const form = useForm({
     name: '',
     description: '',
     slug: '',
+    subreddit_image: null,
 });
 
 const submit = () => {
     form.post(route('subreddits.store'));
 };
-
 </script>

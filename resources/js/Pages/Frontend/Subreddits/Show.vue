@@ -2,9 +2,12 @@
     <guest-layout>
         <template #header>
             <div class="flex m-2 justify-between items-center">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    r/{{ subreddit.name }}
-                </h2>
+                <div class="flex">
+                    <div class="avatar">
+                        <img :src="subreddit.subreddit_image" class="w-16 h-16 rounded-full ring-8 ring-indigo-600">
+                    </div>
+                    <h2 class="font-semibold text-4xl text-gray-800 my-auto mx-6">r/{{ subreddit.name }}</h2>
+                </div>
 
                 <Link v-if="$page.props.auth.auth_check" class="px-3 py-2 rounded bg-indigo-500 hover:bg-indigo-700 text-white"
                 :href="route('subreddits.posts.create', subreddit.slug)">Create a post</Link>

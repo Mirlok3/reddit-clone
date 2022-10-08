@@ -26,6 +26,7 @@ class SubredditStoreRequest extends FormRequest
         return [
             'name' => ['required', 'unique:subreddits'],
             'description' => ['required', 'min:5'],
+            'subreddit_image' => ['image', 'nullable']
         ];
     }
 }
