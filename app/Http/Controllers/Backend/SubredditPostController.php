@@ -19,12 +19,24 @@ class SubredditPostController extends Controller
 
     public function store(StorePostRequest $request, Subreddit $subreddit)
     {
+        // Image save
+        if ($request->hasFile('post_image')) {
+            $imagename = $request->post_image->getClientOriginalName();
+            $request->post_image->move(public_path("post_images"), $imagename);
+            $path = '/post_images/' . $imagename;
+            $request->post_image = $path;
+            $subreddit->save();
+        }
+
         $subreddit->posts()->create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'url' => $request->url,
             'description' => $request->description,
+            'post_image' => $request->post_image,
         ]);
+
+
 
         return Redirect::route('frontend.subreddits.show', $subreddit->slug);
     }

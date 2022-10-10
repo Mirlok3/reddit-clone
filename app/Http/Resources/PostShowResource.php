@@ -23,6 +23,7 @@ class PostShowResource extends JsonResource
             'slug' => $this->slug,
             'url' => $this->url,
             'votes' => $this->votes,
+            'post_image' => $this->post_image,
             'comments' => CommentResource::collection($this->whenLoaded('comments')),
             'postVotes' => $this->whenLoaded('postVotes'),
             'created_at' => $this->created_at->diffForHumans(),

@@ -19,6 +19,7 @@ class SubredditResource extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'posts_count' => $this->posts_count,
+            'subreddit_image' => $this->subreddit_image,
         ];
     }
 }

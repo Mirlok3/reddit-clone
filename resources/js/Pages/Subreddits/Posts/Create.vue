@@ -33,6 +33,13 @@
                             <BreezeInputError class="mt-2" :message="form.errors.description" />
                         </div>
 
+                        <div class="mt-4">
+                            <BreezeLabel for="post_image" value="Image" />
+                            <BreezeInput id="post_image" type="file" class="mt-1 block w-full"
+                                @input="form.post_image = $event.target.files[0]"/>
+                            <BreezeInputError class="mt-2" :message="form.errors.post_image" />
+                        </div>
+
                         <div class="flex items-center justify-end mt-4">
                             <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }"
                                 :disabled="form.processing">
@@ -65,6 +72,7 @@ const form = useForm({
     title: "",
     description: "",
     url: "",
+    post_image: null,
 });
 
 const submit = () => {

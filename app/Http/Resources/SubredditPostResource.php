@@ -21,6 +21,7 @@ class SubredditPostResource extends JsonResource
             'username' => $this->user->username,
             'slug' => $this->slug,
             'votes' => $this->votes,
+            'post_image' => $this->post_image,
             'postVotes' => $this->whenLoaded('postVotes'),
             'subreddit_slug' => $this->subreddit->slug,
             'comments_count' => $this->comments_count,

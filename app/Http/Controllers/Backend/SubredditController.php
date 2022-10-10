@@ -56,7 +56,7 @@ class SubredditController extends Controller
             $subreddit->save();
         }
 
-        if ($request->subreddit_image == null) // If there is no image added
+        if ($request->subreddit_image == null) // If there is no image added change to default picture
         {
             $path = '/subreddit_images/raddit-1521490-1288232.png';
             $subreddit->subreddit_image = $path;

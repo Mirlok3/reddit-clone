@@ -1,40 +1,41 @@
 <template>
-    <div class=" max-w-4xl flex bg-white rounded-lg border border-gray-200 shadow-md mt-4">
+    <Link :href="route('frontend.subreddits.posts.show', [subreddit, post.slug])"
+        class="max-w-4xl flex bg-white rounded-lg border border-gray-200 shadow-md mt-4">
+
         <div class="mr-3">
             <PostVote :post="post"/>
         </div>
         <div>
-            <div class="flex m-2 p-2 text-sm">
-                <Link :href="route('frontend.subreddits.show', subreddit)" class="font-semibold mr-3 hover:text-indigo-700">
+            <div class="flex  mx-3 mt-2 text-sm">
+                <Link  :href="route('frontend.subreddits.show', subreddit)" class="font-semibold mr-3 hover:text-indigo-700">
                     r/{{ subreddit }}
                 </Link>
 
                 <div class="flex text-gray-500">
                     Posted by <span class="text-gray-700 font-semibold mx-1">{{ post.username }}</span>
+                    <!-- TODO moderator and poster badge -->
                     {{ post.created_at }}
                 </div>
             </div>
 
-            <Link :href="route('frontend.subreddits.posts.show', [subreddit, post.slug])">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:text-indigo-700">{{ post.title }}</h5>
-            </Link>
+            <div>
+                <h5 class="my-2 mx-2 text-2xl font-bold tracking-tight text-gray-900 hover:text-indigo-700">{{ post.title }}</h5>
+            </div>
 
-            <p class="mb-3 font-normal text-gray-700">{{ post.description }}</p>
+            <div class="scale-100">
+                <img :src="post.post_image">
+            </div>
+            <p class="my-2 mx-2 max-w-2xl font-normal text-gray-700 truncate overflow-ellipsis">{{ post.description }}</p>
 
-            <div class="flex m-2 p-2">
-                <p class="mr-4 p-2">Comments({{ post.comments_count }})</p>
-                <Link :href="route('frontend.subreddits.posts.show', [subreddit, post.slug])"
-                class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800">
-                    Read More
+            <div class="flex m-1 p-2 text-sm text-slate-500 font-semibold hover:text-slate-700">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
+                </svg>
 
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" strokeWidth={1.5} stroke="currentColor" class="ml-2 mr-1 w-4 h-4">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" />
-                    </svg>
-                </Link>
+                <p class="mt-0.5 ml-2">{{ post.comments_count }} comments</p>
             </div>
         </div>
-    </div>
+    </Link>
 </template>
 
 <script setup>

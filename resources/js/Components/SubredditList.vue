@@ -5,15 +5,17 @@
         <ul role="list" class="divide-y divide-slate-300 p-4">
             <li class="py-3 sm:py-4" v-for="subreddit in subreddits" :key="subreddit.id">
                 <div class="flex items-center space-x-4">
+                    <div class="avatar">
+                        <img :src="subreddit.subreddit_image" class="w-8 h-8 rounded-full ring-2 ring-indigo-600">
+                    </div>
 
-                    <Link :href="route('frontend.subreddits.show', subreddit.slug)" class="text-slate-800 font-semibold truncate text-sm">
+                    <Link :href="route('frontend.subreddits.show', subreddit.slug)" class="text-slate-800 font-semibold text-lg">
                         {{ subreddit.name }}
                     </Link>
 
-                    <div>
-                        Post({{ subreddit.posts_count }})
+                    <div class="text-sm">
+                        {{ subreddit.posts_count }} posts
                     </div>
-
                 </div>
             </li>
         </ul>
