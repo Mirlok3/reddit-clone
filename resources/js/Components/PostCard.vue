@@ -7,7 +7,7 @@
         </div>
         <div>
             <div class="flex  mx-3 mt-2 text-sm">
-                <Link  :href="route('frontend.subreddits.show', subreddit)" class="font-semibold mr-3 hover:text-indigo-700">
+                <Link :href="route('frontend.subreddits.show', subreddit)" class="font-semibold mr-3 hover:text-indigo-700">
                     r/{{ subreddit }}
                 </Link>
 

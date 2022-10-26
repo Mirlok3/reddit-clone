@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->text('description')->default('No description given');
+            $table->string('user_image')->default('user_images/default_user.png');
             $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();

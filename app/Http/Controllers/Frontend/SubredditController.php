@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Frontend;
 
 use Inertia\Inertia;
 use App\Models\Subreddit;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SubredditResource;
 use App\Http\Resources\SubredditPostResource;

@@ -12,6 +12,7 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
+        <!-- Message -->
         <div v-if="$page.props.flash.message" class="bg-green-400">
             <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between flex-wrap">
@@ -24,6 +25,7 @@ const showingNavigationDropdown = ref(false);
                 </div>
             </div>
         </div>
+
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
@@ -42,6 +44,7 @@ const showingNavigationDropdown = ref(false);
                                 <BreezeNavLink :href="route('subreddits.index')" :active="route().current('subreddits.index')">
                                     Subreddits
                                 </BreezeNavLink>
+
                             </div>
                         </div>
 
@@ -64,6 +67,10 @@ const showingNavigationDropdown = ref(false);
                                     <template #content>
                                         <BreezeDropdownLink :href="route('subreddits.index')" :active="route().current('dashboard')">
                                             Subreddits
+                                        </BreezeDropdownLink>
+
+                                        <BreezeDropdownLink :href="route('profile.index')">
+                                            Profile
                                         </BreezeDropdownLink>
 
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
