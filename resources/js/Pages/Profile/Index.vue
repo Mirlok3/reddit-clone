@@ -17,19 +17,25 @@
                             <!-- Profile Card -->
                             <div class="bg-white p-3 border-t-4 border-indigo-400">
                                 <div class="flex items-center px-6 pt-2 pb-6">
-                                    <div class="rounded-full pr-6">
+                                    <div class="rounded-full pr-8">
                                         <img :src="user.user_image" class="w-16 h-16 rounded-full ring-4 ring-indigo-600">
                                     </div>
-                                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{ user.name }}</h1>
+                                    <div>
+                                        <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{ user.name }}</h1>
+                                        <hr>
+                                        <h1 class="text-gray-700 font-bold text-lg leading-8 my-1">{{ user.username}}</h1>
+                                    </div>
                                 </div>
                                 <p class="text-sm text-gray-500 hover:text-gray-600 leading-6"> {{ user.description }}</p>
                                 <ul class="bg-gray-100 text-gray-600 px-3 mt-3 divide-y rounded shadow-sm ">
-                                    <li class="flex items-center py-3">
-                                        Edit Account
-                                    </li>
+                                    <Link :href="route('profile.edit', user.id)">
+                                        <li class="flex items-center py-3">
+                                            Edit Account
+                                        </li>
+                                    </Link>
                                 </ul>
                             </div>
-                            <div class="bg-white p-3 hover:shadow">
+                            <div class="bg-white p-3">
 
                             </div>
                         </div>

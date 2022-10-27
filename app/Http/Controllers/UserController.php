@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserStoreRequest;
 use App\Http\Resources\SubredditPostResource;
 use App\Http\Resources\SubredditResource;
-use App\Http\Resources\UserResource;
-use App\Models\Post;
 use App\Models\Subreddit;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -16,7 +16,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index()
     {
@@ -66,11 +66,14 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $user = User::where('id', auth()->id())->firstOrFail();
+        $this->authorize('update', $user);
+
+        return Inertia::render('Profile/Edit', compact('user'));
     }
 
     /**
@@ -78,11 +81,17 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update($id, UserStoreRequest $request)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->update($request->validated());
+
+        return to_route('profile.index')->with('message', 'Profile updated succesfully.');
     }
 
     /**
