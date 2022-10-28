@@ -33,7 +33,7 @@
                                         <!-- Navigation Links -->
                                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                             <BreezeNavLink :href="route('subreddits.index')" :active="route().current('subreddits.index')">
-                                                Subreddits
+                                                Your Subreddits
                                             </BreezeNavLink>
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@
 
                                     <template #content>
                                         <BreezeDropdownLink :href="route('subreddits.index')">
-                                            Subreddits
+                                            Your Subreddits
                                         </BreezeDropdownLink>
 
                                         <BreezeDropdownLink :href="route('profile.index')">

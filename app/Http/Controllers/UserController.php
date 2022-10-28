@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Inertia\Testing\Assert;
 
 class UserController extends Controller
 {
@@ -25,9 +26,7 @@ class UserController extends Controller
             $query->where('user_id', auth()->id());
         }])->withCount('comments')->paginate(3));
 
-        $subreddits = SubredditResource::collection(Subreddit::withCount('posts')->orderBy('posts_count', 'desc')->take(4)->get());
-
-        return Inertia::render('Profile/Index', compact( 'user', 'posts', 'subreddits'));
+        return Inertia::render('Profile/Index', compact( 'user', 'posts'));
     }
 
     /**
@@ -55,11 +54,16 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
-    public function show($id)
+    public function show($username)
     {
-        //
+        $user = User::where('username', $username)->firstOrFail();
+        $posts = SubredditPostResource::collection($user->posts()->with(['user', 'postVotes' => function ($query) {
+            $query->where('user_id', auth()->id());
+        }])->withCount('comments')->paginate(3));
+
+        return Inertia::render('Profile/Show', compact('user', 'posts'));
     }
 
     /**

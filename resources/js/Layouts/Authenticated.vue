@@ -42,7 +42,7 @@ const showingNavigationDropdown = ref(false);
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <BreezeNavLink :href="route('subreddits.index')" :active="route().current('subreddits.index')">
-                                    Subreddits
+                                    Your Subreddits
                                 </BreezeNavLink>
 
                             </div>
@@ -66,7 +66,7 @@ const showingNavigationDropdown = ref(false);
 
                                     <template #content>
                                         <BreezeDropdownLink :href="route('subreddits.index')" :active="route().current('dashboard')">
-                                            Subreddits
+                                            Your Subreddits
                                         </BreezeDropdownLink>
 
                                         <BreezeDropdownLink :href="route('profile.index')">

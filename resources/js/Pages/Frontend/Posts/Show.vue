@@ -25,7 +25,7 @@
                         <div class="flex flex-col justify-between md:flex-row text-sm mx-3 mt-2 text-gray-500">
                             <div>
                                 Posted by
-                                <span class="text-gray-700 font-semibold mx-1"> {{ post.data.username }}</span>
+                                <Link class="text-gray-700 font-semibold mx-1" :href="route('profile.show', post.data.username)">{{ post.data.username }}</Link>
                                 {{ post.data.created_at }}
                             </div>
 

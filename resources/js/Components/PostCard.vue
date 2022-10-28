@@ -12,7 +12,8 @@
                 </Link>
 
                 <div class="flex text-gray-500">
-                    Posted by <span class="text-gray-700 font-semibold mx-1">{{ post.username }}</span>
+                    Posted by
+                    <Link class="text-gray-700 font-semibold mx-1" :href="route('profile.show', post.username)">{{ post.username }}</Link>
                     <!-- TODO moderator and poster badge -->
                     {{ post.created_at }}
                 </div>
