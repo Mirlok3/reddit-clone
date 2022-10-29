@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Resources\SubredditPostResource;
-use App\Http\Resources\SubredditResource;
-use App\Models\Subreddit;
+use App\Models\Post;
+use App\Models\Vote;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Inertia\Testing\Assert;
 
 class UserController extends Controller
 {
@@ -61,9 +59,13 @@ class UserController extends Controller
         $user = User::where('username', $username)->firstOrFail();
         $posts = SubredditPostResource::collection($user->posts()->with(['user', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());
-        }])->withCount('comments')->paginate(3));
+        }])->withCount('comments','user')->paginate(3));
 
-        return Inertia::render('Profile/Show', compact('user', 'posts'));
+        $postCount = Post::where('user_id', $user->id)->count();
+
+        $voteCount = Post::where('user_id', $user->id)->sum('votes');
+
+        return Inertia::render('Profile/Show', compact('user', 'posts','postCount','voteCount'));
     }
 
     /**

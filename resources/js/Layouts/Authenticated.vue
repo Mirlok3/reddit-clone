@@ -69,8 +69,12 @@ const showingNavigationDropdown = ref(false);
                                             Your Subreddits
                                         </BreezeDropdownLink>
 
-                                        <BreezeDropdownLink :href="route('profile.index')">
+                                        <BreezeDropdownLink :href="route('profile.show', $page.props.auth.user.username)">
                                             Profile
+                                        </BreezeDropdownLink>
+
+                                        <BreezeDropdownLink :href="route('profile.edit', $page.props.auth.user.name)">
+                                            Profile Settings
                                         </BreezeDropdownLink>
 
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">

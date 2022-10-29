@@ -27,11 +27,17 @@
                                     </div>
                                 </div>
                                 <p class="text-sm text-gray-500 hover:text-gray-600 leading-6"> {{ user.description }}</p>
-                                <ul class="bg-gray-100 text-gray-600 px-3 mt-3 divide-y rounded shadow-sm ">
-                                    <li class="flex items-center py-3">
 
-                                    </li>
-                                </ul>
+                                <div class="flex items-center justify-between pt-6 px-12">
+                                    <div>
+                                        <div class="font-semibold">Karma</div>
+                                        <div class="font-extralight">{{ voteCount }}</div>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold">Posts</div>
+                                        <div class="font-extralight">{{ postCount }}</div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="bg-white p-3">
 
@@ -62,6 +68,8 @@ defineProps({
     user: Object,
     subreddits: Object,
     posts: Object,
+    voteCount: String,
+    postCount: String,
 })
 
 </script>
