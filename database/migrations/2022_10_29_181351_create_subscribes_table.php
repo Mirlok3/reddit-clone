@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subreddits', function (Blueprint $table) {
+        Schema::create('subscribes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('name')->unique();
-            $table->text('description');
-            $table->string('slug')->unique();
-            $table->string('subreddit_image')->default('/subreddit_images/default_subreddit.png');
-            $table->integer('subscribers')->default(0);
+            $table->foreignId('subreddit_id')->constrained()->cascadeOnDelete();
+            $table->integer('subscribe')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subreddits');
+        Schema::dropIfExists('subscribes');
     }
 };

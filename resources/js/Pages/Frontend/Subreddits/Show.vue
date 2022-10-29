@@ -10,8 +10,13 @@
                 </Link>
 
                 <!-- TODO add login modal if the user is not login-->
-                <Link v-if="$page.props.auth.auth_check" class="px-3 py-2 rounded bg-indigo-500 hover:bg-indigo-700 text-white"
-                :href="route('subreddits.posts.create', subreddit.slug)">Create a post</Link>
+                <div>
+                    <Link v-if="$page.props.auth.auth_check"
+                          class="px-3 py-2 rounded-full bg-indigo-500 hover:bg-indigo-700 text-white mr-6"
+                          :href="route('subreddits.posts.create', subreddit.slug)">Create a post
+                    </Link>
+                    <Subscribe :subreddit="subreddit"/>
+                </div>
             </div>
         </template>
 
@@ -38,6 +43,9 @@
                         <p class="p-4 bg-white rounded-b-lg">
                             {{ subreddit.description }}
                         </p>
+                        <p class="p-4 bg-white rounded-b-lg">
+                            <span class="font-bold">Subscribers:</span> {{ subreddit.subscribers }}
+                        </p>
                     </div>
                 </div>
                 <div class="m-2 p-2 mt-6">
@@ -54,6 +62,7 @@ import { Link } from "@inertiajs/inertia-vue3";
 import PostCard from "@/Components/PostCard.vue";
 import Pagination from "@/Components/Pagination.vue";
 import SubredditList from "@/Components/SubredditList.vue";
+import Subscribe from "@/Components/Subscribe.vue";
 
 defineProps({
     subreddit: Object,

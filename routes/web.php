@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\SubscribeController;
 use App\Http\Controllers\UserController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
@@ -22,10 +23,13 @@ Route::group(['middleware' => ['auth', 'verified']], function (){
     Route::resource('/subreddits', SubredditController::class);
     Route::resource('/subreddits.posts', SubredditPostController::class);
 
+    Route::resource('/profile', UserController::class);
+
     Route::post('/posts/{post:slug}/upVote', [PostVoteController::class, 'upVote'])->name('posts.upVote');
     Route::post('/posts/{post:slug}/downVote', [PostVoteController::class, 'downVote'])->name('posts.downVote');
 
-    Route::resource('/profile', UserController::class);
+    Route::get('subreddits/{subreddit:slug}/subscribe', [SubscribeController::class, 'subscribe'])->name('subreddits.subscribe');
+
 });
 
 require __DIR__.'/auth.php';
