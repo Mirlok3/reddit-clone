@@ -24,7 +24,7 @@ class SubredditStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique:subreddits'],
+            'name' => ['required', 'unique:subreddits,name'],
             'description' => ['required', 'min:5'],
             'subreddit_image' => ['image', 'nullable']
         ];

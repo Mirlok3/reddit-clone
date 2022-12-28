@@ -52,6 +52,14 @@ class SubredditPostController extends Controller
         $this->authorize('update', $post);
         $post->update($request->validated());
 
+        if ($request->hasFile('post_image')) {
+            $imagename = $request->post_image->getClientOriginalName();
+            $request->post_image->move(public_path("post_images"), $imagename);
+            $path = '/post_images/' . $imagename;
+            $post->post_image = $path;
+            $post->save();
+        }
+
         return Redirect::route('frontend.subreddits.posts.show', [$subreddit->slug, $post->slug]);
     }
 

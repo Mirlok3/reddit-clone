@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Subscribe;
+use App\Models\Vote;
 use Inertia\Inertia;
 use App\Models\Subreddit;
 use App\Http\Controllers\Controller;
@@ -18,7 +20,8 @@ class SubredditController extends Controller
         }])->withCount('comments')->paginate(3));
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('posts')->orderBy('posts_count', 'desc')->take(4)->get());
+        $ifUserSubscribed = Subscribe::where('subreddit_id', $subreddit->id)->where('user_id', auth()->id())->count();
 
-        return Inertia::render('Frontend/Subreddits/Show', compact('subreddit', 'posts', 'subreddits'));
+        return Inertia::render('Frontend/Subreddits/Show', compact('subreddit', 'posts', 'subreddits', 'ifUserSubscribed'));
     }
 }

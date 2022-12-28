@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Resources\SubredditPostResource;
 use App\Models\Post;
-use App\Models\Vote;
 use App\Models\User;
+use Faker\Core\File;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
+/**
+ *
+ */
 class UserController extends Controller
 {
     /**
@@ -30,7 +35,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -41,7 +46,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -92,19 +97,24 @@ class UserController extends Controller
     public function update($id, UserStoreRequest $request)
     {
         $user = User::findOrFail($id);
-
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
         $user->update($request->validated());
 
-        return to_route('profile.index')->with('message', 'Profile updated succesfully.');
+        if ($request->hasFile('user_image')) {
+            $imagename = $request->user_image->getClientOriginalName();
+            $request->user_image->move(public_path("user_images"), $imagename);
+            $path = 'user_images/' . $imagename;
+            $user->user_image = $path;
+            $user->save();
+        }
+
+        return Redirect::route('profile.show', $user->username)->with('message', 'Profile edited succesfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {

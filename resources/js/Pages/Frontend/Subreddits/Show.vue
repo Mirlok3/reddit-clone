@@ -15,7 +15,7 @@
                           class="px-3 py-2 rounded-full bg-indigo-500 hover:bg-indigo-700 text-white mr-6"
                           :href="route('subreddits.posts.create', subreddit.slug)">Create a post
                     </Link>
-                    <Subscribe :subreddit="subreddit"/>
+                    <Subscribe :subreddit="subreddit" :ifUserSubscribed="ifUserSubscribed"/>
                 </div>
             </div>
         </template>
@@ -68,5 +68,6 @@ defineProps({
     subreddit: Object,
     subreddits: Object,
     posts: Object,
+    ifUserSubscribed: Boolean,
 })
 </script>

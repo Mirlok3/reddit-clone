@@ -43,9 +43,12 @@
                             </div>
                         </div>
 
-                        <div class="px-2">
+                        <div class="px-2 mb-2">
                             <h1 class="font-semibold text-3xl text-black">{{ post.data.title }}</h1>
                             <p class="text-slate-700 my-2">{{ post.data.description }}</p>
+                            <div class="scale-100">
+                                <img :src="post.data.post_image">
+                            </div>
                             <a :href="post.data.url" class="font-semibold text-blue-500 text-sm hover:text-blue-300">{{ post.data.url }}</a>
                         </div>
 
@@ -55,7 +58,7 @@
                 <div class="m-2 p-2 bg-white shadow-md rounded-lg mt-6">
                     <div v-if="$page.props.auth.auth_check">
                         <form class="m-2 p-2" @submit.prevent="submit">
-                            <div class="mb-4 w-full bg-gray-50 rounded-lg border border-black">
+                            <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-300">
                                 <div class="flex justify-end bg-slate-200 rounded-t-lg">
                                     <button class="m-1.5 mr-3 px-4 py-2 bg-gray-500 hover:bg-gray-700 text-white rounded-full text-sm font-bold">
                                         Comment

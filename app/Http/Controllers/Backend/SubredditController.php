@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Models\Subreddit;
 use Illuminate\Http\Request;
@@ -89,10 +90,19 @@ class SubredditController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(SubredditStoreRequest $request,Subreddit $subreddit)
+    public function update(SubredditStoreRequest $request, Subreddit $subreddit)
     {
         $this->authorize('update', $subreddit);
+
         $subreddit->update($request->validated());
+
+        if ($request->hasFile('subreddit_image')) {
+            $imagename = $request->subreddit_image->getClientOriginalName();
+            $request->subreddit_image->move(public_path("subreddit_images"), $imagename);
+            $path = '/subreddit_images/' . $imagename;
+            $subreddit->subreddit_image = $path;
+            $subreddit->save();
+        }
 
         return to_route('subreddits.index')->with('message', 'Subreddit updated succesfully.');
     }

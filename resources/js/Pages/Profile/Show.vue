@@ -39,9 +39,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-white p-3">
-
-                            </div>
                         </div>
                         <!--Right Side -->
                         <div class="w-full md:w-9/12 mx-2 h-64">
@@ -63,6 +60,7 @@ import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import PostCard from "@/Components/PostCard.vue";
 import Pagination from "@/Components/Pagination.vue";
+import SubredditList from "@/Components/SubredditList.vue";
 
 defineProps({
     user: Object,
