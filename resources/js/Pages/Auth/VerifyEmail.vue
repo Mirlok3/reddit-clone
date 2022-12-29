@@ -20,23 +20,31 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 <template>
     <BreezeGuestLayout>
         <Head title="Email Verification" />
+        <div class="py-12">
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 text-gray-600 dark:text-white ">
+                <div class="max-w-md mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg text-center">
+                    <div class="mb-6 text-sm">
+                        Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
+                    </div>
 
-        <div class="mb-4 text-sm text-gray-600">
-            Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
-        </div>
+                    <div class="mb-4 font-medium text-sm text-green-500 font-bold" v-if="verificationLinkSent" >
+                        A new verification link has been sent to the email address you provided during registration.
+                    </div>
 
-        <div class="mb-4 font-medium text-sm text-green-600" v-if="verificationLinkSent" >
-            A new verification link has been sent to the email address you provided during registration.
-        </div>
+                    <form @submit.prevent="submit">
+                        <div class="mt-4 flex items-center justify-between">
+                            <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                Resend Verification Email
+                            </BreezeButton>
 
-        <form @submit.prevent="submit">
-            <div class="mt-4 flex items-center justify-between">
-                <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Resend Verification Email
-                </BreezeButton>
-
-                <Link :href="route('logout')" method="post" as="button" class="underline text-sm text-gray-600 hover:text-gray-900">Log Out</Link>
+                            <Link :href="route('logout')" method="post" as="button"
+                                  class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">
+                                Log Out
+                            </Link>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
     </BreezeGuestLayout>
 </template>

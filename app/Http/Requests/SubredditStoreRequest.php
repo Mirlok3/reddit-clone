@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Subreddit;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SubredditStoreRequest extends FormRequest
 {

@@ -1,6 +1,6 @@
 <template>
     <guest-layout>
-        <section class="flex md:flex-row m-2 p-2">
+        <section class="flex md:flex m-2 p-2">
             <div class="w-8/12">
                 <PostCard v-for="post in posts.data"
                     :post="post"
@@ -11,8 +11,8 @@
                     <Pagination :links="posts.meta.links" />
                 </div> -->
             </div>
-            <div class="w-4/12 p-4">
-                <div class="m-2 p-2">
+            <div class="w-4/12 pl-4">
+                <div> <!--TODO: hidden on mobile !md: lg: sm: xl: not working-->
                     <SubredditList :subreddits="subreddits.data" />
                 </div>
             </div>

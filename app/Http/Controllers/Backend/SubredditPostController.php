@@ -60,7 +60,8 @@ class SubredditPostController extends Controller
             $post->save();
         }
 
-        return Redirect::route('frontend.subreddits.posts.show', [$subreddit->slug, $post->slug]);
+        // TODO: with() message doesnt work
+        return Redirect::route('frontend.subreddits.posts.show', [$subreddit->slug, $post->slug])->with('message', 'Post edited succesfuly!');
     }
 
     public function destroy(Subreddit $subreddit, Post $post)

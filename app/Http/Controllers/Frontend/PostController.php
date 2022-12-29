@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Post;
 use Inertia\Inertia;
 use App\Models\Subreddit;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\PostShowResource;
@@ -21,7 +20,7 @@ class PostController extends Controller
             $query->where('user_id', auth()->id());
         }])->where('slug', $slug)->first();
 
-        $post = new PostShowResource($subreddit_post);
+        $post = new PostShowResource($subreddit_post); // TODO: post.user_id is the same as subreddit.user_id
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('posts')->orderBy('posts_count', 'desc')->take(4)->get());
 

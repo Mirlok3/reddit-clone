@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Dotenv\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Models\Subreddit;
@@ -93,8 +94,12 @@ class SubredditController extends Controller
     public function update(SubredditStoreRequest $request, Subreddit $subreddit)
     {
         $this->authorize('update', $subreddit);
+/*        $rules = $this->rules; // TODO: Form says name taken when its filled with its own name
+        $rules['name'] = $rules['name']. ',id,'.$subreddit->id;
+        $validator = Validator::make($request->all(), $rules);*/
 
         $subreddit->update($request->validated());
+
 
         if ($request->hasFile('subreddit_image')) {
             $imagename = $request->subreddit_image->getClientOriginalName();
