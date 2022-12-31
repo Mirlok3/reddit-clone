@@ -10,7 +10,7 @@
 
         <div class="py-12">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="max-w-md mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg">
+                <div class="max-w-md mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg dark:text-white">
                     <form @submit.prevent="submit" method="post" enctype="multipart/form-data">
                         <div class="mt-4">
                             <BreezeLabel for="subreddit_image"
@@ -31,7 +31,7 @@
 
                         <div class="mt-4">
                             <BreezeLabel for="name" value="Name" class="dark:text-white"/>
-                            <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus
+                            <BreezeInput id="name" type="text" class="mt-1 block w-full dark:bg-neutral-800" v-model="form.name" autofocus
                                 autocomplete="name" />
                             <BreezeInputError class="mt-2" :message="form.errors.name" />
                         </div>
@@ -39,7 +39,7 @@
                         <div class="mt-4">
                             <BreezeLabel for="description" value="Description" class="dark:text-white"/>
                             <textarea id="description" type="text" v-model="form.description"
-                                      class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"
+                                      class="border-gray-400 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full dark:bg-neutral-800"
                                       autofocus autocomplete="description" rows="4"/>
                             <BreezeInputError class="mt-2" :message="form.errors.description"/>
                         </div>

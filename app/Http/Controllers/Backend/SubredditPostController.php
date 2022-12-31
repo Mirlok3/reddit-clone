@@ -36,8 +36,6 @@ class SubredditPostController extends Controller
             'post_image' => $request->post_image,
         ]);
 
-
-
         return Redirect::route('frontend.subreddits.show', $subreddit->slug);
     }
 

@@ -100,7 +100,6 @@ class SubredditController extends Controller
 
         $subreddit->update($request->validated());
 
-
         if ($request->hasFile('subreddit_image')) {
             $imagename = $request->subreddit_image->getClientOriginalName();
             $request->subreddit_image->move(public_path("subreddit_images"), $imagename);

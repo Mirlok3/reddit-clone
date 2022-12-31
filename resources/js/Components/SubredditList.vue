@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full bg-white shadow-md border rounded-lg dark:bg-neutral-700">
+    <div class="w-full bg-white shadow-md border rounded-lg dark:bg-neutral-700 dark:border-2 dark:border-neutral-500">
         <h2 class="font-semibold text-large p-4 bg-indigo-700 text-white rounded-t-lg">Top Subreddits</h2>
 
         <ul role="list" class="divide-y divide-slate-300 p-4">

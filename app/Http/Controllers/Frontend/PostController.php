@@ -20,7 +20,7 @@ class PostController extends Controller
             $query->where('user_id', auth()->id());
         }])->where('slug', $slug)->first();
 
-        $post = new PostShowResource($subreddit_post); // TODO: post.user_id is the same as subreddit.user_id
+        $post = new PostShowResource($subreddit_post);
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('posts')->orderBy('posts_count', 'desc')->take(4)->get());
 

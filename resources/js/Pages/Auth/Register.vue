@@ -26,34 +26,34 @@ const submit = () => {
     <BreezeGuestLayout>
         <Head title="Register" />
 
-        <form @submit.prevent="submit" class="max-w-md mx-auto bg-white shadow rounded-md p-6 dark:bg-neutral-700">
+        <form @submit.prevent="submit" class="max-w-md mx-auto bg-white shadow rounded-md p-6 dark:bg-neutral-700 dark:text-white">
             <div>
                 <BreezeLabel for="name" value="Name" class="dark:text-white" />
-                <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus autocomplete="name" />
+                <BreezeInput id="name" type="text" class=" mt-1 block w-full border-gray-400 dark:bg-neutral-800" v-model="form.name" autofocus autocomplete="name" />
                 <BreezeInputError class="mt-2" :message="form.errors.name" />
             </div>
 
             <div>
                 <BreezeLabel for="username" value="Username" class="dark:text-white mt-2" />
-                <BreezeInput id="username" type="text" class="mt-1 block w-full" v-model="form.username" autofocus autocomplete="username" />
+                <BreezeInput id="username" type="text" class="mt-1 block w-full border-gray-400 dark:bg-neutral-800" v-model="form.username" autofocus autocomplete="username" />
                 <BreezeInputError class="mt-2" :message="form.errors.name" />
             </div>
 
             <div class="mt-4">
                 <BreezeLabel for="email" value="Email" class="dark:text-white" />
-                <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" autocomplete="username" />
+                <BreezeInput id="email" type="email" class="mt-1 block w-full border-gray-400 dark:bg-neutral-800" v-model="form.email" autocomplete="username" />
                 <BreezeInputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
                 <BreezeLabel for="password" value="Password" class="dark:text-white" />
-                <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" autocomplete="new-password" />
+                <BreezeInput id="password" type="password" class="mt-1 block w-full border-gray-400 dark:bg-neutral-800" v-model="form.password" autocomplete="new-password" />
                 <BreezeInputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="mt-4">
                 <BreezeLabel for="password_confirmation" value="Confirm Password" class="dark:text-white" />
-                <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" autocomplete="new-password" />
+                <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full border-gray-400 dark:bg-neutral-800" v-model="form.password_confirmation" autocomplete="new-password" />
                 <BreezeInputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
 

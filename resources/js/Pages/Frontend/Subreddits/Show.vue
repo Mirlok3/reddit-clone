@@ -9,7 +9,6 @@
                     <h2 class="font-semibold text-4xl my-auto mx-6 text-white">r/{{ subreddit.name }}</h2>
                 </Link>
 
-                <!-- TODO add login modal if the user is not login-->
                 <div class="flex justify-end" v-if="$page.props.auth.auth_check">
                     <Link
                           class="px-3 py-2 rounded-full bg-white hover:bg-gray-200 text-black mr-6 font-semibold pr-4"
@@ -42,14 +41,14 @@
 
             <!-- Sidebar -->
             <div class="hidden lg:flex flex-col w-6/12 ml-4">
-                <div class="shadow-md dark:text-white rounded-lg border">
-                    <h2 class="font-semibold text-large p-4 bg-indigo-700 text-white rounded-t-lg">
+                <div class="shadow-md dark:text-white rounded-lg">
+                    <h2 class="font-semibold text-large p-4 bg-indigo-700 text-white rounded-t-lg dark:border-x-2 dark:border-t-2 dark:border-neutral-500">
                         About {{ subreddit.name }}
                     </h2>
-                    <p class="p-4 bg-white dark:bg-neutral-700">
+                    <p class="p-4 bg-white dark:bg-neutral-700 dark:border-x-2 dark:border-neutral-500">
                         {{ subreddit.description }}
                     </p>
-                    <p class="p-4 bg-white rounded-b-lg dark:bg-neutral-700">
+                    <p class="p-4 bg-white rounded-b-lg dark:bg-neutral-700 dark:border-x-2 dark:border-b-2 dark:border-neutral-500">
                         <span class="font-bold">Subscribers:</span> {{ subreddit.subscribers }}
                     </p>
                 </div>

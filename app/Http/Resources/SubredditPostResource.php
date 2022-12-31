@@ -19,6 +19,8 @@ class SubredditPostResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'username' => $this->user->username,
+            'user_id' => $this->user->id,
+            'subreddit_mod' => $this->subreddit->user_id,
             'slug' => $this->slug,
             'votes' => $this->votes,
             'post_image' => $this->post_image,

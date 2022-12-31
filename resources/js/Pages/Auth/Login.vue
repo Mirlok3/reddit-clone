@@ -46,16 +46,16 @@ const submit = () => {
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit" class="max-w-md mx-auto bg-white shadow rounded-md p-6 dark:bg-neutral-700">
+        <form @submit.prevent="submit" class="max-w-md mx-auto bg-white shadow rounded-md p-6 dark:bg-neutral-700 dark:text-white">
             <div>
                 <BreezeLabel for="email" value="Email" class="dark:text-white"/>
-                <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" autofocus autocomplete="username" />
+                <BreezeInput id="email" type="email" class="mt-1 block w-full border-gray-400 dark:bg-neutral-800" v-model="form.email" autofocus autocomplete="username" />
                 <BreezeInputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
                 <BreezeLabel for="password" value="Password" class="dark:text-white"/>
-                <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" autocomplete="current-password" />
+                <BreezeInput id="password" type="password" class="mt-1 block w-full border-gray-400 dark:bg-neutral-800" v-model="form.password" autocomplete="current-password" />
                 <BreezeInputError class="mt-2" :message="form.errors.password" />
             </div>
 

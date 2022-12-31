@@ -10,11 +10,11 @@
 
         <div class="py-12">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="max-w-md mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg">
+                <div class="max-w-md mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg dark:text-white">
                     <form @submit.prevent="submit" method="post" enctype="multipart/form-data">
                         <div class="mt-4">
                             <BreezeLabel for="subreddit_image"
-                                         class="flex flex-col justify-center items-centerh-64 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer hover:border-indigo-300
+                                         class="flex flex-col justify-center items-centerh-64 bg-gray-50 rounded-lg border-2 border-gray-400 border-dashed cursor-pointer hover:border-indigo-300
                                   dark:text-white dark:bg-neutral-800 ">
                                 <div class="flex flex-col justify-center items-center pt-5 pb-6">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mb-3 w-10 h-10 text-gray-400">
@@ -31,7 +31,7 @@
 
                         <div class="mt-4">
                             <BreezeLabel for="name" value="Name" class="dark:text-white"/>
-                            <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus
+                            <BreezeInput id="name" type="text" class="mt-1 block w-full dark:bg-neutral-800 border-gray-400" v-model="form.name" autofocus
                                          autocomplete="name" />
                             <BreezeInputError class="mt-2" :message="form.errors.name" />
                         </div>
@@ -39,7 +39,7 @@
                         <div class="mt-4">
                             <BreezeLabel for="description" value="Description" class="dark:text-white"/>
                             <textarea id="description" type="text" v-model="form.description"
-                                      class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"
+                                      class="border-gray-400 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full dark:bg-neutral-800"
                                       autofocus autocomplete="description" rows="4"/>
                             <BreezeInputError class="mt-2" :message="form.errors.description"/>
                         </div>

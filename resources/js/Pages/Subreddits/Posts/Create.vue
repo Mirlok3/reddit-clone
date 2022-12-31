@@ -10,18 +10,18 @@
 
         <div class="py-12">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="max-w-xl mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg">
+                <div class="max-w-xl mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg dark:text-white">
                     <form @submit.prevent="submit">
                         <div>
                             <BreezeLabel for="title" value="Title" class="dark:text-white"/>
-                            <BreezeInput id="title" type="text" class="mt-1 block w-1/2" v-model="form.title" autofocus
+                            <BreezeInput id="title" type="text" class="mt-1 block w-1/2 dark:bg-neutral-800 border-gray-400" v-model="form.title" autofocus
                                          autocomplete="title" />
                             <BreezeInputError class="mt-2" :message="form.errors.title" />
                         </div>
 
                         <BreezeLabel for="description" value="Description" class="mt-4 dark:text-white"/>
-                        <div class="w-full bg-gray-50 rounded-lg border border-gray-300">
-                            <div class="flex bg-slate-300 rounded-t-lg p-2 text-sm text-gray-600 pr-4 dark:bg-neutral-800">
+                        <div class="w-full bg-gray-50 rounded-lg border border-gray-400 ">
+                            <div class="flex bg-slate-300 rounded-t-lg p-2 text-sm text-gray-600 pr-4 dark:bg-neutral-900">
                                 <BreezeLabel for="post_image">
                                     <div class="flex justify-between items-center hover:text-gray-800 hover:font-semibold cursor-pointer">
                                         <div class="mr-16 ml-3">
@@ -38,10 +38,9 @@
                             </div>
 
                             <div>
-
                                 <textarea id="description" type="text" v-model="form.description" placeholder="Say something..."
                                           rows="4" autofocus autocomplete="description"
-                                          class="block p-2 w-full text-sm text-gray-800 bg-white border-0 focus:ring-0 rounded-lg"/>
+                                          class="block p-2 w-full text-sm text-gray-800 bg-white border-0 focus:ring-0 rounded-b-lg dark:text-white dark:bg-neutral-800"/>
                             </div>
                         </div>
                         <BreezeInputError class="mt-2" :message="form.errors.description"/>
@@ -49,7 +48,7 @@
 
                         <div class="mt-4">
                             <BreezeLabel for="url" value="Url" class="dark:text-white" />
-                            <BreezeInput id="url" type="text" class="mt-1 block w-full" v-model="form.url" autofocus
+                            <BreezeInput id="url" type="text" class="mt-1 block w-full dark:bg-neutral-800 border-gray-400" v-model="form.url" autofocus
                                          autocomplete="url" />
                             <BreezeInputError class="mt-2" :message="form.errors.url" />
                         </div>
@@ -58,7 +57,7 @@
                         <div class="flex items-center justify-end mt-4">
                             <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }"
                                           :disabled="form.processing">
-                                Update
+                                Create
                             </BreezeButton>
                         </div>
                     </form>

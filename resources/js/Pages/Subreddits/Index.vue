@@ -27,7 +27,7 @@
                     <div class="mt-8 flex flex-col">
                         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                                <div class="bg-gray-200 overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg dark:bg-neutral-700 border-white border">
+                                <div class="bg-gray-200 overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg dark:bg-neutral-700 border dark:border-2 dark:border-neutral-400">
                                     <table class="min-w-full divide-y divide-gray-300">
                                         <thead class="bg-gray-200 dark:bg-neutral-700">
                                             <tr>
@@ -40,10 +40,8 @@
                                                 </th>
                                             </tr>
                                         </thead>
+
                                         <tbody class="divide-y divide-gray-200 bg-white dark:bg-neutral-900">
-                                            <!--<div v-if="subreddits.from == null" class="bg-white dark:bg-neutral-900">
-                                                dd
-                                            </div> TODO: if user didnt post nothing message-->
                                             <tr v-for="subreddit in subreddits.data" :key="subreddit.id">
 <!--                                                TODO: Small subreddit image-->
                                                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
@@ -54,6 +52,7 @@
                                                 </td>
 
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">{{ subreddit.slug }}</td>
+
 
                                                 <td class="relative whitespace-nowrap py-3 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                     <Link :href="route('subreddits.edit', subreddit.slug)"
@@ -70,6 +69,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <div v-if="subreddits.from == null" class="font-semibold text-gray-400 p-2 flex items-center flex-col bg-white dark:bg-neutral-900">
+                                        You have no subreddits...
+                                    </div>
                                     <div class="mt-2 mb-1.5 mx-2">
                                         <Pagination :links="subreddits.links"/>
                                     </div>
