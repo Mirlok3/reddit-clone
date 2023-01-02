@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->text('description');
             $table->string('slug')->unique();
-            $table->string('subreddit_image')->default('/subreddit_images/default_subreddit.png');
+            $table->string('subreddit_image')->nullable()->default('/subreddit_images/default_subreddit.png');
             $table->integer('subscribers')->default(0);
             $table->timestamps();
         });

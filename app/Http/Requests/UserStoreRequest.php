@@ -27,7 +27,6 @@ class UserStoreRequest extends FormRequest
         $userId = Auth::id();
 
         return [
-            'user_image' => [''],
             'name' => 'string|max:255',
             'username' => 'string|max:255|unique:users,username,'.$userId,
             'email' => 'email|string|max:255|unique:users,email,'.$userId,

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Subreddit;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class SubredditStoreRequest extends FormRequest
@@ -28,7 +29,7 @@ class SubredditStoreRequest extends FormRequest
         return [
             'name' => ['required', 'unique:subreddits,name'],
             'description' => ['required', 'min:5'],
-            'subreddit_image' => ['image', 'nullable']
+            //'subreddit_image' => 'image|mimes:svg,png,jpg' replaced with accept="image/*" in input
         ];
     }
 }

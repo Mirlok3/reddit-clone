@@ -27,7 +27,7 @@ class StorePostRequest extends FormRequest
             'title' => ['required', 'min:5'],
             'url' => ['nullable', 'url'],
             'description' => ['nullable', 'min:5'],
-            'post_image' => [''], // TODO: Image only upload
+            //'post_image' => ['nullable', 'image'], replaced with accept="image/*" in input
         ];
     }
 }

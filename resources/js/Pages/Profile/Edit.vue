@@ -16,7 +16,7 @@
                             <p class="text-xs text-gray-500">SVG, PNG, JPG</p>
                         </div>
                         <BreezeInput id="user_image" type="file" class="mt-1 block w-full file:hidden pl-4 pb-1"
-                                     @input="form.user_image = $event.target.files[0]"/>
+                                     @input="form.user_image = $event.target.files[0]" accept="image/*"/>
                         <BreezeInputError class="mt-2" :message="form.errors.user_image" />
                     </BreezeLabel>
                 </div>

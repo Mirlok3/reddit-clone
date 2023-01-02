@@ -40,7 +40,7 @@
             </div>
 
             <!-- Sidebar -->
-            <div class="hidden lg:flex flex-col w-6/12 ml-4">
+            <div class="hidden lg:flex flex-col w-5/12 ml-4">
                 <div class="shadow-md dark:text-white rounded-lg">
                     <h2 class="font-semibold text-large p-4 bg-indigo-700 text-white rounded-t-lg dark:border-x-2 dark:border-t-2 dark:border-neutral-500">
                         About {{ subreddit.name }}

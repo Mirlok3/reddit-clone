@@ -22,7 +22,7 @@ class SubredditController extends Controller
         $subreddits = Subreddit::where('user_id', auth()->id())-> paginate(5)->through(fn($subreddit) => [
             'id' => $subreddit->id,
             'name' => $subreddit->name,
-            'subreddit_subreddit_image' => $subreddit->subreddit_subreddit_image,
+            'subreddit_image' => $subreddit->subreddit_image,
             'slug' => $subreddit->slug,
         ]);
 
@@ -54,6 +54,10 @@ class SubredditController extends Controller
             $imagename = $request->subreddit_image->getClientOriginalName();
             $request->subreddit_image->move(public_path("subreddit_images"), $imagename);
             $path = '/subreddit_images/' . $imagename;
+            $subreddit->subreddit_image = $path;
+            $subreddit->save();
+        } else {
+            $path = '/subreddit_images/default_subreddit.png';
             $subreddit->subreddit_image = $path;
             $subreddit->save();
         }
@@ -98,6 +102,7 @@ class SubredditController extends Controller
         $rules['name'] = $rules['name']. ',id,'.$subreddit->id;
         $validator = Validator::make($request->all(), $rules);*/
 
+        $id = $subreddit->id;
         $subreddit->update($request->validated());
 
         if ($request->hasFile('subreddit_image')) {

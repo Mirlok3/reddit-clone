@@ -10,6 +10,10 @@ class PostCommentController extends Controller
 {
     public function store($subreddit_slug, Post $post)
     {
+        Request::validate([
+            'content' => ['required','max:255'],
+        ]);
+
         $post->comments()->create([
             'user_id' => auth()->id(),
             'content' => Request::input('content'),

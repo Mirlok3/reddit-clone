@@ -26,7 +26,7 @@
                                     <div class="flex justify-between items-center hover:text-gray-800 hover:font-semibold cursor-pointer">
                                         <div class="mr-16 ml-3">
                                             <BreezeInput id="post_image" type="file" class="mt-1 block w-1/2 file:hidden shadow-none dark:text-white"
-                                                         @input="form.post_image = $event.target.files[0]"/>
+                                                         @input="form.post_image = $event.target.files[0]" accept="image/*"/>
 
                                         </div>
                                         <p class="mr-3 mt-0.5 dark:text-white">Add a Picture... </p>

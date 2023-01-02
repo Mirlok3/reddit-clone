@@ -16,7 +16,7 @@ class WelcomeController extends Controller
     {
         $posts = SubredditPostResource::collection(Post::with(['user','subreddit', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());
-        }])->withCount('comments')->orderBy('votes', 'desc')->take(12)->get());
+        }])->withCount('comments')->orderBy('votes', 'desc')->take(12)->paginate(4));
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('posts')->orderBy('posts_count', 'desc')->take(6)->get());
 

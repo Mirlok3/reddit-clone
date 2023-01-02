@@ -28,12 +28,15 @@
                         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                                 <div class="bg-gray-200 overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg dark:bg-neutral-700 border dark:border-2 dark:border-neutral-400">
-                                    <table class="min-w-full divide-y divide-gray-300">
+                                    <table class="min-w-full divide-gray-300">
                                         <thead class="bg-gray-200 dark:bg-neutral-700">
                                             <tr>
-                                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 dark:text-white">
+                                                <th scope="col" class="relative py-3.5 dark:text-white">
+                                                    <span class="sr-only">Subreddit Icon</span>
+                                                </th>
+                                                <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">
                                                     Name</th>
-                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">
+                                                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
                                                     Slug</th>
                                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 dark:text-white">
                                                     <span class="sr-only">Edit</span>
@@ -43,8 +46,13 @@
 
                                         <tbody class="divide-y divide-gray-200 bg-white dark:bg-neutral-900">
                                             <tr v-for="subreddit in subreddits.data" :key="subreddit.id">
-<!--                                                TODO: Small subreddit image-->
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                <td>
+                                                    <Link :href="route('frontend.subreddits.show', subreddit.slug)"
+                                                          class="text-blue-500 hover:text-blue-700 font-semibold dark:text-white dark:hover:text-blue-300">
+                                                        <img :src=subreddit.subreddit_image alt="" class="w-10 h-10 rounded-full ring-1 ring-white p-1 ml-3">
+                                                    </Link>
+                                                </td>
+                                                <td class="whitespace-nowrap py-4 pr-3 text-sm font-medium text-gray-900">
                                                     <Link :href="route('frontend.subreddits.show', subreddit.slug)"
                                                         class="text-blue-500 hover:text-blue-700 font-semibold dark:text-white dark:hover:text-blue-300">
                                                         {{ subreddit.name }}

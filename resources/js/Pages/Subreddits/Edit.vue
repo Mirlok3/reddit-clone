@@ -24,7 +24,7 @@
                                     <p class="text-xs text-gray-500">SVG, PNG, JPG</p>
                                 </div>
                                 <BreezeInput id="subreddit_image" type="file" class="mt-1 block w-full file:hidden pl-4 pb-1"
-                                             @input="form.subreddit_image = $event.target.files[0]"/>
+                                             @input="form.subreddit_image = $event.target.files[0]" accept="image/*"/>
                             </BreezeLabel>
                         </div>
                         <BreezeInputError class="mt-2" :message="form.errors.subreddit_image" />
@@ -55,8 +55,6 @@
             </div>
         </div>
     </BreezeAuthenticatedLayout>
-
-
 </template>
 
 <script setup>
