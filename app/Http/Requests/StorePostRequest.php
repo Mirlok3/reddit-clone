@@ -24,9 +24,9 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'min:5'],
+            'title' => ['required', 'min:5','max:255'],
             'url' => ['nullable', 'url'],
-            'description' => ['nullable', 'min:5'],
+            'description' => ['nullable', 'min:5','max:255'],
             //'post_image' => ['nullable', 'image'], replaced with accept="image/*" in input
         ];
     }

@@ -27,8 +27,8 @@ class SubredditStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique:subreddits,name'],
-            'description' => ['required', 'min:5'],
+            'name' => 'required|unique:subreddits|max:255',
+            'description' => ['required', 'min:5','max:255'],
             //'subreddit_image' => 'image|mimes:svg,png,jpg' replaced with accept="image/*" in input
         ];
     }

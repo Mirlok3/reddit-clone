@@ -148,13 +148,41 @@ const showingNavigationDropdown = ref(false);
                     </div>
                 </div>
 
-                <!-- Responsive Navigation Menu -->
+                <!-- Responsive Navigation Menu --> <!--TODO: Darkmode dropdown button-->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}"
-                     class="sm:hidden">
+                     class="sm:hidden dark:bg-neutral-800">
                     <div class="pt-2 pb-3 space-y-1">
-                        <BreezeResponsiveNavLink :href="route('subreddits.index')"
-                                                 :active="route().current('subreddits.index')">
-                            Subreddits
+                        <!-- Navigation Links -->
+                        <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex dark:bg-neutral-800">
+                            <BreezeResponsiveNavLink :href="route('welcome')"
+                                           :active="route().current('welcome')">
+                                Home page
+                            </BreezeResponsiveNavLink>
+                        </div>
+
+                        <div v-if="$page.props.auth.user != null">
+                            <BreezeResponsiveNavLink :href="route('subreddits.index')"
+                                           :active="route().current('subreddits.index')">
+                                Your Subreddits
+                            </BreezeResponsiveNavLink>
+                        </div>
+
+                        <BreezeResponsiveNavLink v-if="$page.props.auth.auth_check"
+                            :href="route('profile.show', $page.props.auth.user.username)"
+                            :active="route().current('profile.show')">
+                            Profile
+                        </BreezeResponsiveNavLink>
+
+                        <BreezeResponsiveNavLink :href="route('login')" :active="route().current('login')" v-if="!$page.props.auth.auth_check">
+                            Log in
+                        </BreezeResponsiveNavLink>
+
+                        <BreezeResponsiveNavLink :href="route('register')" :active="route().current('register')" v-if="!$page.props.auth.auth_check">
+                            Register
+                        </BreezeResponsiveNavLink>
+
+                        <BreezeResponsiveNavLink :href="route('logout')" method="post" as="button" v-if="$page.props.auth.auth_check">
+                            Log Out
                         </BreezeResponsiveNavLink>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 <template>
     <guest-layout>
-        <section class="flex md:flex m-2 p-2">
-            <div class="lg:w-9/12 w-full">
+        <section class="md:flex md:m-2 md:p-2">
+            <div class="md:w-9/12 w-full">
                 <PostCard v-for="post in posts.data"
                     :post="post"
                     :subreddit="post.subreddit_slug"

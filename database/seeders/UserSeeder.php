@@ -35,7 +35,6 @@ class UserSeeder extends Seeder
             'email' => 'test@test.com',
         ]);
 
-
         User::factory()->count(10)->create();
     }
 }

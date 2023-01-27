@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Post;
+use App\Models\Subscribe;
 use Inertia\Inertia;
 use App\Models\Subreddit;
 use App\Http\Controllers\Controller;
@@ -26,7 +27,8 @@ class PostController extends Controller
 
         $can_update = Auth::check() ? Auth::user()->can('update', $subreddit_post) : false;
         $can_delete = Auth::check() ? Auth::user()->can('delete', $subreddit_post) : false;
+        $ifUserSubscribed = Subscribe::where('subreddit_id', $subreddit->id)->where('user_id', auth()->id())->count();
 
-        return Inertia::render('Frontend/Posts/Show', compact('subreddit', 'post', 'subreddits','can_update' ,'can_delete'));
+        return Inertia::render('Frontend/Posts/Show', compact('subreddit', 'post', 'subreddits','can_update' ,'can_delete', 'ifUserSubscribed'));
     }
 }

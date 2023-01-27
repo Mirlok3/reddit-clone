@@ -4,23 +4,29 @@
             <div class="flex m-2 justify-between items-center">
                 <Link class="flex" :href="route('frontend.subreddits.show', subreddit.slug)">
                     <div class="avatar">
-                        <img :src="subreddit.subreddit_image" class="w-12 h-12 rounded-full ring-4 ring-white p-1">
+                        <img :src="subreddit.subreddit_image" class="md:w-14 md:h-14 rounded-full border-2 border-white p-1 w-10 h-10">
                     </div>
-                    <h2 class="font-semibold text-4xl my-auto mx-6 text-white">r/{{ subreddit.name }}</h2>
+                    <h2 class="font-semibold md:text-4xl my-auto mx-6 text-white text-xl">r/{{ subreddit.name }}</h2>
                 </Link>
 
-                <div class="flex justify-end" v-if="$page.props.auth.auth_check">
-                    <Link
-                        class="px-3 py-2 rounded-full bg-white hover:bg-gray-200 text-black mr-6 font-semibold pr-4"
-                        :href="route('subreddits.posts.create', subreddit.slug)">Create a post
+                <div class="flex justify-end " v-if="$page.props.auth.auth_check">
+                    <Link class="md:px-3 md:py-2 rounded-full bg-white hover:bg-gray-200 text-black md:mr-6 font-semibold md:pr-4 p-1 mr-1"
+                          :href="route('subreddits.posts.create', subreddit.slug)">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                             class="w-5 h-5 mx-1.5 lg:hidden block">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                        <span class="hidden lg:block">Create a post</span>
+
                     </Link>
+                    <Subscribe :subreddit="subreddit" :ifUserSubscribed="ifUserSubscribed" class=""/>
                 </div>
             </div>
         </template>
 
-        <section class="flex flex-col md:flex-row m-2 p-2">
-            <div class="w-full">
-                <div class="flex m-2 bg-white shadow-md rounded-lg dark:bg-neutral-700 dark:border-2 dark:border-neutral-500">
+        <section class="flex flex-col md:flex-row md:m-2 md:p-2">
+            <div class="md:w-9/12">
+                <div class="flex md:m-2 bg-white shadow-md rounded-lg dark:bg-neutral-700 dark:border-2 dark:border-neutral-500">
                     <div>
                         <PostVote :post="post.data" />
                     </div>
@@ -55,9 +61,9 @@
                             </div>
                         </div>
 
-                        <div class="px-2 mb-2">
-                            <h1 class="font-semibold text-3xl text-black dark:text-white">{{ post.data.title }}</h1>
-                            <p class="text-slate-700 my-2 dark:text-gray-300">{{ post.data.description }}</p>
+                        <div class="px-2 mb-2 w-10/12">
+                            <h1 class="font-semibold text-3xl text-black dark:text-white truncate">{{ post.data.title }}</h1>
+                            <p class="text-slate-700 my-2 dark:text-gray-300 truncate">{{ post.data.description }}</p>
                             <div class="scale-100">
                                 <img :src="post.data.post_image">
                             </div>
@@ -67,7 +73,7 @@
                     </div>
                 </div>
                 <!-- Comments -->
-                <div class="m-2 p-2 bg-white shadow-md rounded-lg mt-6 dark:bg-neutral-700 dark:border-2 dark:border-neutral-500">
+                <div class="md:m-2 md:p-2 bg-white shadow-md rounded-lg mt-6 dark:bg-neutral-700 dark:border-2 dark:border-neutral-500">
                     <div v-if="$page.props.auth.auth_check">
                         <form class="m-2 p-2" @submit.prevent="submit">
                             <div class="mb-4 w-full rounded-lg border border-gray-400">
@@ -113,7 +119,7 @@
             </div>
 
             <!-- Sidebar -->
-            <div class="hidden lg:flex flex-col w-6/12">
+            <div class="hidden lg:flex flex-col w-4/12">
                 <div class="dark:text-white rounded-lg ml-1 p-2">
                     <h2 class="font-semibold text-large p-4 bg-indigo-700 text-white rounded-t-lg dark:border-x-2 dark:border-t-2 dark:border-neutral-500">
                         About r/{{ subreddit.name }}
@@ -139,6 +145,7 @@ import { Link, useForm } from "@inertiajs/inertia-vue3";
 import PostVote from "@/Components/PostVote.vue";
 import SubredditList from "@/Components/SubredditList.vue";
 import BreezeInputError from '@/Components/InputError.vue';
+import Subscribe from "@/Components/Subscribe.vue";
 
 const props = defineProps({
     subreddit: Object,
@@ -146,6 +153,7 @@ const props = defineProps({
     post: Object,
     can_update: Boolean,
     can_delete: Boolean,
+    ifUserSubscribed: Boolean,
 });
 
 const form = useForm({

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Dotenv\Validator;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Models\Subreddit;
 use Illuminate\Http\Request;
@@ -51,7 +49,7 @@ class SubredditController extends Controller
 
         // Image save
         if ($request->hasFile('subreddit_image')) {
-            $imagename = $request->subreddit_image->getClientOriginalName();
+            $imagename = $request->subreddit_image->getClientOriginalName(); // TODO: security issue , hash image name
             $request->subreddit_image->move(public_path("subreddit_images"), $imagename);
             $path = '/subreddit_images/' . $imagename;
             $subreddit->subreddit_image = $path;
@@ -95,15 +93,16 @@ class SubredditController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(SubredditStoreRequest $request, Subreddit $subreddit)
+    public function update(Request $request, Subreddit $subreddit)
     {
         $this->authorize('update', $subreddit);
-/*        $rules = $this->rules; // TODO: Form says name taken when its filled with its own name
-        $rules['name'] = $rules['name']. ',id,'.$subreddit->id;
-        $validator = Validator::make($request->all(), $rules);*/
 
-        $id = $subreddit->id;
-        $subreddit->update($request->validated());
+        $request->validate([
+            'name' => ['required','unique:subreddits,name,'.$subreddit->id],
+            'description' => ['required', 'min:5'],
+        ]);
+
+        //$subreddit->update($request->validated());
 
         if ($request->hasFile('subreddit_image')) {
             $imagename = $request->subreddit_image->getClientOriginalName();
