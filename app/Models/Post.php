@@ -22,7 +22,7 @@ class Post extends Model
         'description',
         'url',
         'votes',
-        'post_image',
+        'post_file',
     ];
 
     public function sluggable(): array

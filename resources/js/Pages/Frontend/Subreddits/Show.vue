@@ -80,5 +80,6 @@ defineProps({
     posts: Object,
     postCount: Object,
     ifUserSubscribed: Boolean,
+    fileExt: String,
 })
 </script>

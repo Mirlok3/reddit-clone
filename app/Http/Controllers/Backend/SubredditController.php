@@ -17,7 +17,7 @@ class SubredditController extends Controller
      */
     public function index()
     {
-        $subreddits = Subreddit::where('user_id', auth()->id())-> paginate(5)->through(fn($subreddit) => [
+        $subreddits = Subreddit::where('user_id', auth()->id())->paginate(5)->through(fn($subreddit) => [
             'id' => $subreddit->id,
             'name' => $subreddit->name,
             'subreddit_image' => $subreddit->subreddit_image,
@@ -49,7 +49,7 @@ class SubredditController extends Controller
 
         // Image save
         if ($request->hasFile('subreddit_image')) {
-            $imagename = $request->subreddit_image->getClientOriginalName(); // TODO: security issue , hash image name
+            $imagename = $request->subreddit_image->hashName();
             $request->subreddit_image->move(public_path("subreddit_images"), $imagename);
             $path = '/subreddit_images/' . $imagename;
             $subreddit->subreddit_image = $path;

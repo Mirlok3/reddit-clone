@@ -20,11 +20,11 @@ class SubredditPostController extends Controller
     public function store(StorePostRequest $request, Subreddit $subreddit)
     {
         // Image save
-        if ($request->hasFile('post_image')) {
-            $imagename = $request->post_image->getClientOriginalName();
-            $request->post_image->move(public_path("post_images"), $imagename);
-            $path = '/post_images/' . $imagename;
-            $request->post_image = $path;
+        if ($request->hasFile('post_file')) {
+            $imagename = $request->post_file->hashName();
+            $request->post_file->move(public_path("post_files"), $imagename);
+            $path = '/post_files/' . $imagename;
+            $request->post_file = $path;
             $subreddit->save();
         }
 
@@ -33,7 +33,7 @@ class SubredditPostController extends Controller
             'title' => $request->title,
             'url' => $request->url,
             'description' => $request->description,
-            'post_image' => $request->post_image,
+            'post_file' => $request->post_file,
         ]);
 
         return Redirect::route('frontend.subreddits.show', $subreddit->slug);
@@ -50,11 +50,11 @@ class SubredditPostController extends Controller
         $this->authorize('update', $post);
         $post->update($request->validated());
 
-        if ($request->hasFile('post_image')) {
-            $imagename = $request->post_image->getClientOriginalName();
-            $request->post_image->move(public_path("post_images"), $imagename);
-            $path = '/post_images/' . $imagename;
-            $post->post_image = $path;
+        if ($request->hasFile('post_file')) {
+            $imagename = $request->post_file->getClientOriginalName();
+            $request->post_file->move(public_path("post_files"), $imagename);
+            $path = '/post_files/' . $imagename;
+            $post->post_file = $path;
             $post->save();
         }
 

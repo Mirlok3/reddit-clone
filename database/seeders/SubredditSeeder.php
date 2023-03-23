@@ -30,5 +30,14 @@ class SubredditSeeder extends Seeder
             'slug' => 'VueJS',
             'created_at' => now(),
         ]);
+
+        DB::table('subreddits')->insert([
+            'user_id' => '1',
+            'name' => 'Test Sub',
+            'description' => 'Testing posts',
+            'slug' => 'test-sub',
+            'subreddit_image' => '/post_files/gif-test.gif',
+            'created_at' => now(),
+        ]);
     }
 }

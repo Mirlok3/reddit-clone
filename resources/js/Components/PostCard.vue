@@ -26,9 +26,9 @@
             <p class="my-2 mx-2 text-2xl font-bold text-gray-900 hover:text-indigo-700 dark:text-white dark:hover:text-indigo-300 truncate">
                 {{ post.title }}
             </p>
-
+<!--             -->
             <div class="scale-100 mr-2">
-                <img :src="post.post_image">
+                <PostMedia :post="post"/>
             </div>
 
             <p class="m-2 font-normal text-gray-700 dark:text-white truncate">
@@ -49,6 +49,7 @@
 <script setup>
     import {Link} from "@inertiajs/inertia-vue3"
     import PostVote from "./PostVote.vue"
+    import PostMedia from "./PostMedia.vue";
 
     defineProps({
         post: Object,

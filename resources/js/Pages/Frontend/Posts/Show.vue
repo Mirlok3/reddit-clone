@@ -61,18 +61,18 @@
                             </div>
                         </div>
 
-                        <div class="px-2 mb-2 w-10/12">
-                            <h1 class="font-semibold text-3xl text-black dark:text-white truncate">{{ post.data.title }}</h1>
-                            <p class="text-slate-700 my-2 dark:text-gray-300 truncate">{{ post.data.description }}</p>
+                        <div class="px-2 mb-2 w-10/12 break-words">
+                            <h1 class="font-semibold text-3xl text-black dark:text-white">{{ post.data.title }}</h1>
+                            <h2 class="text-slate-700 my-2 dark:text-gray-300 whitespace-pre-wrap">{{ post.data.description }}</h2>
                             <div class="scale-100">
-                                <img :src="post.data.post_image">
+                                <PostMedia :post="post.data" />
                             </div>
                             <a :href="post.data.url" class="font-semibold text-blue-500 text-sm hover:text-blue-300">{{ post.data.url }}</a>
                         </div>
-
                     </div>
                 </div>
-                <!-- Comments -->
+
+                <!-- Comments form-->
                 <div class="md:m-2 md:p-2 bg-white shadow-md rounded-lg mt-6 dark:bg-neutral-700 dark:border-2 dark:border-neutral-500">
                     <div v-if="$page.props.auth.auth_check">
                         <form class="m-2 p-2" @submit.prevent="submit">
@@ -95,7 +95,7 @@
                     </div>
 
                     <ul role="list" class="m-4">
-                        <!--TODO: Add upvotes to comments, Add replies-->
+                        <!--TODO: Add upvotes to comments, Add replies, Add no comment styling-->
                         <li v-for="(comment, index) in post.data.comments"  :key="index" class="py-3.5 px-4 mb-3 flex flex-col bg-gray-200 rounded-xl dark:bg-neutral-800">
                             <div class="text-sm text-gray-600 dark:text-gray-300 flex ml-3">
                                 <img :src="'/' + comment.user_image" alt="" class="w-8 h-8 rounded-full">
@@ -110,7 +110,7 @@
                                 <span class="my-auto ml-2 text-xs text-gray-500 font-bold">{{ comment.created_at }}</span>
                             </div>
 
-                            <div class="text-slate-600 m-2 border-l-4 border-indigo-500 dark:text-white">
+                            <div class="text-slate-600 m-2 border-l-4 border-indigo-500 dark:text-white whitespace-pre-wrap">
                                 <span class="ml-2">{{ comment.content }}</span>
                             </div>
                         </li>
@@ -146,6 +146,7 @@ import PostVote from "@/Components/PostVote.vue";
 import SubredditList from "@/Components/SubredditList.vue";
 import BreezeInputError from '@/Components/InputError.vue';
 import Subscribe from "@/Components/Subscribe.vue";
+import PostMedia from "@/Components/PostMedia.vue";
 
 const props = defineProps({
     subreddit: Object,

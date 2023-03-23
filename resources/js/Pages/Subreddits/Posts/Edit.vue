@@ -22,11 +22,11 @@
                         <BreezeLabel for="description" value="Description" class="mt-4 dark:text-white"/>
                         <div class="w-full bg-gray-50 rounded-lg border border-gray-400 ">
                             <div class="flex bg-slate-300 rounded-t-lg p-2 text-sm text-gray-600 pr-4 dark:bg-neutral-900">
-                                <BreezeLabel for="post_image">
+                                <BreezeLabel for="post_file">
                                     <div class="flex justify-between items-center hover:text-gray-800 hover:font-semibold cursor-pointer">
                                         <div class="mr-16 ml-3">
-                                            <BreezeInput id="post_image" type="file" class="mt-1 block w-1/2 file:hidden shadow-none dark:text-white"
-                                                         @input="form.post_image = $event.target.files[0]" accept="image/*"/>
+                                            <BreezeInput id="post_file" type="file" class="mt-1 block w-1/2 file:hidden shadow-none dark:text-white"
+                                                         @input="form.post_file = $event.target.files[0]" accept="image/*"/>
 
                                         </div>
                                         <p class="mr-3 mt-0.5 dark:text-white">Add a Picture... </p>
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <BreezeInputError class="mt-2" :message="form.errors.description"/>
-                        <BreezeInputError class="mt-2" :message="form.errors.post_image" />
+                        <BreezeInputError class="mt-2" :message="form.errors.post_file" />
 
                         <div class="mt-4">
                             <BreezeLabel for="url" value="Url" class="dark:text-white" />
@@ -86,7 +86,7 @@ const props = defineProps({
 const form = useForm({
     title: props.post?.title,
     description: props.post?.description,
-    post_image: props.post?.post_image,
+    post_file: props.post?.post_file,
     url: props.post?.url,
     _method: 'put',
 });

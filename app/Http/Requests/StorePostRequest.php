@@ -26,8 +26,9 @@ class StorePostRequest extends FormRequest
         return [
             'title' => ['required', 'min:5','max:255'],
             'url' => ['nullable', 'url'],
-            'description' => ['nullable', 'min:5','max:255'],
-            //'post_image' => ['nullable', 'image'], replaced with accept="image/*" in input
+            'description' => ['nullable', 'min:5','max:1024'],
+            'post_file' => 'max:10240',
+            //'post_file' => ['nullable', 'image'], replaced with accept="image/*" in input
         ];
     }
 }

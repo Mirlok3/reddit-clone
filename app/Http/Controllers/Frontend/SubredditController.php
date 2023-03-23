@@ -18,7 +18,7 @@ class SubredditController extends Controller
         $subreddit = Subreddit::where('slug', $slug)->firstOrFail();
         $posts = SubredditPostResource::collection($subreddit->posts()->with(['user', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());
-        }])->withCount('comments')->paginate(3));
+        }])->withCount('comments')->orderBy('votes', 'desc')->paginate(5));
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('posts')->orderBy('posts_count', 'desc')->take(4)->get());
         $ifUserSubscribed = Subscribe::where('subreddit_id', $subreddit->id)->where('user_id', auth()->id())->count();
