@@ -44,6 +44,13 @@
                             <BreezeInputError class="mt-2" :message="form.errors.description"/>
                         </div>
 
+                        <div class="mt-4 flex">
+                            <BreezeLabel for="color" value="Subreddit Color:" class="dark:text-white my-auto p-2.5" />
+                            <BreezeInput id="color" type="color" class="mt-1 block w-full dark:bg-neutral-800 border-gray-400 w-4/12 h-8 p-0.5" v-model="form.color"
+                                         autocomplete="color" /> <!--TODO: value="" doesnt work properly. When selecting different color it doesnt change from the value -->
+                            <BreezeInputError class="mt-2" :message="form.errors.color" />
+                        </div>
+
                         <div class="flex items-center justify-end mt-4">
                             <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }"
                                 :disabled="form.processing">
@@ -73,6 +80,7 @@ const props = defineProps({
 const form = useForm({
     name: props.subreddit.name,
     description: props.subreddit.description,
+    color: props.subreddit.color,
     _method: 'put',
     subreddit_image: props.subreddit.subreddit_image,
 });

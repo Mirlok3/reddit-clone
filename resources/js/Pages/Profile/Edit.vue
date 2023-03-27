@@ -5,6 +5,7 @@
         <form @submit.prevent="submit" class="max-w-lg mx-auto bg-white shadow rounded-md p-6 dark:bg-neutral-700 dark:text-white">
             <div class="flex justify-center">
                 <div class="pr-6">
+<!--                    TODO: Preview image-->
                     <BreezeLabel for="user_image"
                            class="flex flex-col justify-center items-centerh-64 bg-gray-50 rounded-lg border-2 border-gray-400 border-dashed cursor-pointer hover:border-indigo-300
                                   dark:text-white dark:bg-neutral-800 ">

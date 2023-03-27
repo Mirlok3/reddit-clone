@@ -17,6 +17,7 @@ class Subreddit extends Model
         'name',
         'description',
         'slug',
+        'color',
         'subscribers',
         'subreddit_image',
     ];

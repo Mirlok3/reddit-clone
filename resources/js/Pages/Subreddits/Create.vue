@@ -44,10 +44,17 @@
                             <BreezeInputError class="mt-2" :message="form.errors.description"/>
                         </div>
 
+                        <div class="mt-4 flex">
+                            <BreezeLabel for="color" value="Subreddit Color" class="dark:text-white my-auto p-2"/>
+                            <BreezeInput id="color" type="color" class="mt-1 block w-full dark:bg-neutral-800 border-gray-400 w-4/12 h-8 p-0.5" v-model="form.color"
+                                         autocomplete="color"/>
+                            <BreezeInputError class="mt-2" :message="form.errors.color" />
+                        </div>
+
                         <div class="flex items-center justify-end mt-4">
                             <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }"
                                           :disabled="form.processing">
-                                Edit Subreddit
+                                Create Subreddit
                             </BreezeButton>
                         </div>
                     </form>
@@ -55,7 +62,6 @@
             </div>
         </div>
     </BreezeAuthenticatedLayout>
-
 
 </template>
 
@@ -75,6 +81,7 @@ const form = useForm({
     name: '',
     description: '',
     slug: '',
+    color: '',
     subreddit_image: null,
 });
 

@@ -97,12 +97,16 @@ class SubredditController extends Controller
     {
         $this->authorize('update', $subreddit);
 
-        $request->validate([
+        $subreddit->update($request->validate([
             'name' => ['required','unique:subreddits,name,'.$subreddit->id],
-            'description' => ['required', 'min:5'],
-        ]);
-
-        //$subreddit->update($request->validated());
+            'description' => ['required', 'min:5','max:255'],
+            'color' => ['nullable'],
+        ]));
+        /*$request->validate([  // OLD VERSION
+            'name' => ['required','unique:subreddits,name,'.$subreddit->id],
+            'description' => ['required', 'min:5','max:255'],
+            'color' => ['nullable'],
+        ]);*/
 
         if ($request->hasFile('subreddit_image')) {
             $imagename = $request->subreddit_image->getClientOriginalName();

@@ -190,9 +190,7 @@ const showingNavigationDropdown = ref(false);
 
             <!-- Page Heading -->
             <header class="bg-white shadow bg-indigo-600" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                     <slot name="header"/>
-                </div>
             </header>
 
             <!-- Page Content -->

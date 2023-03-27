@@ -11,7 +11,7 @@
         <div class="py-6">
             <div >
                 <div class="container mx-auto my-5 p-5">
-                    <div class="md:flex no-wrap md:-mx-2">
+                    <div class="md:flex md:-mx-2">
                         <!-- Left Side -->
                         <div class="w-full md:w-3/12 md:mx-2 mb-4 rounded-lg">
                             <!-- Profile Card -->
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <!--Right Side -->
-                        <div class="w-full md:w-9/12 h-64 md:ml-4">
+                        <div class="w-full md:w-9/12 md:ml-4">
                             <div v-if="postCount == 0" class="font-semibold text-2xl text-gray-400 p-4 flex items-center flex-col">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
@@ -57,6 +57,10 @@
                                       :subreddit="post.subreddit_slug"
                                       :key="post.id"
                             />
+
+                            <div class="mt-4 p-2" v-if="postCount > 0">
+                                <Pagination :links="posts.meta.links" />
+                            </div>
                         </div>
                     </div>
                 </div>

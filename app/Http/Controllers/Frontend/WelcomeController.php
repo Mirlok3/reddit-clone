@@ -18,7 +18,7 @@ class WelcomeController extends Controller
             $query->where('user_id', auth()->id());
         }])->withCount('comments')->orderBy('votes', 'desc')->take(12)->paginate(4));
 
-        $subreddits = SubredditResource::collection(Subreddit::withCount('posts')->orderBy('posts_count', 'desc')->take(6)->get());
+        $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers', 'posts')->orderBy('subscribers_count', 'desc')->take(6)->get());
 
         return Inertia::render('Welcome', compact('posts', 'subreddits'));
     }

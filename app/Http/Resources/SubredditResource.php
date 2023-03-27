@@ -18,6 +18,8 @@ class SubredditResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
+            'subscribers_count' => $this->subscribers_count,
+            'color' => $this->color,
             'posts_count' => $this->posts_count,
             'subreddit_image' => $this->subreddit_image,
         ];

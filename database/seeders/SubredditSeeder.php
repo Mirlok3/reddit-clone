@@ -20,6 +20,7 @@ class SubredditSeeder extends Seeder
             'name' => 'Laravel',
             'description' => 'Laravel is a web application framework with expressive, elegant syntax. We’ve already laid the foundation — freeing you to create without sweating the small things.',
             'slug' => 'Laravel',
+            'color' => '#ffa500', // orange
             'created_at' => now(),
         ]);
 
@@ -28,6 +29,7 @@ class SubredditSeeder extends Seeder
             'name' => 'VueJS',
             'description' => 'An approachable, performant and versatile framework for building web user interfaces.',
             'slug' => 'VueJS',
+            'color' => '#378805', // green
             'created_at' => now(),
         ]);
 
@@ -36,7 +38,26 @@ class SubredditSeeder extends Seeder
             'name' => 'Test Sub',
             'description' => 'Testing posts',
             'slug' => 'test-sub',
+            'color' => '#ffffff', // white
             'subreddit_image' => '/post_files/gif-test.gif',
+            'created_at' => now(),
+        ]);
+
+        DB::table('subreddits')->insert([
+            'user_id' => '3',
+            'name' => 'Black from User',
+            'description' => 'Normal user is the moderator',
+            'slug' => 'black-from-user',
+            'color' => '#000000', //black
+            'subreddit_image' => '/post_files/jpg-test.jpg',
+            'created_at' => now(),
+        ]);
+
+        DB::table('subreddits')->insert([
+            'user_id' => '2',
+            'name' => 'Normal',
+            'description' => 'Normal',
+            'slug' => 'normal',
             'created_at' => now(),
         ]);
     }

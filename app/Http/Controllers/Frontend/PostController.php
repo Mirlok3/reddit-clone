@@ -23,7 +23,7 @@ class PostController extends Controller
 
         $post = new PostShowResource($subreddit_post);
 
-        $subreddits = SubredditResource::collection(Subreddit::withCount('posts')->orderBy('posts_count', 'desc')->take(4)->get());
+        $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers','posts')->orderBy('subscribers_count', 'desc')->take(6)->get());
 
         $can_update = Auth::check() ? Auth::user()->can('update', $subreddit_post) : false;
         $can_delete = Auth::check() ? Auth::user()->can('delete', $subreddit_post) : false;

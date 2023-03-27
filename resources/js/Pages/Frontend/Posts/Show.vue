@@ -1,31 +1,36 @@
 <template>
     <guest-layout>
         <template #header>
-            <div class="flex m-2 justify-between items-center">
-                <Link class="flex" :href="route('frontend.subreddits.show', subreddit.slug)">
-                    <div class="avatar">
-                        <img :src="subreddit.subreddit_image" class="md:w-14 md:h-14 rounded-full border-2 border-white p-1 w-10 h-10">
-                    </div>
-                    <h2 class="font-semibold md:text-4xl my-auto mx-6 text-white text-xl">r/{{ subreddit.name }}</h2>
-                </Link>
-
-                <div class="flex justify-end " v-if="$page.props.auth.auth_check">
-                    <Link class="md:px-3 md:py-2 rounded-full bg-white hover:bg-gray-200 text-black md:mr-6 font-semibold md:pr-4 p-1 mr-1"
-                          :href="route('subreddits.posts.create', subreddit.slug)">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                             class="w-5 h-5 mx-1.5 lg:hidden block">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                        <span class="hidden lg:block">Create a post</span>
-
+            <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8" :style="'background-color:' + subreddit.color + ';'" ref="element">
+                <div class="flex justify-between items-center mx-auto max-w-6xl">
+                    <Link class="flex" :href="route('frontend.subreddits.show', subreddit.slug)">
+                        <div class="avatar">
+                            <img :src="subreddit.subreddit_image" class="md:w-14 md:h-14 rounded-full border-2 p-1 w-10 h-10" :class="'border-' + colorInvert">
+                        </div>
+                        <h2 class="font-semibold md:text-4xl my-auto mx-6 text-white text-xl" :class="'text-' + colorInvert">r/{{ subreddit.name }}</h2>
                     </Link>
-                    <Subscribe :subreddit="subreddit" :ifUserSubscribed="ifUserSubscribed" class=""/>
+
+                    <div class="flex justify-end" v-if="$page.props.auth.auth_check">
+                        <Link class="md:px-3 md:py-2 rounded-full bg-white hover:bg-gray-200 md:mr-6 font-semibold border-4"
+                              :href="route('subreddits.posts.create', subreddit.slug)" >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                 class="w-5 h-5 mx-1.5 lg:hidden block my-1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            <span class="hidden lg:block mx-auto" :class="'text-' + !colorInvert">Create a post</span>
+
+                        </Link>
+                        <Subscribe :subreddit="subreddit" :ifUserSubscribed="ifUserSubscribed"
+                                   :class="'text-' + !colorInvert"
+                                   class="md:px-3 md:py-2 rounded-full bg-white hover:bg-gray-200 text-black md:mr-6 font-semibold md:pr-4 p-1 pt-1.5 mr-1 flex justify-between border-4"
+                        />
+                    </div>
                 </div>
             </div>
         </template>
 
-        <section class="flex flex-col md:flex-row md:m-2 md:p-2">
-            <div class="md:w-9/12">
+        <section class="flex flex-col md:flex-row">
+            <div class="md:w-9/12 w-full">
                 <div class="flex md:m-2 bg-white shadow-md rounded-lg dark:bg-neutral-700 dark:border-2 dark:border-neutral-500">
                     <div>
                         <PostVote :post="post.data" />
@@ -118,21 +123,24 @@
                 </div>
             </div>
 
-            <!-- Sidebar -->
-            <div class="hidden lg:flex flex-col w-4/12">
-                <div class="dark:text-white rounded-lg ml-1 p-2">
-                    <h2 class="font-semibold text-large p-4 bg-indigo-700 text-white rounded-t-lg dark:border-x-2 dark:border-t-2 dark:border-neutral-500">
-                        About r/{{ subreddit.name }}
+            <!-- Sidebar  TODO: Top isnt aligned with post -->
+            <div class="lg:flex flex-col md:w-3/12 ml-3 hidden">
+                <div class="shadow-md dark:text-white rounded-lg">
+                    <h2 class="font-semibold text-large p-4 text-white rounded-t-lg dark:border-x-2 dark:border-t-2 dark:border-neutral-500"
+                        :class="'text-' + colorInvert"
+                        :style="'background-color:' + subreddit.color + ';'" >
+                        About {{ subreddit.name }}
                     </h2>
-                    <p class="p-4 bg-white dark:bg-neutral-700 dark:border-x-2 dark:border-neutral-500">
+                    <p class="p-4 bg-white dark:bg-neutral-700 dark:border-x-2 dark:border-neutral-500" >
                         {{ subreddit.description }}
                     </p>
                     <p class="p-4 bg-white rounded-b-lg dark:bg-neutral-700 dark:border-x-2 dark:border-b-2 dark:border-neutral-500">
                         <span class="font-bold">Subscribers:</span> {{ subreddit.subscribers }}
                     </p>
                 </div>
-                <div class="ml-1 p-2 mt-4">
-                    <SubredditList :subreddits="subreddits.data" />
+
+                <div class="mt-6">
+                    <SubredditList :subreddits="subreddits.data" :color="subreddit.color"/>
                 </div>
             </div>
         </section>
@@ -147,6 +155,36 @@ import SubredditList from "@/Components/SubredditList.vue";
 import BreezeInputError from '@/Components/InputError.vue';
 import Subscribe from "@/Components/Subscribe.vue";
 import PostMedia from "@/Components/PostMedia.vue";
+import {computed, onMounted, ref} from "vue";
+
+const element = ref(null);
+
+// Calculate the relative luminance of the background color
+const getLuminance = (rgb) => (0.2126 * rgb[0]) + (0.7152 * rgb[1]) + (0.0722 * rgb[2]);
+
+// Get the background color of the element
+const getBackgroundColor = () => {
+    if (element.value) {
+        return window.getComputedStyle(element.value).backgroundColor;
+    }
+    return null;
+};
+
+// Compute the text color class based on the background color
+const colorInvert = computed(() => {
+    const bgColor = getBackgroundColor();
+    if (bgColor) {
+        const rgb = bgColor.match(/\d+/g);
+        const luminance = getLuminance(rgb);
+        return luminance > 128 ? 'black' : 'white';
+    }
+    return null;
+});
+
+// Update the text color class when the component is mounted
+onMounted(() => {
+    colorInvert.value && element.value.classList.add(colorInvert.value);
+});
 
 const props = defineProps({
     subreddit: Object,
