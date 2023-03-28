@@ -15,7 +15,7 @@ class PostController extends Controller
 {
     public function show($subreddit_slug, $slug)
     {
-        $subreddit = Subreddit::where('slug', $subreddit_slug)->first();
+        $subreddit = Subreddit::withCount('posts')->where('slug', $subreddit_slug)->firstOrFail();
 
         $subreddit_post = Post::with(['comments', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());

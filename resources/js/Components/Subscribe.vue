@@ -26,6 +26,6 @@
 
     defineProps({
         subreddit: Object,
-        ifUserSubscribed: Boolean,
+        ifUserSubscribed: Number,
     });
 </script>

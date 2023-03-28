@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-large p-4 bg-indigo-700 text-white rounded-t-lg"
             ref="element" :class="'text-' + colorInvert"
             :style="'background-color:' + color + ';'">
-            Top Subreddits
+            {{ title || 'Top Subreddits' }}
         </h2>
 
         <ul role="list" class="divide-y divide-slate-300 p-3 truncate">
@@ -63,5 +63,6 @@ onMounted(() => {
 defineProps({
     subreddits: Object,
     color: String,
+    title: String,
 })
 </script>

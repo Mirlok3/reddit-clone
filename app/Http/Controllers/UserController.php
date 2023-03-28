@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Resources\SubredditPostResource;
+use App\Http\Resources\SubredditResource;
 use App\Models\Post;
+use App\Models\Subreddit;
 use App\Models\User;
-use Faker\Core\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
@@ -24,12 +25,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::where('id', auth()->id())->firstOrFail();
+        /* function show used instead
+         * $user = User::where('id', auth()->id())->firstOrFail();
         $posts = SubredditPostResource::collection($user->posts()->with(['user', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());
         }])->withCount('comments')->paginate(3));
 
-        return Inertia::render('Profile/Index', compact( 'user', 'posts'));
+        $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers', 'posts')->where('user_id', auth()->id())->orderBy('subscribers_count', 'desc')->take(6)->get());
+
+        return Inertia::render('Profile/Index', compact( 'user', 'posts', 'subreddits'));*/
     }
 
     /**
@@ -61,16 +65,16 @@ class UserController extends Controller
      */
     public function show($username)
     {
-        $user = User::where('username', $username)->firstOrFail();
+        $user = User::withCount('posts')->where('username', $username)->firstOrFail();
         $posts = SubredditPostResource::collection($user->posts()->with(['user', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());
         }])->withCount('comments','user')->paginate(3));
 
-        $postCount = Post::where('user_id', $user->id)->count();
-
         $voteCount = Post::where('user_id', $user->id)->sum('votes');
 
-        return Inertia::render('Profile/Show', compact('user', 'posts','postCount','voteCount'));
+        $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers', 'posts')->where('user_id', $user->id)->orderBy('subscribers_count', 'desc')->take(6)->get());
+
+        return Inertia::render('Profile/Show', compact('user', 'posts', 'voteCount', 'subreddits'));
     }
 
     /**

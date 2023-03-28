@@ -9,7 +9,7 @@
         </template>
 
         <div class="py-6">
-            <div >
+            <div>
                 <div class="container mx-auto my-5 p-5">
                     <div class="md:flex md:-mx-2">
                         <!-- Left Side -->
@@ -37,20 +37,16 @@
                                     </div>
                                     <div>
                                         <div class="font-semibold">Posts</div>
-                                        <div class="font-extralight text-center">{{ postCount }}</div>
+                                        <div class="font-extralight text-center">{{ user.posts_count }}</div>
                                     </div>
                                 </div>
                             </div>
+                            <SubredditList class="mt-4" :subreddits="subreddits.data" title="Users Subreddits" v-if="subreddits.data[0]"/>
                         </div>
+
                         <!--Right Side -->
                         <div class="w-full md:w-9/12 md:ml-4">
-                            <div v-if="postCount == 0" class="font-semibold text-2xl text-gray-400 p-4 flex items-center flex-col">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
-                                </svg>
-                                <h2>There is nothing here....</h2>
-                                <h2>Post Something!</h2>
-                            </div>
+                            <EmptyState v-if="!user.posts_count" message="You have no posts..." />
 
                             <PostCard v-for="post in posts.data"
                                       :post="post"
@@ -58,7 +54,7 @@
                                       :key="post.id"
                             />
 
-                            <div class="mt-4 p-2" v-if="postCount > 0">
+                            <div class="mt-4 p-2" v-if="user.posts_count">
                                 <Pagination :links="posts.meta.links" />
                             </div>
                         </div>
@@ -74,14 +70,14 @@ import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import PostCard from "@/Components/PostCard.vue";
 import Pagination from "@/Components/Pagination.vue";
+import EmptyState from "@/Components/EmptyState.vue";
 import SubredditList from "@/Components/SubredditList.vue";
 
 defineProps({
     user: Object,
     subreddits: Object,
     posts: Object,
-    voteCount: String,
-    postCount: String,
+    voteCount: Number,
 })
 
 </script>

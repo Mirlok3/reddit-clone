@@ -11,7 +11,7 @@
                     <Pagination :links="posts.meta.links" />
                 </div>
             </div>
-            <div class="hidden lg:flex flex-col w-3/12 ml-3">
+            <div class="hidden md:flex flex-col w-3/12 ml-3">
                 <div>
                     <SubredditList :subreddits="subreddits.data" />
                 </div>

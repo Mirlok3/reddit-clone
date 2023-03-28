@@ -77,9 +77,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div v-if="subreddits.from == null" class="font-semibold text-gray-400 p-2 flex items-center flex-col bg-white dark:bg-neutral-900">
-                                        You have no subreddits...
-                                    </div>
+
+                                    <EmptyState v-if="!subreddits.from" message="You have no subreddits..." class="bg-white dark:bg-neutral-900"/>
+
                                     <div class="mt-2 mb-1.5 mx-2">
                                         <Pagination :links="subreddits.links"/>
                                     </div>
@@ -97,6 +97,7 @@
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import Pagination from '../../Components/Pagination.vue';
+import EmptyState from "@/Components/EmptyState.vue";
 
 defineProps({
     subreddits: Object

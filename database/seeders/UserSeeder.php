@@ -35,6 +35,12 @@ class UserSeeder extends Seeder
             'email' => 'test@test.com',
         ]);
 
+        User::factory()->create([ // Normal user
+            'name' => 'user',
+            'username' => 'user',
+            'email' => 'user@user.com',
+        ]);
+
         User::factory()->count(10)->create();
     }
 }
