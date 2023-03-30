@@ -14,12 +14,11 @@ use App\Http\Controllers\Backend\SubredditPostController;
 use App\Http\Controllers\Frontend\SubredditController as FrontendSubredditController;
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
-
 Route::get('/r/{slug}', [FrontendSubredditController::class, 'show'])->name('frontend.subreddits.show');
 Route::get('/r/{subreddit_slug}/posts/{post:slug}', [PostController::class, 'show'])->name('frontend.subreddits.posts.show');
-Route::post('/r/{subreddit_slug}/posts/{post:slug}/comments', [PostCommentController::class, 'store'])->name('frontend.posts.comments');
 
 Route::group(['middleware' => ['auth', 'verified']], function (){
+    Route::resource('/r/{subreddit_slug}/posts/{post:slug}/comments', PostCommentController::class);
     Route::resource('/subreddits', SubredditController::class);
     Route::resource('/subreddits.posts', SubredditPostController::class);
 

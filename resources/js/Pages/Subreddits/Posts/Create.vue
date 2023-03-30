@@ -1,5 +1,5 @@
 <template>
-    <Head title="Create a Subreddit"></Head>
+    <Head title="Creating a Post"></Head>
 
     <BreezeAuthenticatedLayout>
         <template #header>
