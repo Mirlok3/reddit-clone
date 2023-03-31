@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\CommentVote;
 use App\Models\Post;
 use App\Models\Subscribe;
 use Inertia\Inertia;
@@ -21,6 +22,8 @@ class PostController extends Controller
             $query->where('user_id', auth()->id());
         }])->where('slug', $slug)->first();
 
+        $commentVote = CommentVote::where('user_id', auth()->id())->get();
+
         $post = new PostShowResource($subreddit_post);
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers','posts')->orderBy('subscribers_count', 'desc')->take(6)->get());
@@ -29,6 +32,6 @@ class PostController extends Controller
         $can_delete = Auth::check() ? Auth::user()->can('delete', $subreddit_post) : false;
         $ifUserSubscribed = Subscribe::where('subreddit_id', $subreddit->id)->where('user_id', auth()->id())->count();
 
-        return Inertia::render('Frontend/Posts/Show', compact('subreddit', 'post', 'subreddits','can_update' ,'can_delete', 'ifUserSubscribed'));
+        return Inertia::render('Frontend/Posts/Show', compact('subreddit', 'post', 'subreddits','can_update' ,'can_delete', 'ifUserSubscribed', 'commentVote'));
     }
 }
