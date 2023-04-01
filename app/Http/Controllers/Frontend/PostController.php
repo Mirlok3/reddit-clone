@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\PostShowResource;
 use App\Http\Resources\SubredditResource;
+use function _PHPStan_d279f388f\React\Promise\all;
 
 class PostController extends Controller
 {
@@ -32,6 +33,8 @@ class PostController extends Controller
         $can_delete = Auth::check() ? Auth::user()->can('delete', $subreddit_post) : false;
         $ifUserSubscribed = Subscribe::where('subreddit_id', $subreddit->id)->where('user_id', auth()->id())->count();
 
-        return Inertia::render('Frontend/Posts/Show', compact('subreddit', 'post', 'subreddits','can_update' ,'can_delete', 'ifUserSubscribed', 'commentVote'));
+        return Inertia::render('Frontend/Posts/Show',
+            compact('subreddit', 'post', 'subreddits','can_update' ,'can_delete', 'ifUserSubscribed', 'commentVote'
+        ));
     }
 }
