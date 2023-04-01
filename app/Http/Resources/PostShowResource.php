@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\CommentResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostShowResource extends JsonResource
@@ -26,7 +25,6 @@ class PostShowResource extends JsonResource
             'votes' => $this->votes,
             'post_file' => $this->post_file,
             'file_ext' => pathinfo(storage_path($this->post_file), PATHINFO_EXTENSION),
-            'comments' => CommentResource::collection($this->whenLoaded('comments')),
             'postVotes' => $this->whenLoaded('postVotes'),
             'created_at' => $this->created_at->diffForHumans(),
         ];

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Http\Resources\CommentResource;
+use App\Models\Comment;
 use App\Models\CommentVote;
 use App\Models\Post;
 use App\Models\Subscribe;
@@ -11,7 +13,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\PostShowResource;
 use App\Http\Resources\SubredditResource;
-use function _PHPStan_d279f388f\React\Promise\all;
 
 class PostController extends Controller
 {
@@ -23,9 +24,11 @@ class PostController extends Controller
             $query->where('user_id', auth()->id());
         }])->where('slug', $slug)->first();
 
-        $commentVote = CommentVote::where('user_id', auth()->id())->get();
-
         $post = new PostShowResource($subreddit_post);
+
+        $comments = CommentResource::collection(Comment::with(['commentVotes', 'replies' => function ($query) {
+            $query->where('user_id', auth()->id());
+        }])->where('post_id', $subreddit_post->id)->get());
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers','posts')->orderBy('subscribers_count', 'desc')->take(6)->get());
 
@@ -34,7 +37,7 @@ class PostController extends Controller
         $ifUserSubscribed = Subscribe::where('subreddit_id', $subreddit->id)->where('user_id', auth()->id())->count();
 
         return Inertia::render('Frontend/Posts/Show',
-            compact('subreddit', 'post', 'subreddits','can_update' ,'can_delete', 'ifUserSubscribed', 'commentVote'
+            compact('subreddit', 'post', 'subreddits','can_update' ,'can_delete', 'ifUserSubscribed', 'comments'
         ));
     }
 }

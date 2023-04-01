@@ -2,41 +2,37 @@
 
 namespace App\Models;
 
-use App\Models\Post;
 use App\Models\User;
-use App\Models\Reply;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Vote;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Reply extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'id',
         'user_id',
+        'comment_id',
         'post_id',
         'votes',
         'content',
     ];
-
-    public function post()
-    {
-        return $this->belongsTo(Post::class);
-    }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function replies()
+    public function comments()
     {
-        return $this->hasMany(Reply::class);
+        return $this->belongsTo(Comment::class);
     }
 
     public function commentVotes()
     {
         return $this->hasMany(CommentVote::class);
     }
+
+    use HasFactory;
 }

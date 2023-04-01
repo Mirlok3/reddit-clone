@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\ReplyResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CommentResource extends JsonResource
+class ReplyResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,12 +17,11 @@ class CommentResource extends JsonResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
+            'comment_id' => $this->comment_id,
             'votes' => $this->votes,
             'username' => $this->user->username,
             'user_image' => $this->user->user_image,
             'content' => $this->content,
-            'commentVotes' => $this->whenLoaded('commentVotes'),
-            'replies' => ReplyResource::collection($this->whenLoaded('replies')),
             'created_at' => $this->created_at->diffForHumans(),
         ];
     }

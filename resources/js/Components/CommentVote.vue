@@ -1,17 +1,17 @@
 <template>
     <div class="w-12 flex flex-col p-3 bg-slate-300 text-center justify-center dark:bg-neutral-900 rounded-l-lg dark:text-white">
-        <CommentUpVoteLink :comment_id="comment.id" :class="{'text-red-600 dark:text-red-500': vote && vote.vote == 1 && vote.user_id == $page.props.auth.user.id}" />
+        <CommentUpVoteLink :comment_id="comment.id" :class="{'text-red-600 dark:text-red-500': comment.commentVotes[0] && comment.commentVotes[0].vote == 1,}" />
 
-        <div class="my-auto mx-auto font-bold "
-            :class="{
-                'text-red-600 dark:text-red-500': vote && vote.vote == 1 && vote.user_id == $page.props.auth.user.id,
-                'text-blue-600 dark:text-blue-500': vote && vote.vote == -1 && vote.user_id == $page.props.auth.user.id,
+        <div class="p-2 my-2 font-bold"
+             :class="{
+                'text-red-600 dark:text-red-500': comment.commentVotes[0] && comment.commentVotes[0].vote == 1,
+                'text-blue-600 dark:text-blue-500': comment.commentVotes[0] && comment.commentVotes[0].vote == -1,
             }"
         >
             {{ comment.votes }}
         </div>
 
-        <CommentDownVoteLink :comment_id="comment.id" :class="{'text-blue-600 dark:text-blue-500': vote && vote.vote == -1 && vote.user_id == $page.props.auth.user.id}" />
+        <CommentDownVoteLink :comment_id="comment.id" :class="{'text-blue-600 dark:text-blue-500': comment.commentVotes[0] && comment.commentVotes[0].vote == -1,}" />
     </div>
 </template>
 
