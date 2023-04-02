@@ -102,7 +102,7 @@
                                         <span class="my-auto ml-2 text-xs text-gray-500 font-bold truncate">{{ comment.created_at }}</span>
                                     </div>
 
-                                     <!-- Edit and delete TODO: edit and create on the same page -->
+                                     <!-- Comment Edit and delete TODO: edit and create on the same page -->
                                     <div v-if="$page.props.auth.auth_check" class="flex">
                                         <Link :href="route('comments.edit', [subreddit.slug, props.post.data.slug, comment.id])"
                                               v-if="$page.props.auth.user.id === comment.user_id"
@@ -117,14 +117,17 @@
                                     </div>
                                 </div>
                                 <div class="m-2 border-l-4 border-indigo-500 flex-col">
-                                    <p class="text-slate-600 dark:text-white whitespace-pre-wrap ml-2">{{ comment.content }}</p>
-
+                                    <p class="text-slate-600 dark:text-white whitespace-pre-wrap ml-2 mb-2.5">{{ comment.content }}</p>
+                                    <Link :href="route('replies.create', [subreddit.slug, props.post.data.slug, comment.id])"
+                                          class="font-semibold text-sm bg-blue-500 hover:bg-blue-700 rounded-full text-white p-0.5 px-2.5 my-auto m-2">
+                                        <span>Reply</span>
+                                    </Link>
                                     <!--Replies TODO: Upvotes, Create, edit destroy -->
                                     <ul role="list" class="m-2 ml-4 border-l-4 border-indigo-500">
                                         <li v-for="(reply, jindex) in comments.data[index].replies" :key="jindex" class="flex">
-                                            <div class="w-full flex-col justify-between p-3 break-words">
+                                            <div class="w-full flex-col justify-between p-3 pt-0 break-words">
                                                 <div class="flex justify-between my-auto ">
-                                                    <div class="flex">
+                                                    <div class="flex my-auto">
                                                         <img :src="'/' + reply.user_image" alt="" class="w-8 h-8 rounded-full">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                                              class="w-4 h-4 text-blue-600 dark:text-blue-500 my-auto md:ml-3 ml-0.5" v-if="reply.username == post.data.username ">
@@ -137,24 +140,25 @@
                                                         <span class="my-auto ml-2 text-xs text-gray-500 font-bold truncate">{{ reply.created_at }}</span>
                                                     </div>
 
-                                                    <!-- Edit and delete TODO: edit and create on the same page -->
+                                                    <!-- Reply Edit and delete TODO: better styling -->
                                                     <div v-if="$page.props.auth.auth_check" class="flex flex-col">
-                                                        <Link :href="route('comments.edit', [subreddit.slug, props.post.data.slug, comment.id])"
-                                                              v-if="$page.props.auth.user.id === comment.user_id"
+
+                                                        <Link :href="route('replies.edit', [subreddit.slug, props.post.data.slug, comment.id, reply.id])"
+                                                              v-if="$page.props.auth.user.id === reply.user_id"
                                                               class="font-semibold text-sm bg-blue-500 hover:bg-blue-700 rounded-full text-white p-0.5 px-2.5 my-auto">
                                                             <ResponsiveEditText />
                                                         </Link>
-                                                        <Link :href="route('comments.destroy', [props.subreddit.slug, props.post.data.slug, comment.id])"
-                                                              method="delete" as="button" type="button" v-if="$page.props.auth.user.id === comment.user_id || $page.props.auth.user.is_admin"
+                                                        <Link :href="route('replies.destroy', [props.subreddit.slug, props.post.data.slug, comment.id, reply.id])"
+                                                              method="delete" as="button" type="button" v-if="$page.props.auth.user.id === reply.user_id || $page.props.auth.user.is_admin"
                                                               class="font-semibold text-sm bg-red-500 hover:bg-red-700 rounded-full text-white px-2.5 p-0.5 my-auto">
                                                             <ResponsiveDeleteText />
                                                         </Link>
                                                     </div>
 
                                                 </div>
-                                                    <div class="m-2">
-                                                        <p class="text-slate-600 dark:text-white whitespace-pre-wrap ml-2">{{ reply.content }}</p>
-                                                    </div>
+                                                <div class="m-2">
+                                                    <p class="text-slate-600 dark:text-white whitespace-pre-wrap ml-2">{{ reply.content }}</p>
+                                                </div>
                                             </div>
                                         </li>
                                     </ul>
@@ -197,6 +201,18 @@ const props = defineProps({
 const form = useForm({
     content: "",
 });
+
+/*const formReply = id => useForm({ TODO
+    content: "",
+});
+
+const reply = id => {
+    formReply(id).post(
+        route("replies.store", [props.subreddit.slug, props.post.data.slug, id]), {
+            onSuccess: () => formReply(id).reset("content")
+        }
+    );
+};*/
 
 const submit = () => {
     form.post(

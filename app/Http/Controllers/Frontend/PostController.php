@@ -26,9 +26,9 @@ class PostController extends Controller
 
         $post = new PostShowResource($subreddit_post);
 
-        $comments = CommentResource::collection(Comment::with(['commentVotes', 'replies' => function ($query) {
+        $comments = CommentResource::collection(Comment::with(['commentVotes' => function ($query) {
             $query->where('user_id', auth()->id());
-        }])->where('post_id', $subreddit_post->id)->get());
+        }, 'replies'])->where('post_id', $subreddit_post->id)->get());
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers','posts')->orderBy('subscribers_count', 'desc')->take(6)->get());
 

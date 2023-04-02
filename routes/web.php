@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\SubredditController;
 use App\Http\Controllers\Frontend\PostCommentController;
 use App\Http\Controllers\Backend\SubredditPostController;
 use App\Http\Controllers\Frontend\SubredditController as FrontendSubredditController;
+use App\Http\Controllers\Frontend\ReplyController;
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 Route::get('/r/{slug}', [FrontendSubredditController::class, 'show'])->name('frontend.subreddits.show');
@@ -18,6 +19,7 @@ Route::get('/r/{subreddit_slug}/posts/{post:slug}', [PostController::class, 'sho
 
 Route::group(['middleware' => ['auth', 'verified']], function (){
     Route::resource('/r/{subreddit_slug}/posts/{post:slug}/comments', PostCommentController::class);
+    Route::resource('/r/{subreddit_slug}/posts/{post:slug}/comments/{comment:id}/replies', ReplyController::class);
     Route::resource('/subreddits', SubredditController::class);
     Route::resource('/subreddits.posts', SubredditPostController::class);
 

@@ -29,6 +29,7 @@
                                           class="block p-4 w-full text-sm text-gray-800 bg-white border-0 focus:ring-0 rounded-b-lg dark:bg-neutral-800 dark:text-white">
                                 </textarea>
                             </div>
+                            <BreezeInputError class="mt-2" :message="form.errors.content" />
                         </div>
                     </form>
                 </div>
@@ -42,6 +43,7 @@
 <script setup>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import BreezeButton from '@/Components/Button.vue';
+import BreezeInputError from '@/Components/InputError.vue';
 import { Link, Head, useForm } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
