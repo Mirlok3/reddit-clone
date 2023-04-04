@@ -29,9 +29,9 @@ class Reply extends Model
         return $this->belongsTo(Comment::class);
     }
 
-    public function commentVotes()
+    public function replyVotes()
     {
-        return $this->hasMany(CommentVote::class);
+        return $this->hasMany(ReplyVote::class);
     }
 
     use HasFactory;

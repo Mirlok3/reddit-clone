@@ -4,6 +4,7 @@
         <div class="mr-3">
             <PostVote :post="post"/>
         </div>
+<!--        TODO: add replies to comment count-->
         <div class="w-9/12">
             <div class="flex mx-3 mt-2 text-sm text-gray-500 dark:text-gray-400 truncate tracking-tight">
                 <Link :href="route('frontend.subreddits.show', subreddit)" class="font-semibold mr-2 hover:text-indigo-700 text-neutral-900 dark:text-white">

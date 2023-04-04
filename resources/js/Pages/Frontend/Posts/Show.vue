@@ -86,7 +86,7 @@
                         <!--TODO: Add replies-->
                         <li v-for="(comment, index) in comments.data"  :key="index" class="mb-3 flex bg-gray-200 rounded-xl dark:bg-neutral-800">
 <!--                            TODO: add share link for comment and post -->
-                            <CommentVote :comment="comment"/>
+                            <CommentVote :comment="comment" type="comments"/>
                             <div class="w-11/12 flex-col justify-between p-3 break-words">
                                 <div class="flex justify-between my-auto ">
                                     <div class="flex">
@@ -124,7 +124,8 @@
                                     </Link>
                                     <!--Replies TODO: Upvotes, Create, edit destroy -->
                                     <ul role="list" class="m-2 ml-4 border-l-4 border-indigo-500">
-                                        <li v-for="(reply, jindex) in comments.data[index].replies" :key="jindex" class="flex">
+                                        <li v-for="(reply, jindex) in comments.data[index].replies" :key="jindex" class="flex mb-2">
+                                            <CommentVote :comment="reply" type="replies"/>
                                             <div class="w-full flex-col justify-between p-3 pt-0 break-words">
                                                 <div class="flex justify-between my-auto ">
                                                     <div class="flex my-auto">
@@ -135,7 +136,7 @@
                                                         </svg>
                                                         <Link class="font-semibold text-slate-700 dark:text-white my-auto dark:hover:text-indigo-300 md:ml-1.5 ml-1"
                                                               :href="route('profile.show', reply.username)">
-                                                            <span class="">{{ reply.username }}</span>
+                                                            <span>{{ reply.username }}</span>
                                                         </Link>
                                                         <span class="my-auto ml-2 text-xs text-gray-500 font-bold truncate">{{ reply.created_at }}</span>
                                                     </div>

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\Backend\PostVoteController;
 use App\Http\Controllers\Backend\CommentVoteController;
+use App\Http\Controllers\Backend\ReplyVoteController;
 use App\Http\Controllers\Frontend\WelcomeController;
 use App\Http\Controllers\Backend\SubredditController;
 use App\Http\Controllers\Frontend\PostCommentController;
@@ -27,9 +28,10 @@ Route::group(['middleware' => ['auth', 'verified']], function (){
 
     Route::post('/posts/{post:slug}/upVote', [PostVoteController::class, 'upVote'])->name('posts.upVote');
     Route::post('/posts/{post:slug}/downVote', [PostVoteController::class, 'downVote'])->name('posts.downVote');
-
     Route::post('/comments/{comment:id}/upVote', [CommentVoteController::class, 'upVote'])->name('comments.upVote');
     Route::post('/comments/{comment:id}/downVote', [CommentVoteController::class, 'downVote'])->name('comments.downVote');
+    Route::post('/replies/{reply:id}/upVote', [ReplyVoteController::class, 'upVote'])->name('replies.upVote');
+    Route::post('/replies/{reply:id}/downVote', [ReplyVoteController::class, 'downVote'])->name('replies.downVote');
 
     Route::get('subreddits/{subreddit:slug}/subscribe', [SubscribeController::class, 'subscribe'])->name('subreddits.subscribe');
 

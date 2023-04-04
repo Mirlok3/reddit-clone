@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\ReplyResource;
+use App\Models\Reply;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CommentResource extends JsonResource
@@ -23,7 +24,9 @@ class CommentResource extends JsonResource
             'user_image' => $this->user->user_image,
             'content' => $this->content,
             'commentVotes' => $this->whenLoaded('commentVotes'),
-            'replies' => ReplyResource::collection($this->whenLoaded('replies')),
+            'replies' => ReplyResource::collection(Reply::with(['replyVotes' => function ($query) {
+                $query->where('user_id', auth()->id());
+            }])->where('comment_id', $this->id)->get()),
             'created_at' => $this->created_at->diffForHumans(),
         ];
     }

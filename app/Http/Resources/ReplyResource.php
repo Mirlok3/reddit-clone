@@ -22,6 +22,7 @@ class ReplyResource extends JsonResource
             'username' => $this->user->username,
             'user_image' => $this->user->user_image,
             'content' => $this->content,
+            'commentVotes' => $this->whenLoaded('replyVotes'),
             'created_at' => $this->created_at->diffForHumans(),
         ];
     }
