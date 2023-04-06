@@ -21,6 +21,7 @@ Route::get('/r/{subreddit_slug}/posts/{post:slug}', [PostController::class, 'sho
 Route::group(['middleware' => ['auth', 'verified']], function (){
     Route::resource('/r/{subreddit_slug}/posts/{post:slug}/comments', PostCommentController::class);
     Route::resource('/r/{subreddit_slug}/posts/{post:slug}/comments/{comment:id}/replies', ReplyController::class);
+
     Route::resource('/subreddits', SubredditController::class);
     Route::resource('/subreddits.posts', SubredditPostController::class);
 

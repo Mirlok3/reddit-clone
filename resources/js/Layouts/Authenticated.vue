@@ -78,14 +78,8 @@ const showingNavigationDropdown = ref(false);
                                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-full text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150
                                                            dark:bg-neutral-900 dark:text-white dark:hover:text-neutral-200">
 
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                     fill="currentColor" class="w-5 h-5 mr-1">
-                                                      <path fill-rule="evenodd"
-                                                            d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
-                                                            clip-rule="evenodd"/>
-                                                </svg>
-
-                                                {{ $page.props.auth.user.name }}
+                                                <img :src="'/' + $page.props.auth.user.user_image" alt="" class="w-8 h-8 rounded-full">
+                                                <span class="my-auto pl-2">{{ $page.props.auth.user.name }}</span>
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 20 20" fill="currentColor">
@@ -144,6 +138,13 @@ const showingNavigationDropdown = ref(false);
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <!-- Navigation Links -->
+                        <BreezeResponsiveNavLink class="flex"
+                            :href="route('profile.show', $page.props.auth.user.username)"
+                            :active="route().current('profile.show')">
+                            <img :src="'/' + $page.props.auth.user.user_image" alt="" class="w-8 h-8 rounded-full">
+                            <p class="my-auto pl-2">{{ $page.props.auth.user.name }}</p>
+                        </BreezeResponsiveNavLink>
+
                         <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex dark:bg-neutral-800">
                             <BreezeResponsiveNavLink :href="route('welcome')"
                                                      :active="route().current('welcome')">
@@ -158,11 +159,6 @@ const showingNavigationDropdown = ref(false);
                             </BreezeResponsiveNavLink>
                         </div>
 
-                        <BreezeResponsiveNavLink
-                            :href="route('profile.show', $page.props.auth.user.username)"
-                            :active="route().current('profile.show')">
-                            Profile
-                        </BreezeResponsiveNavLink>
 
                         <BreezeResponsiveNavLink :href="route('login')" :active="route().current('login')" v-if="!$page.props.auth.auth_check">
                             Log in

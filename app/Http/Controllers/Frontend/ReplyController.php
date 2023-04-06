@@ -25,7 +25,7 @@ class ReplyController extends Controller
 
     public function create($subreddit_slug, Post $post, Comment $comment)
     {
-        $creator = User::where('id', $comment->id)->get();
+        $creator = User::where('id', $comment->user_id)->get();
         return Inertia::render('Subreddits/Posts/Comments/Replies/Create', compact('comment', 'creator', 'subreddit_slug', 'post'));
     }
 
@@ -68,7 +68,7 @@ class ReplyController extends Controller
     public function edit($subreddit_slug, $post, Comment $comment, Reply $reply)
     {
         $this->authorize('update', $reply);
-        $creator = User::where('id', $comment->id)->get();
+        $creator = User::where('id', $comment->user_id)->get();
 
         return Inertia::render('Subreddits/Posts/Comments/Replies/Edit', compact('subreddit_slug', 'post', 'comment','reply', 'creator'));
     }

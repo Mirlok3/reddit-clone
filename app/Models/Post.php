@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Vote;
 use App\Models\Comment;
+use App\Models\Reply;
 use App\Models\Subreddit;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -47,6 +48,11 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
     }
 
     public function subreddit()

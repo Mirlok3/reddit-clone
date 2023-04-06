@@ -65,7 +65,7 @@ class ReplyPolicy
      */
     public function delete(User $user, Reply $reply)
     {
-        return $user->is_admin || in_array($user->id, [$reply->user_id, $reply->subreddit->user_id]);
+        return $user->is_admin || in_array($user->id, [$reply->user_id]);
     }
 
     /**

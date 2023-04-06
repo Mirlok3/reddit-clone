@@ -27,7 +27,7 @@ class SubredditPostResource extends JsonResource
             'file_ext' => pathinfo(storage_path($this->post_file), PATHINFO_EXTENSION),
             'postVotes' => $this->whenLoaded('postVotes'),
             'subreddit_slug' => $this->subreddit->slug,
-            'comments_count' => $this->comments_count,
+            'comments_count' => $this->comments_count + $this->replies_count,
             'created_at' => $this->created_at->diffForHumans(),
         ];
     }

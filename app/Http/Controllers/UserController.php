@@ -58,7 +58,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource. TODO: Show comments
      *
      * @param  int  $id
      * @return \Inertia\Response
@@ -68,7 +68,7 @@ class UserController extends Controller
         $user = User::withCount('posts')->where('username', $username)->firstOrFail();
         $posts = SubredditPostResource::collection($user->posts()->with(['user', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());
-        }])->withCount('comments','user')->paginate(3));
+        }])->withCount('comments','user', 'replies')->paginate(3));
 
         $voteCount = Post::where('user_id', $user->id)->sum('votes');
 
@@ -104,7 +104,7 @@ class UserController extends Controller
         $user->update($request->validated());
 
         if ($request->hasFile('user_image')) {
-            $imagename = $request->user_image->getClientOriginalName();
+            $imagename = $request->user_image->hashName();
             $request->user_image->move(public_path("user_images"), $imagename);
             $path = 'user_images/' . $imagename;
             $user->user_image = $path;

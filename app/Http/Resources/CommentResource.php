@@ -26,7 +26,7 @@ class CommentResource extends JsonResource
             'commentVotes' => $this->whenLoaded('commentVotes'),
             'replies' => ReplyResource::collection(Reply::with(['replyVotes' => function ($query) {
                 $query->where('user_id', auth()->id());
-            }])->where('comment_id', $this->id)->get()),
+            }])->where('comment_id', $this->id)->get()), // TODO: See more pagination
             'created_at' => $this->created_at->diffForHumans(),
         ];
     }

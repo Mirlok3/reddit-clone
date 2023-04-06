@@ -65,7 +65,7 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        return $user->is_admin || in_array($user->id, [$comment->user_id, $comment->subreddit->user_id]);
+        return $user->is_admin || in_array($user->id, [$comment->user_id]);
     }
 
     /**
