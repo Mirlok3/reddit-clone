@@ -10,7 +10,7 @@
 
         <div class="py-12">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="max-w-md mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg dark:text-white">
+                <div class="dark:border dark:border-neutral-500 max-w-md mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg dark:text-white">
                     <form @submit.prevent="submit" method="post" enctype="multipart/form-data">
                         <div class="mt-4">
                             <BreezeLabel for="subreddit_image"

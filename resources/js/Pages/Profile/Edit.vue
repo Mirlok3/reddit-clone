@@ -2,7 +2,7 @@
     <BreezeGuestLayout>
         <Head title="Edit"/>
 
-        <form @submit.prevent="submit" class="max-w-lg mx-auto bg-white shadow rounded-md p-6 dark:bg-neutral-700 dark:text-white">
+        <form @submit.prevent="submit" class="dark:border dark:border-neutral-500 max-w-lg mx-auto bg-white shadow rounded-md p-6 dark:bg-neutral-700 dark:text-white">
             <div class="flex justify-center">
                 <div class="pr-6">
 <!--                    TODO: Preview image-->

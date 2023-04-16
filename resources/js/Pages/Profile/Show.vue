@@ -15,7 +15,7 @@
                         <!-- Left Side -->
                         <div class="w-full md:w-3/12 md:mx-2 mb-4 rounded-lg">
                             <!-- Profile Card -->
-                            <div class="bg-white dark:bg-neutral-700 p-3 border-t-8 border-indigo-600 dark:text-white rounded-lg">
+                            <div class="dark:border dark:border-neutral-500 bg-white dark:bg-neutral-700 p-3 border-t-8 border-indigo-600 dark:text-white rounded-lg">
                                 <div class="flex items-center px-6 pt-2 pb-6">
                                     <div class="rounded-full pr-8 shrink-0">
                                         <img :src="'/' + user.user_image" class="w-16 h-16 rounded-full ring-4 ring-indigo-600">

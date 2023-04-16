@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
-use App\Models\CommentVote;
 use App\Models\Post;
 use App\Models\Subscribe;
 use Inertia\Inertia;

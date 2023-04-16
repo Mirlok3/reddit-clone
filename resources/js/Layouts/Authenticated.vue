@@ -76,7 +76,7 @@ const showingNavigationDropdown = ref(false);
                                         <span class="inline-flex rounded-md">
                                             <button type="button"
                                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-full text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150
-                                                           dark:bg-neutral-900 dark:text-white dark:hover:text-neutral-200">
+                                                           bg-neutral-200 dark:bg-neutral-900 dark:text-white dark:hover:text-neutral-200">
 
                                                 <img :src="'/' + $page.props.auth.user.user_image" alt="" class="w-8 h-8 rounded-full">
                                                 <span class="my-auto pl-2">{{ $page.props.auth.user.name }}</span>

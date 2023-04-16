@@ -10,7 +10,7 @@
 
         <div class="py-12">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="max-w-3xl mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg dark:text-white">
+                <div class="dark:border dark:border-neutral-500 max-w-3xl mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg dark:text-white">
                     <form @submit.prevent="submit">
                         <div>
                             <BreezeLabel for="title" value="Title" class="dark:text-white"/>

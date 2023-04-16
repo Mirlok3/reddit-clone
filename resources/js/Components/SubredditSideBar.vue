@@ -1,16 +1,16 @@
 <template>
     <div class="md:flex flex-col md:w-3/12 ml-3 hidden mb-4">
         <div class="shadow-md dark:text-white rounded-lg">
-            <h2 class="font-semibold text-large p-4 text-white bg-indigo-700 rounded-t-lg dark:border-x-2 dark:border-t-2 dark:border-neutral-500"
+            <h2 class="font-semibold text-large p-4 text-white bg-indigo-700 rounded-t-lg dark:border-x dark:border-t dark:border-neutral-500"
                 ref="element" :class="'text-' + colorInvert"
                 :style="'background-color:' + subreddit.color + ';'" >
                 About {{ subreddit.name }}
             </h2>
-            <p class="p-4 bg-white dark:bg-neutral-700 dark:border-x-2 dark:border-neutral-500" >
+            <p class="p-4 bg-white dark:bg-neutral-700 dark:border-x dark:border-neutral-500" >
                 {{ subreddit.description }}
             </p>
 
-            <div class="flex items-center justify-between px-12 p-4 bg-white rounded-b-lg dark:bg-neutral-700 dark:border-x-2 dark:border-b-2 dark:border-neutral-500">
+            <div class="flex items-center justify-between px-12 p-4 bg-white rounded-b-lg dark:bg-neutral-700 dark:border-x dark:border-b dark:border-neutral-500">
                 <div>
                     <div class="font-semibold">Subscribers</div>
                     <div class="font-extralight text-center">{{ subreddit.subscribers }}</div>

@@ -1,10 +1,10 @@
 <template>
     <Link :href="route('frontend.subreddits.posts.show', [subreddit, post.slug])"
-        class="flex bg-white rounded-lg border border-gray-200 shadow-md mb-4 dark:bg-neutral-700 dark:text-white dark:border-2 dark:border-neutral-500">
+        class="flex bg-white rounded-lg border border-gray-200 shadow-md mb-4 dark:bg-neutral-700 dark:text-white dark:border dark:border-neutral-500">
         <div class="mr-3">
             <PostVote :post="post"/>
         </div>
-<!--        TODO: add replies to comment count-->
+
         <div class="w-9/12">
             <div class="flex mx-3 mt-2 text-sm text-gray-500 dark:text-gray-400 truncate tracking-tight">
                 <Link :href="route('frontend.subreddits.show', subreddit)" class="font-semibold mr-2 hover:text-indigo-700 text-neutral-900 dark:text-white">

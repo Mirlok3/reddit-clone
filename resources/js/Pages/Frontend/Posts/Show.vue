@@ -6,7 +6,7 @@
 
         <section class="flex flex-col md:flex-row">
             <div class="md:w-9/12 w-full">
-                <div class="flex bg-white shadow-md rounded-lg dark:bg-neutral-700 dark:border-2 dark:border-neutral-500">
+                <div class="flex bg-white shadow-md rounded-lg dark:bg-neutral-700 dark:border dark:border-neutral-500">
                     <div>
                         <PostVote :post="post.data" />
                     </div>
@@ -47,7 +47,7 @@
                 </div>
 
                 <!-- Comments form-->
-                <div class="bg-white shadow-md rounded-lg mt-5 dark:bg-neutral-700 dark:border-2 dark:border-neutral-500 mb-12">
+                <div class="bg-white shadow-md rounded-lg mt-5 dark:bg-neutral-700 dark:border dark:border-neutral-500 mb-12">
                     <div v-if="$page.props.auth.auth_check">
                         <form class="m-2 p-2" @submit.prevent="submit">
                             <div class="mb-4 w-full rounded-lg border border-gray-400">

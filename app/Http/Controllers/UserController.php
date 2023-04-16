@@ -31,7 +31,8 @@ class UserController extends Controller
             $query->where('user_id', auth()->id());
         }])->withCount('comments')->paginate(3));
 
-        $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers', 'posts')->where('user_id', auth()->id())->orderBy('subscribers_count', 'desc')->take(6)->get());
+        $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers', 'posts')
+        ->where('user_id', auth()->id())->orderBy('subscribers_count', 'desc')->take(6)->get());
 
         return Inertia::render('Profile/Index', compact( 'user', 'posts', 'subreddits'));*/
     }
@@ -72,7 +73,8 @@ class UserController extends Controller
 
         $voteCount = Post::where('user_id', $user->id)->sum('votes');
 
-        $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers', 'posts')->where('user_id', $user->id)->orderBy('subscribers_count', 'desc')->take(6)->get());
+        $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers', 'posts')->where('user_id', $user->id)
+            ->orderBy('subscribers_count', 'desc')->take(6)->get());
 
         return Inertia::render('Profile/Show', compact('user', 'posts', 'voteCount', 'subreddits'));
     }
