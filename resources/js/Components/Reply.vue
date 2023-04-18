@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="m-2">
-            <p class="text-slate-600 dark:text-white whitespace-pre-wrap ml-2">{{ reply.content }}</p>
+            <p class="text-black dark:text-white whitespace-pre-wrap ml-2">{{ reply.content }}</p>
         </div>
     </div>
 </template>

@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Post;
 use App\Models\Subscribe;
-use App\Models\Vote;
 use Inertia\Inertia;
 use App\Models\Subreddit;
 use App\Http\Controllers\Controller;

@@ -8,7 +8,7 @@
             post.file_ext === 'jpeg'
         "
     />
-    <video controls
+    <video controls muted
         v-if="
             post.file_ext === 'mp4' ||
             post.file_ext === 'webm' ||

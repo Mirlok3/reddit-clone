@@ -10,11 +10,11 @@
 
         <div class="py-12">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="max-w-3xl mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg dark:text-white">
+                <div class="shadow-md max-w-3xl mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg dark:text-white">
                     <form class="m-1" @submit.prevent="submit">
-                        <div class="w-full rounded-lg border border-gray-400 bg-neutral-900">
+                        <div class="w-full rounded-lg border border-gray-400 bg-neutral-200 dark:bg-neutral-900">
                             <h1 class="font-bold text-lg p-2">Reply to:</h1>
-                            <div class="flex-col justify-between p-3 break-words bg-neutral-800 border-b-2">
+                            <div class="flex-col justify-between p-3 break-words bg-neutral-100 dark:bg-neutral-800 border-b-2">
                                 <div class="flex justify-between my-auto">
                                     <div class="flex">
                                         <img :src="'/' + creator[0].user_image" alt="" class="w-8 h-8 rounded-full">
@@ -25,7 +25,7 @@
                                     </div>
                                 </div>
                                 <div class="m-2 border-l-4 border-indigo-500 flex-col">
-                                    <p class="text-slate-600 dark:text-white whitespace-pre-wrap ml-2">{{ comment.content }}</p>
+                                    <p class="text-black dark:text-white whitespace-pre-wrap ml-2">{{ comment.content }}</p>
                                 </div>
                             </div>
 
@@ -35,7 +35,7 @@
                                 </textarea>
                             </div>
 
-                            <div class="flex justify-end bg-gray-400 rounded-b-lg dark:bg-neutral-900 p-2">
+                            <div class="flex justify-end bg-neutral-200 rounded-b-lg dark:bg-neutral-900 p-2">
                                 <BreezeButton class="m-1.5 mr-3 px-4 py-2 text-white rounded-full text-sm font-bold bg-indigo-600 font-bold hover:bg-indigo-500 dark:hover:bg-indigo-800"
                                               :class="{ 'opacity-25': form.processing }"
                                               :disabled="form.processing">
@@ -49,8 +49,6 @@
             </div>
         </div>
     </BreezeAuthenticatedLayout>
-
-
 </template>
 
 <script setup>

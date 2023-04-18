@@ -27,7 +27,7 @@
             <p class="my-2 mx-2 text-2xl font-bold text-gray-900 hover:text-indigo-700 dark:text-white dark:hover:text-indigo-300 truncate">
                 {{ post.title }}
             </p>
-<!--             -->
+            
             <div class="scale-100 mr-2">
                 <PostMedia :post="post"/>
             </div>

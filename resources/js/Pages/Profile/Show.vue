@@ -10,12 +10,12 @@
 
         <div class="py-6">
             <div>
-                <div class="container mx-auto my-5 p-5">
-                    <div class="md:flex md:-mx-2">
+                <div class="mx-auto my-5 ">
+                    <div class="lg:flex lg:mx-16">
                         <!-- Left Side -->
-                        <div class="w-full md:w-3/12 md:mx-2 mb-4 rounded-lg">
+                        <div class="w-full lg:w-3/12 lg:mx-2 rounded-lg border-t-8 border-t-indigo-600">
                             <!-- Profile Card -->
-                            <div class="dark:border dark:border-neutral-500 bg-white dark:bg-neutral-700 p-3 border-t-8 border-indigo-600 dark:text-white rounded-lg">
+                            <div class="shadow-md bg-white dark:bg-neutral-700 p-3  dark:text-white rounded-b-lg dark:border-x dark:border-b dark:border-neutral-500">
                                 <div class="flex items-center px-6 pt-2 pb-6">
                                     <div class="rounded-full pr-8 shrink-0">
                                         <img :src="'/' + user.user_image" class="w-16 h-16 rounded-full ring-4 ring-indigo-600">
@@ -41,11 +41,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <SubredditList class="mt-4" :subreddits="subreddits.data" title="Users Subreddits" v-if="subreddits.data[0]"/>
+                            <SubredditList class="my-6" :subreddits="subreddits.data" title="Users Subreddits" v-if="subreddits.data[0]"/>
+                            <hr class="lg:hidden p-3">
                         </div>
 
-                        <!--Right Side -->
-                        <div class="w-full md:w-9/12 md:ml-4">
+                        <!--Middle Side -->
+                        <div class="w-full lg:w-6/12 lg:ml-4">
+                            <h2 class="py-2 text-white text-2xl text-center font-bold">Posts</h2>
                             <EmptyState v-if="!user.posts_count" message="You have no posts..." />
 
                             <PostCard v-for="post in posts.data"
@@ -56,6 +58,39 @@
 
                             <div class="mt-4 p-2" v-if="user.posts_count">
                                 <Pagination :links="posts.meta.links" />
+                            </div>
+                        </div>
+
+                        <!--Right Side -->
+                        <div class="w-full lg:w-3/12 lg:ml-4">
+                            <h2 class="my-2 text-white text-2xl text-center font-bold">Comments</h2>
+                            <div class="bg-neutral-700 p-0.5 rounded-md dark:border dark:border-neutral-500">
+                                <EmptyState v-if="!comments.data[0]" message="This user has no comments..."/>
+
+                                <ProfileComment
+                                    v-for="(comment, index) in comments.data"
+                                    :comment="comment"
+                                />
+                            </div>
+
+                            <div class="mt-4 p-2" v-if="user.posts_count">
+                                <Pagination :links="comments.meta.links"/>
+                            </div>
+
+                            <hr class="m-3">
+
+                            <h2 class="py-2 text-white text-2xl text-center font-bold">Replies</h2>
+                            <div class="bg-neutral-700 p-0.5 rounded-md dark:border dark:border-neutral-500">
+                                <EmptyState v-if="!comments.data[0]" message="This user has no comments..."/>
+
+                                <ProfileComment
+                                    v-for="(reply, index) in replies.data"
+                                    :comment="reply"
+                                />
+                            </div>
+
+                            <div class="mt-4 p-2" v-if="user.posts_count">
+                                <Pagination :links="replies.meta.links"/>
                             </div>
                         </div>
                     </div>
@@ -72,12 +107,15 @@ import PostCard from "@/Components/PostCard.vue";
 import Pagination from "@/Components/Pagination.vue";
 import EmptyState from "@/Components/EmptyState.vue";
 import SubredditList from "@/Components/SubredditList.vue";
+import ProfileComment from "@/Components/ProfileComment.vue";
 
 defineProps({
     user: Object,
     subreddits: Object,
     posts: Object,
     voteCount: Number,
+    comments: Object,
+    replies: Object,
 })
 
 </script>

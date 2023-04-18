@@ -51,7 +51,7 @@
                     <div v-if="$page.props.auth.auth_check">
                         <form class="m-2 p-2" @submit.prevent="submit">
                             <div class="mb-4 w-full rounded-lg border border-gray-400">
-                                <div class="flex justify-between bg-gray-400 rounded-t-lg dark:bg-neutral-900">
+                                <div class="flex justify-between bg-neutral-200 rounded-t-lg dark:bg-neutral-900">
                                     <div class="flex my-auto ml-3">
                                         <img :src="'/' + $page.props.auth.user.user_image" alt="" class="w-8 h-8 rounded-full">
                                         <Link class="font-semibold text-slate-700 dark:text-white my-auto dark:hover:text-indigo-300 ml-1.5">

@@ -10,10 +10,10 @@
 
         <div class="py-12">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="max-w-3xl mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg dark:text-white">
+                <div class="shadow-md dark:border dark:border-neutral-500 max-w-3xl mx-auto bg-white m-2 p-6 dark:bg-neutral-600 rounded-lg dark:text-white">
                     <form class="m-1" @submit.prevent="submit">
                         <div class="w-full rounded-lg border border-gray-400">
-                            <div class="flex justify-between bg-gray-400 rounded-t-lg dark:bg-neutral-900 p-2">
+                            <div class="flex justify-between bg-neutral-200 rounded-t-lg dark:bg-neutral-900 p-2">
                                 <div class="flex my-auto ml-3">
                                     Edit a comment from a post in r/{{ sub_name.name }}
                                 </div>

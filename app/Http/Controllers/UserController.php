@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Resources\CommentResource;
+use App\Http\Resources\ReplyResource;
 use App\Http\Resources\SubredditPostResource;
 use App\Http\Resources\SubredditResource;
+use App\Models\Comment;
+use App\Models\Reply;
 use App\Models\Post;
 use App\Models\Subreddit;
 use App\Models\User;
@@ -59,7 +63,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource. TODO: Show comments
+     * Display the specified resource. TODO: Show replies
      *
      * @param  int  $id
      * @return \Inertia\Response
@@ -69,14 +73,26 @@ class UserController extends Controller
         $user = User::withCount('posts')->where('username', $username)->firstOrFail();
         $posts = SubredditPostResource::collection($user->posts()->with(['user', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());
-        }])->withCount('comments','user', 'replies')->paginate(3));
-
-        $voteCount = Post::where('user_id', $user->id)->sum('votes');
+        }])->orderBy('created_at', 'desc')->withCount('comments','user', 'replies')->paginate(3));
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers', 'posts')->where('user_id', $user->id)
             ->orderBy('subscribers_count', 'desc')->take(6)->get());
 
-        return Inertia::render('Profile/Show', compact('user', 'posts', 'voteCount', 'subreddits'));
+        $comments = CommentResource::collection(Comment::with(['commentVotes' => function ($query) {
+            $query->where('user_id', auth()->id());
+        }])->where('user_id', $user->id)->orderBy('created_at', 'desc')
+            ->paginate(3, ['*'], 'comments'));
+
+        $replies = ReplyResource::collection(Reply::with(['replyVotes' => function ($query) {
+            $query->where('user_id', auth()->id());
+        }])->where('user_id', $user->id)->orderBy('created_at', 'desc')
+            ->paginate(3, ['*'], 'replies')); // TODO: Better code
+
+        $postVoteCount = Post::where('user_id', $user->id)->sum('votes');
+        $commentVoteCount = Comment::where('user_id', $user->id)->sum('votes');
+        $voteCount = $postVoteCount + $commentVoteCount;
+
+        return Inertia::render('Profile/Show', compact('user', 'posts', 'voteCount', 'subreddits', 'comments', 'replies'));
     }
 
     /**
