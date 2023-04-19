@@ -18,6 +18,8 @@ class ReplyResource extends JsonResource
             'id' => $this->id,
             'user_id' => $this->user_id,
             'comment_id' => $this->comment_id,
+            'post_slug' => $this->post->slug,
+            'subreddit_slug' => $this->post->subreddit->slug,
             'votes' => $this->votes,
             'username' => $this->user->username,
             'user_image' => $this->user->user_image,

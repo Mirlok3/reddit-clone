@@ -13,7 +13,7 @@
                 <div class="mx-auto my-5 ">
                     <div class="lg:flex lg:mx-16">
                         <!-- Left Side -->
-                        <div class="w-full lg:w-3/12 lg:mx-2 rounded-lg border-t-8 border-t-indigo-600">
+                        <div class="w-full lg:w-2/12 lg:mx-2 rounded-lg border-t-8 border-t-indigo-600">
                             <!-- Profile Card -->
                             <div class="shadow-md bg-white dark:bg-neutral-700 p-3  dark:text-white rounded-b-lg dark:border-x dark:border-b dark:border-neutral-500">
                                 <div class="flex items-center px-6 pt-2 pb-6">
@@ -32,7 +32,7 @@
 
                                 <div class="flex items-center justify-between pt-6 px-12">
                                     <div>
-                                        <div class="font-semibold mr-2">Karma</div>
+                                        <div class="font-semibold">Karma</div>
                                         <div class="font-extralight text-center">{{ voteCount }}</div>
                                     </div>
                                     <div>
@@ -46,8 +46,8 @@
                         </div>
 
                         <!--Middle Side -->
-                        <div class="w-full lg:w-6/12 lg:ml-4">
-                            <h2 class="py-2 text-white text-2xl text-center font-bold">Posts</h2>
+                        <div class="w-full lg:w-8/12 lg:ml-4">
+                            <h2 class="py-2 dark:text-white text-2xl text-center font-bold">Posts</h2>
                             <EmptyState v-if="!user.posts_count" message="You have no posts..." />
 
                             <PostCard v-for="post in posts.data"
@@ -57,14 +57,14 @@
                             />
 
                             <div class="mt-4 p-2" v-if="user.posts_count">
-                                <Pagination :links="posts.meta.links" />
+                                <Pagination :links="posts.meta.links" v-if="posts.meta.last_page !== 1" />
                             </div>
                         </div>
 
                         <!--Right Side -->
                         <div class="w-full lg:w-3/12 lg:ml-4">
-                            <h2 class="my-2 text-white text-2xl text-center font-bold">Comments</h2>
-                            <div class="bg-neutral-700 p-0.5 rounded-md dark:border dark:border-neutral-500">
+                            <h2 class="my-2 dark:text-white text-2xl text-center font-bold">Comments</h2>
+                            <div class="dark:bg-neutral-700 rounded-md dark:border dark:border-neutral-500">
                                 <EmptyState v-if="!comments.data[0]" message="This user has no comments..."/>
 
                                 <ProfileComment
@@ -74,13 +74,13 @@
                             </div>
 
                             <div class="mt-4 p-2" v-if="user.posts_count">
-                                <Pagination :links="comments.meta.links"/>
+                                <Pagination :links="comments.meta.links" v-if="comments.meta.last_page !== 1"/>
                             </div>
 
                             <hr class="m-3">
 
-                            <h2 class="py-2 text-white text-2xl text-center font-bold">Replies</h2>
-                            <div class="bg-neutral-700 p-0.5 rounded-md dark:border dark:border-neutral-500">
+                            <h2 class="py-2 dark:text-white text-2xl text-center font-bold">Replies</h2>
+                            <div class="dark:bg-neutral-700 rounded-md dark:border dark:border-neutral-500">
                                 <EmptyState v-if="!comments.data[0]" message="This user has no comments..."/>
 
                                 <ProfileComment
@@ -90,7 +90,7 @@
                             </div>
 
                             <div class="mt-4 p-2" v-if="user.posts_count">
-                                <Pagination :links="replies.meta.links"/>
+                                <Pagination :links="replies.meta.links" v-if="comments.meta.last_page !== 1"/>
                             </div>
                         </div>
                     </div>

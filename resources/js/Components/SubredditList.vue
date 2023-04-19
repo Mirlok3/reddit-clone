@@ -9,7 +9,10 @@
             <li class="py-3.5 sm:py-3.5 hover:bg-neutral-200 dark:hover:bg-neutral-600" v-for="subreddit in subreddits" :key="subreddit.id">
                 <Link :href="route('frontend.subreddits.show', subreddit.slug)" class="flex items-center space-x-4 text-center p-2">
                     <div class="avatar w-1/3">
-                        <img :src="subreddit.subreddit_image" class="w-10 h-10 rounded-full ring-2 ring-indigo-700 dark:ring-white p-0.5">
+                        <img :src="subreddit.subreddit_image"
+                             class="w-12 h-12 rounded-full ring-2 ring-gray-400 p-1"
+                             :style="'border: 3px solid' + subreddit.color + ';'"
+                        >
                     </div>
 
                     <div class="text-slate-800 font-semibold text-xl dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-300 truncate w-2/3 text-left">

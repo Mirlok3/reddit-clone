@@ -47,7 +47,7 @@
                 </div>
 
                 <!-- Comments form-->
-                <div class="bg-white shadow-md rounded-lg mt-5 dark:bg-neutral-700 dark:border dark:border-neutral-500 mb-12">
+                <div class="bg-white shadow-lg rounded-lg mt-5 dark:bg-neutral-700 dark:border dark:border-neutral-500 mb-12">
                     <div v-if="$page.props.auth.auth_check">
                         <form class="m-2 p-2" @submit.prevent="submit">
                             <div class="mb-4 w-full rounded-lg border border-gray-400">
@@ -76,7 +76,7 @@
                     </div>
 
                     <!-- Comment section -->
-                    <ul role="list" class="md:m-4">
+                    <ul role="list" class="md:m-4 pb-5">
                         <EmptyState v-if="!comments.data[0]" message="Be the first to comment!"/>
 
                         <li v-for="(comment, index) in comments.data"  :key="index" class="mb-3 flex bg-gray-200 rounded-xl dark:bg-neutral-800">

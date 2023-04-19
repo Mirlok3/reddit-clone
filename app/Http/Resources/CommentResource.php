@@ -22,6 +22,8 @@ class CommentResource extends JsonResource
             'votes' => $this->votes,
             'username' => $this->user->username,
             'user_image' => $this->user->user_image,
+            'post_slug' => $this->post->slug,
+            'subreddit_slug' => $this->post->subreddit->slug,
             'content' => $this->content,
             'commentVotes' => $this->whenLoaded('commentVotes'),
             'replies' => ReplyResource::collection(Reply::with(['replyVotes' => function ($query) {
