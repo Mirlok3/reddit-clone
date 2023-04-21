@@ -63,7 +63,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource. TODO: Show replies
+     * Display the specified resource.
      *
      * @param  int  $id
      * @return \Inertia\Response

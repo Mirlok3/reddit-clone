@@ -1,7 +1,7 @@
 <template>
     <div class="md:flex flex-col md:w-3/12 ml-3 hidden mb-4">
         <div class="shadow-md dark:text-white rounded-lg">
-            <h2 class="font-semibold text-large p-4 text-white bg-indigo-700 rounded-t-lg dark:border-x dark:border-t dark:border-neutral-500"
+            <h2 class="border-b font-semibold text-large p-4 text-white bg-indigo-700 rounded-t-lg dark:border-x dark:border-t dark:border-neutral-500"
                 ref="element" :class="'text-' + colorInvert"
                 :style="'background-color:' + subreddit.color + ';'" >
                 About {{ subreddit.name }}

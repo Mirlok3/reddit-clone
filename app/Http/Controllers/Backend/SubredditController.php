@@ -21,6 +21,7 @@ class SubredditController extends Controller
             'id' => $subreddit->id,
             'name' => $subreddit->name,
             'subreddit_image' => $subreddit->subreddit_image,
+            'color' => $subreddit->color,
             'slug' => $subreddit->slug,
         ]);
 

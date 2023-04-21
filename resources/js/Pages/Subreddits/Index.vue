@@ -49,28 +49,29 @@
                                                 <td>
                                                     <Link :href="route('frontend.subreddits.show', subreddit.slug)"
                                                           class="text-blue-500 hover:text-blue-700 font-semibold dark:text-white dark:hover:text-blue-300">
-                                                        <img :src=subreddit.subreddit_image alt="" class="w-10 h-10 rounded-full ring-1 ring-white p-1 ml-3">
+                                                        <img :src=subreddit.subreddit_image alt="" class="w-12 h-12 rounded-full ring-2 ring-gray-400 m-2"
+                                                            :style="'border: 3px solid' + subreddit.color + ';'"
+                                                        >
                                                     </Link>
                                                 </td>
-                                                <td class="whitespace-nowrap py-4 pr-3 text-sm font-medium text-gray-900">
+                                                <td class="whitespace-nowrap py-4 pr-3 text-md font-medium text-gray-900">
                                                     <Link :href="route('frontend.subreddits.show', subreddit.slug)"
-                                                        class="text-blue-500 hover:text-blue-700 font-semibold dark:text-white dark:hover:text-blue-300">
+                                                          class="text-blue-500 hover:text-blue-700 font-semibold dark:text-white dark:hover:text-blue-300">
                                                         {{ subreddit.name }}
                                                     </Link>
                                                 </td>
 
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">{{ subreddit.slug }}</td>
 
-
-                                                <td class="relative whitespace-nowrap py-3 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                                <td class="relative whitespace-nowrap py-3 pl-3 pr-4 text-right text-sm font-bold sm:pr-6">
                                                     <Link :href="route('subreddits.edit', subreddit.slug)"
-                                                          class="text-white hover:bg-indigo-700 mr-3 bg-indigo-600 px-3 py-1.5 rounded-full">
+                                                          class="text-white hover:bg-indigo-700 mr-3 bg-indigo-600 px-4 py-2 rounded-full">
                                                           Edit
                                                     </Link>
 
                                                     <Link :href="route('subreddits.destroy', subreddit.slug)"
                                                           method="delete" as="button" type="button"
-                                                          class="text-white hover:bg-red-700 bg-red-600 px-3 py-1.5 rounded-full">
+                                                          class="text-white hover:bg-red-700 bg-red-600 px-4 py-2 rounded-full">
                                                           Delete
                                                     </Link>
                                                 </td>

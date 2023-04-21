@@ -10,8 +10,8 @@
                 <Link :href="route('frontend.subreddits.show', subreddit.slug)" class="flex items-center space-x-4 text-center p-2">
                     <div class="avatar w-1/3">
                         <img :src="subreddit.subreddit_image"
-                             class="w-12 h-12 rounded-full ring-2 ring-gray-400 p-1"
-                             :style="'border: 3px solid' + subreddit.color + ';'"
+                             class="w-12 h-12 rounded-full ring-2 ring-gray-400 p-0.5"
+                             :style="'border: 2px solid' + subreddit.color + ';'"
                         >
                     </div>
 
