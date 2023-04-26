@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Post;
+use App\Models\Subscribe;
 use Inertia\Inertia;
 use App\Models\Subreddit;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Redirect;
@@ -14,12 +14,12 @@ class SubredditPostController extends Controller
 {
     public function create(Subreddit $subreddit)
     {
-        return Inertia::render('Subreddits/Posts/Create', compact('subreddit'));
+        $subs = Subscribe::with('subreddits:id,name,slug')->where('user_id', auth()->id())->get()->pluck('subreddits');
+        return Inertia::render('Subreddits/Posts/Create', compact('subs', 'subreddit'));
     }
 
     public function store(StorePostRequest $request, Subreddit $subreddit)
     {
-        // Image save
         if ($request->hasFile('post_file')) {
             $imagename = $request->post_file->hashName();
             $request->post_file->move(public_path("post_files"), $imagename);
@@ -34,6 +34,7 @@ class SubredditPostController extends Controller
             'url' => $request->url,
             'description' => $request->description,
             'post_file' => $request->post_file,
+            'subreddit_id' => $request->sub,
         ]);
 
         return Redirect::route('frontend.subreddits.show', $subreddit->slug);

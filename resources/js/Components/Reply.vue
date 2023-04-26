@@ -14,18 +14,17 @@
                 </Link>
                 <span class="my-auto ml-2 text-xs text-gray-500 font-bold truncate">{{ reply.created_at }}</span>
             </div>
-
-            <!-- Reply Edit and delete -->
-            <div>
-                <EditDelete :editHref="route('replies.edit', [subreddit.slug, props.post.data.slug, comment.id, reply.id])"
-                            :deleteHref="route('replies.destroy', [subreddit.slug, props.post.data.slug, comment.id, reply.id])"
-                            :id="reply.user_id" :can_delete="can_delete"
-                            v-if="$page.props.auth.user === null || $page.props.auth.user.id === reply.user_id || $page.props.auth.user.is_admin || can_delete"
+        </div>
+        <div class="mx-2 mt-2 flex flex-col">
+            <p class="text-black dark:text-white whitespace-pre-wrap ml-2 mb-2">{{ reply.content }}</p>
+            <!-- Comment Edit and delete -->
+            <div class="flex">
+                <EditDelete :editHref="route('comments.edit', [subreddit.slug, post.data.slug, comment.id])"
+                            :deleteHref="route('comments.destroy', [subreddit.slug, post.data.slug, comment.id])"
+                            :can_delete="can_delete" :id="comment.user_id"
+                            v-if="$page.props.auth.user === null || $page.props.auth.user.id === comment.user_id || $page.props.auth.user.is_admin || can_delete"
                 />
             </div>
-        </div>
-        <div class="m-2">
-            <p class="text-black dark:text-white whitespace-pre-wrap ml-2">{{ reply.content }}</p>
         </div>
     </div>
 </template>

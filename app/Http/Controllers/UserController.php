@@ -71,9 +71,11 @@ class UserController extends Controller
     public function show($username)
     {
         $user = User::withCount('posts')->where('username', $username)->firstOrFail();
+
         $posts = SubredditPostResource::collection($user->posts()->with(['user', 'postVotes' => function ($query) {
             $query->where('user_id', auth()->id());
-        }])->orderBy('created_at', 'desc')->withCount('comments','user', 'replies')->paginate(3));
+        }])->orderBy('created_at', 'desc')->withCount('comments','user', 'replies')
+            ->paginate(3, ['*'], 'posts')->appends(request()->query()));
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers', 'posts')->where('user_id', $user->id)
             ->orderBy('subscribers_count', 'desc')->take(6)->get());
@@ -81,12 +83,12 @@ class UserController extends Controller
         $comments = CommentResource::collection(Comment::with(['commentVotes' => function ($query) {
             $query->where('user_id', auth()->id());
         }])->where('user_id', $user->id)->orderBy('created_at', 'desc')
-            ->paginate(3, ['*'], 'comments'));
+            ->paginate(3, ['*'], 'comments')->appends(request()->query()));
 
         $replies = ReplyResource::collection(Reply::with(['replyVotes' => function ($query) {
             $query->where('user_id', auth()->id());
         }])->where('user_id', $user->id)->orderBy('created_at', 'desc')
-            ->paginate(3, ['*'], 'replies')); // TODO: Better code
+            ->paginate(3, ['*'], 'replies')->appends(request()->query())); // TODO: Better code
 
         $postVoteCount = Post::where('user_id', $user->id)->sum('votes');
         $commentVoteCount = Comment::where('user_id', $user->id)->sum('votes');

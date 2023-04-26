@@ -16,21 +16,23 @@
                 <span class="my-auto ml-2 text-xs text-gray-500 font-bold truncate">{{ comment.created_at }}</span>
             </div>
 
-            <!-- Comment Edit and delete -->
-            <div>
-                <EditDelete :editHref="route('comments.edit', [subreddit.slug, post.data.slug, comment.id])"
-                            :deleteHref="route('comments.destroy', [subreddit.slug, post.data.slug, comment.id])"
-                            :can_delete="can_delete" :id="comment.user_id"
-                            v-if="$page.props.auth.user === null || $page.props.auth.user.id === comment.user_id || $page.props.auth.user.is_admin || can_delete"
-                />
-            </div>
         </div>
         <div class="md:m-2 border-l-4 border-indigo-500 flex-col">
             <p class="text-black dark:text-white whitespace-pre-wrap ml-2 mb-2.5">{{ comment.content }}</p>
-            <Link :href="route('replies.create', [subreddit.slug, props.post.data.slug, comment.id])"
-                  class="font-semibold text-sm bg-blue-500 hover:bg-blue-700 rounded-full text-white p-0.5 px-2.5 my-auto m-2">
-                <span>Reply</span>
-            </Link>
+            <div class="flex">
+                <Link :href="route('replies.create', [subreddit.slug, props.post.data.slug, comment.id])"
+                      class="font-semibold text-sm bg-blue-500 hover:bg-blue-700 rounded-full text-white p-0.5 px-2.5 my-auto m-2">
+                    <span>Reply</span>
+                </Link>
+                <!-- Comment Edit and delete -->
+                <div>
+                    <EditDelete :editHref="route('comments.edit', [subreddit.slug, post.data.slug, comment.id])"
+                                :deleteHref="route('comments.destroy', [subreddit.slug, post.data.slug, comment.id])"
+                                :can_delete="can_delete" :id="comment.user_id"
+                                v-if="$page.props.auth.user === null || $page.props.auth.user.id === comment.user_id || $page.props.auth.user.is_admin || can_delete"
+                    />
+                </div>
+            </div>
             <!--Replies -->
             <ul role="list" class="m-2 md:ml-4 border-l-4 border-indigo-500 w-full">
                 <li v-for="(reply, jindex) in comments.data[index].replies" :key="jindex" class="flex mb-2">

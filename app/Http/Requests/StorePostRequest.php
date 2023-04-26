@@ -28,6 +28,7 @@ class StorePostRequest extends FormRequest
             'url' => ['nullable', 'url'],
             'description' => ['nullable', 'min:5','max:1024'],
             'post_file' => 'max:10240',
+            'sub' => 'required',
             //'post_file' => ['nullable', 'image'], replaced with accept="image/*" in input
         ];
     }

@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth', 'verified']], function (){
 
     Route::resource('/subreddits', SubredditController::class);
     Route::resource('/subreddits.posts', SubredditPostController::class);
+    Route::get('/posts/create', [SubredditPostController::class, 'create'])->name('posts.create');
 
     Route::resource('/profile', UserController::class);
 
