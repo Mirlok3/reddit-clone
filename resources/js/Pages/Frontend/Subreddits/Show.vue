@@ -20,7 +20,7 @@
             </div>
 
             <!-- Sidebar -->
-            <SubredditSideBar :subreddit="subreddit" :subreddits="subreddits"/>
+            <SubredditSideBar :subreddit="subreddit" :subreddits="subreddits" :auth="can_delete"/>
         </section>
     </guest-layout>
 </template>
@@ -39,5 +39,6 @@ defineProps({
     posts: Object,
     ifUserSubscribed: Number,
     fileExt: String,
+    can_delete: Boolean,
 })
 </script>

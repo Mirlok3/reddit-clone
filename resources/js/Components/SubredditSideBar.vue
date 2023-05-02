@@ -1,23 +1,27 @@
 <template>
-    <div class="md:flex flex-col md:w-3/12 ml-3 hidden mb-4">
-        <div class="shadow-md dark:text-white rounded-lg">
-            <h2 class="border-b font-semibold text-large p-4 text-white bg-indigo-700 rounded-t-lg dark:border-x dark:border-t dark:border-neutral-500"
-                ref="element" :class="'text-' + colorInvert"
-                :style="'background-color:' + subreddit.color + ';'" >
+    <div class="mb-4 ml-3 hidden flex-col md:flex md:w-3/12">
+        <Link class="mb-4 rounded-lg border bg-indigo-700 p-4 font-semibold text-white text-large dark:border-x dark:border-t dark:border-neutral-500"
+              v-if="auth" :class="'text-' + colorInvert"
+              :style="'background-color:' + subreddit.color + ';'"
+              :href="route('subreddit.users', subreddit)">Admin panel
+        </Link>
+        <div class="rounded-lg shadow-md dark:text-white">
+            <h2 class="rounded-t-lg border-b bg-indigo-700 p-4 font-semibold text-white text-large dark:border-x dark:border-t dark:border-neutral-500"
+                ref="element" :class="'text-' + colorInvert" :style="'background-color:' + subreddit.color + ';'" >
                 About {{ subreddit.name }}
             </h2>
-            <p class="p-4 bg-white dark:bg-neutral-700 dark:border-x dark:border-neutral-500" >
+            <p class="bg-white p-4 dark:bg-neutral-700 dark:border-x dark:border-neutral-500" >
                 {{ subreddit.description }}
             </p>
 
-            <div class="flex items-center justify-between px-12 p-4 bg-white rounded-b-lg dark:bg-neutral-700 dark:border-x dark:border-b dark:border-neutral-500">
+            <div class="flex items-center justify-between rounded-b-lg bg-white p-4 px-12 dark:bg-neutral-700 dark:border-x dark:border-b dark:border-neutral-500">
                 <div>
                     <div class="font-semibold">Subscribers</div>
-                    <div class="font-extralight text-center">{{ subreddit.subscribers }}</div>
+                    <div class="text-center font-extralight">{{ subreddit.subscribers }}</div>
                 </div>
                 <div>
                     <div class="font-semibold">Posts</div>
-                    <div class="font-extralight text-center">{{ subreddit.posts_count }}</div>
+                    <div class="text-center font-extralight">{{ subreddit.posts_count }}</div>
                 </div>
             </div>
         </div>
@@ -31,11 +35,13 @@
 <script setup>
     import SubredditList from "@/Components/SubredditList.vue";
     import { ref, computed, onMounted } from 'vue';
+    import {Link} from "@inertiajs/inertia-vue3"
 
     defineProps({
         subreddit: Object,
         subreddits: Object,
         postCount: Number,
+        auth: Boolean,
     });
 
     const element = ref(null);

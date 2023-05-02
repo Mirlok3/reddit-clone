@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Subscribe;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Subreddit;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,10 @@ class SubredditController extends Controller
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers','posts')->orderBy('subscribers_count', 'desc')->take(6)->get());
         $ifUserSubscribed = Subscribe::where('subreddit_id', $subreddit->id)->where('user_id', auth()->id())->count();
+        $can_delete = Auth::check() ? Auth::user()->can('delete', $subreddit->id) : false;
 
-        return Inertia::render('Frontend/Subreddits/Show', compact('subreddit', 'posts', 'subreddits', 'ifUserSubscribed'));
+        return Inertia::render('Frontend/Subreddits/Show',
+            compact('subreddit', 'posts', 'subreddits', 'ifUserSubscribed', 'can_delete')
+        );
     }
 }

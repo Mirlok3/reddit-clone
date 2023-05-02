@@ -15,10 +15,7 @@
                             <div class="flex my-auto">
                                 <p class="mr-1 md:flex hidden">Posted by</p>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                     class="w-5 h-4 text-green-600 dark:text-green-500" v-if="post.data.user_id == subreddit.user_id">
-                                    <path fill-rule="evenodd" d="M12.516 2.17a.75.75 0 00-1.032 0 11.209 11.209 0 01-7.877 3.08.75.75 0 00-.722.515A12.74 12.74 0 002.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 00.374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 00-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08zm3.094 8.016a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
-                                </svg>
+                                <UserRole class="pb-0.5" :role="posterRole" />
 
                                 <Link class="text-gray-700 font-semibold mr-1 dark:text-gray-200 dark:hover:text-indigo-300"
                                       :href="route('profile.show', post.data.username)">
@@ -32,7 +29,7 @@
                                         :deleteHref="route('subreddits.posts.destroy', [subreddit.slug, post.data.slug])"
                                         :id="post.data.user_id" :can_delete="can_delete"
                                         v-if="$page.props.auth.user === null || $page.props.auth.user.id === post.data.user_id || $page.props.auth.user.is_admin || can_delete"
-                            />
+                            /><!--TODO: use can update-->
                         </div>
 
                         <div class="px-2 mb-2 md:w-12/12 break-words">
@@ -89,7 +86,7 @@
             </div>
 
             <!-- Sidebar -->
-            <SubredditSideBar :subreddit="subreddit" :subreddits="subreddits" />
+            <SubredditSideBar :subreddit="subreddit" :subreddits="subreddits" :auth="can_delete" />
         </section>
     </guest-layout>
 </template>
@@ -106,6 +103,7 @@ import SubredditHeader from "@/Components/SubredditHeader.vue";
 import Pagination from "@/Components/Pagination.vue";
 import Comment from "@/Components/Comment.vue";
 import EditDelete from "@/Components/EditDelete.vue";
+import UserRole from "@/Components/UserRole.vue";
 
 const props = defineProps({
     subreddit: Object,
@@ -115,6 +113,7 @@ const props = defineProps({
     can_delete: Boolean,
     ifUserSubscribed: Number,
     comments: Object,
+    posterRole: String,
 });
 
 const form = useForm({

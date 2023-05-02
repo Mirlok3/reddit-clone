@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('subreddit_id')->constrained()->cascadeOnDelete();
             $table->integer('subscribe')->nullable();
+            $table->string('role')->nullable();
             $table->timestamps();
         });
     }

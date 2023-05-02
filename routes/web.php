@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\PostCommentController;
 use App\Http\Controllers\Backend\SubredditPostController;
 use App\Http\Controllers\Frontend\SubredditController as FrontendSubredditController;
 use App\Http\Controllers\Frontend\ReplyController;
+use App\Http\Controllers\SubredditUserController;
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 Route::get('/r/{slug}', [FrontendSubredditController::class, 'show'])->name('frontend.subreddits.show');
@@ -24,6 +25,9 @@ Route::group(['middleware' => ['auth', 'verified']], function (){
 
     Route::resource('/subreddits', SubredditController::class);
     Route::resource('/subreddits.posts', SubredditPostController::class);
+    Route::get('/subreddit/{subreddit:id}/users', [SubredditUserController::class, 'index'])->name('subreddit.users');
+    Route::get('/subreddit/{subreddit:id}/users/{user:id}/giveRole/{role}', [SubredditUserController::class, 'giveRole'])->name('subreddit.users.giveRole');
+
     Route::get('/posts/create', [SubredditPostController::class, 'create'])->name('posts.create');
 
     Route::resource('/profile', UserController::class);
@@ -36,7 +40,6 @@ Route::group(['middleware' => ['auth', 'verified']], function (){
     Route::post('/replies/{reply:id}/downVote', [ReplyVoteController::class, 'downVote'])->name('replies.downVote');
 
     Route::get('subreddits/{subreddit:slug}/subscribe', [SubscribeController::class, 'subscribe'])->name('subreddits.subscribe');
-
 });
 
 require __DIR__.'/auth.php';

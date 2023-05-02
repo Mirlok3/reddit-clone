@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Http\Resources\ReplyResource;
 use App\Models\Reply;
+use App\Models\Subscribe;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CommentResource extends JsonResource
@@ -30,6 +31,8 @@ class CommentResource extends JsonResource
                 $query->where('user_id', auth()->id());
             }])->where('comment_id', $this->id)->get()), // TODO: See more pagination
             'created_at' => $this->created_at->diffForHumans(),
+            'role' => Subscribe::where('user_id', $this->user_id)
+                ->where('subreddit_id', $this->post->subreddit->id)->value('role'),
         ];
     }
 }

@@ -13,11 +13,12 @@ class Subscribe extends Model
         'user_id',
         'subreddit_id',
         'subscribe',
+        'role'
     ];
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function subreddits()

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Subscribe;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ReplyResource extends JsonResource
@@ -26,6 +27,8 @@ class ReplyResource extends JsonResource
             'content' => $this->content,
             'commentVotes' => $this->whenLoaded('replyVotes'),
             'created_at' => $this->created_at->diffForHumans(),
+            'role' => Subscribe::where('user_id', $this->user_id)
+                ->where('subreddit_id', $this->post->subreddit->id)->value('role'),
         ];
     }
 }

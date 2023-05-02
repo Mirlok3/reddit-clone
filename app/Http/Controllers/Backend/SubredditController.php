@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Subscribe;
 use Inertia\Inertia;
 use App\Models\Subreddit;
 use Illuminate\Http\Request;
@@ -48,7 +49,6 @@ class SubredditController extends Controller
     {
         $subreddit = Subreddit::create($request->validated() + ['user_id' => auth()->id()]);
 
-        // Image save
         if ($request->hasFile('subreddit_image')) {
             $imagename = $request->subreddit_image->hashName();
             $request->subreddit_image->move(public_path("subreddit_images"), $imagename);
@@ -61,18 +61,14 @@ class SubredditController extends Controller
             $subreddit->save();
         }
 
-        return to_route('subreddits.index')->with('message', 'Subreddit created succesfully.');
-    }
+        Subscribe::create([
+            'user_id' => auth()->id(),
+            'subreddit_id' => $subreddit->id,
+            'subscribe' => 1,
+            'role' => 'creator',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Inertia\Response
-     */
-    public function show($id)
-    {
-        //
+        return to_route('subreddits.index')->with('message', 'Subreddit created succesfully.');
     }
 
     /**

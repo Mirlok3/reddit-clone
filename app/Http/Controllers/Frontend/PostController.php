@@ -24,19 +24,21 @@ class PostController extends Controller
         }])->where('slug', $slug)->first();
 
         $post = new PostShowResource($subreddit_post);
+        $posterRole = Subscribe::where('user_id', $post->user_id)->value('role');
 
         $comments = CommentResource::collection(Comment::with(['commentVotes' => function ($query) {
             $query->where('user_id', auth()->id());
         }])->where('post_id', $subreddit_post->id)->paginate(6));
 
-        $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers','posts')->orderBy('subscribers_count', 'desc')->take(6)->get());
+        $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers','posts')
+            ->orderBy('subscribers_count', 'desc')->take(6)->get());
 
         $can_update = Auth::check() ? Auth::user()->can('update', $subreddit_post) : false;
         $can_delete = Auth::check() ? Auth::user()->can('delete', $subreddit_post) : false;
         $ifUserSubscribed = Subscribe::where('subreddit_id', $subreddit->id)->where('user_id', auth()->id())->count();
-
+//        dd($subreddit_post);
         return Inertia::render('Frontend/Posts/Show',
-            compact('subreddit', 'post', 'subreddits','can_update' ,'can_delete', 'ifUserSubscribed', 'comments'
+            compact('subreddit', 'post', 'subreddits','can_update' ,'can_delete', 'ifUserSubscribed', 'comments', 'posterRole'
         ));
     }
 }

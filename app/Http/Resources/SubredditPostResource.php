@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Subscribe;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SubredditPostResource extends JsonResource
@@ -20,7 +21,6 @@ class SubredditPostResource extends JsonResource
             'description' => $this->description,
             'username' => $this->user->username,
             'user_id' => $this->user->id,
-            'subreddit_mod' => $this->subreddit->user_id,
             'slug' => $this->slug,
             'votes' => $this->votes,
             'post_file' => $this->post_file,
@@ -29,6 +29,8 @@ class SubredditPostResource extends JsonResource
             'subreddit_slug' => $this->subreddit->slug,
             'comments_count' => $this->comments_count + $this->replies_count,
             'created_at' => $this->created_at->diffForHumans(),
+            'role' => Subscribe::where('user_id', $this->user_id)
+                ->where('subreddit_id', $this->subreddit->id)->value('role'),
         ];
     }
 }

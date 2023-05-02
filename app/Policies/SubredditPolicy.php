@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Subreddit;
+use App\Models\Subscribe;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -65,7 +66,7 @@ class SubredditPolicy
      */
     public function delete(User $user, Subreddit $subreddit)
     {
-        return $user->id === $subreddit->user_id;
+        return $user->id === $subreddit->user_id || Subscribe::where('user_id', $user->id)->value('role') === 'admin';
     }
 
     /**
