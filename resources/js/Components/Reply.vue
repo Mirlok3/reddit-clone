@@ -21,8 +21,8 @@
             <p class="text-black dark:text-white whitespace-pre-wrap ml-2 mb-2">{{ reply.content }}</p>
             <!-- Comment Edit and delete -->
             <div class="flex">
-                <EditDelete :editHref="route('comments.edit', [subreddit.slug, post.data.slug, comment.id])"
-                            :deleteHref="route('comments.destroy', [subreddit.slug, post.data.slug, comment.id])"
+                <EditDelete :editHref="route('replies.edit', [subreddit.slug, post.data.slug, comment.id, reply.id])"
+                            :deleteHref="route('replies.destroy', [subreddit.slug, post.data.slug, comment.id, reply.id])"
                             :can_delete="can_delete" :id="comment.user_id"
                             v-if="$page.props.auth.user === null || $page.props.auth.user.id === comment.user_id || $page.props.auth.user.is_admin || can_delete"
                 />

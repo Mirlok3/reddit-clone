@@ -10,14 +10,14 @@ class SubredditUserController extends Controller
 {
     public function index(Subreddit $subreddit)
     {
-        $this->authorize('update', $subreddit);
+        $this->authorize('delete', $subreddit);
         $subscribedUsers = Subscribe::with('users')->where('subreddit_id', $subreddit->id)->paginate(12);
         return Inertia::render('Subreddits/Users/Index', compact('subscribedUsers', 'subreddit'));
     }
 
     public function giveRole(Subreddit $subreddit, $user, $role)
     {
-        $this->authorize('update', $subreddit);
+        $this->authorize('delete', $subreddit);
         $subscribeData = Subscribe::where('subreddit_id', $subreddit->id)->where('user_id', $user)->first();
 
         if ($subscribeData->role == $role) {

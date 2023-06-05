@@ -1,6 +1,7 @@
 <template>
     <div class="mb-4 ml-3 hidden flex-col md:flex md:w-3/12">
-        <Link class="mb-4 rounded-lg border bg-indigo-700 p-4 font-semibold text-white text-large dark:border-x dark:border-t dark:border-neutral-500"
+        <Link class="mb-4 rounded-lg border bg-indigo-700 p-4 font-semibold text-white text-large dark:border-x dark:border-t dark:border-neutral-500
+                     hover:bg-opacity-75"
               v-if="auth" :class="'text-' + colorInvert"
               :style="'background-color:' + subreddit.color + ';'"
               :href="route('subreddit.users', subreddit)">Admin panel

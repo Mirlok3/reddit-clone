@@ -21,7 +21,7 @@ class SubredditController extends Controller
 
         $subreddits = SubredditResource::collection(Subreddit::withCount('subscribers','posts')->orderBy('subscribers_count', 'desc')->take(6)->get());
         $ifUserSubscribed = Subscribe::where('subreddit_id', $subreddit->id)->where('user_id', auth()->id())->count();
-        $can_delete = Auth::check() ? Auth::user()->can('delete', $subreddit->id) : false;
+        $can_delete = Auth::check() ? Auth::user()->can('delete', Subreddit::where('slug', $slug)->firstOrFail()) : false;
 
         return Inertia::render('Frontend/Subreddits/Show',
             compact('subreddit', 'posts', 'subreddits', 'ifUserSubscribed', 'can_delete')

@@ -3,9 +3,11 @@
 
     <BreezeAuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl leading-tight">
-                Edit r/{{ props.subreddit.name }}
-            </h2>
+            <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-white">
+                <h2 class="text-xl font-semibold leading-tight text-white">
+                    Edit r/{{ props.subreddit.name }}
+                </h2>
+            </div>
         </template>
 
         <div class="py-12">

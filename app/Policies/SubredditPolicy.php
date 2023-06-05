@@ -66,7 +66,9 @@ class SubredditPolicy
      */
     public function delete(User $user, Subreddit $subreddit)
     {
-        return $user->id === $subreddit->user_id || Subscribe::where('user_id', $user->id)->value('role') === 'admin';
+        return
+            $user->id === $subreddit->user_id ||
+            Subscribe::where('user_id', auth()->id())->where('subreddit_id', $subreddit->id)->value('role') == 'creator';
     }
 
     /**

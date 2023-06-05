@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Post;
+use App\Models\Subscribe;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -53,7 +54,9 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return
+            $user->id === $post->user_id ||
+            Subscribe::where('user_id', $user->id)->value('role') === 'creator';
     }
 
     /**
@@ -65,7 +68,10 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->is_admin || in_array($user->id, [$post->user_id, $post->subreddit->user_id]);
+        return
+            $user->is_admin ||
+            in_array($user->id, [$post->user_id, $post->subreddit->user_id]) ||
+            Subscribe::where('user_id', auth()->id())->where('subreddit_id', $post->subreddit_id)->value('role') == 'creator';
     }
 
     /**
