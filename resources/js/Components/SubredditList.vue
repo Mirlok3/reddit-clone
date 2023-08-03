@@ -1,7 +1,7 @@
 <template>
     <div class="w-full bg-white shadow-md border rounded-lg dark:bg-neutral-700 dark:border dark:border-neutral-500">
         <h2 class="font-semibold text-large p-4 bg-indigo-700 text-white rounded-t-lg"
-            ref="element" :class="'text-' + colorInvert"
+            ref="element" :class="colorInvert"
             :style="'background-color:' + color + ';'">
             {{ title || 'Top Subreddits' }}
         </h2>
@@ -52,7 +52,7 @@ const colorInvert = computed(() => {
     if (bgColor) {
         const rgb = bgColor.match(/\d+/g);
         const luminance = getLuminance(rgb);
-        return luminance > 128 ? 'black' : 'white';
+        return luminance > 128 ? '!text-black' : '!text-white';
     }
     return null;
 });

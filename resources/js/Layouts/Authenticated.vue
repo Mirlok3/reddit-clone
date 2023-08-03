@@ -176,7 +176,7 @@ const showingNavigationDropdown = ref(false);
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow bg-indigo-600" v-if="$slots.header">
+            <header class="bg-indigo-600 shadow " v-if="$slots.header">
                 <slot name="header"/> <!--TODO: Create non subreddit header-->
             </header>
 

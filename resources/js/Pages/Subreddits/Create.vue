@@ -48,7 +48,7 @@
 
                         <div class="mt-4 flex">
                             <BreezeLabel for="color" value="Subreddit Color" class="dark:text-white my-auto p-2"/>
-                            <BreezeInput id="color" type="color" class="mt-1 block w-full dark:bg-neutral-800 border-gray-400 w-4/12 h-8 p-0.5" v-model="form.color"
+                            <BreezeInput id="color" type="color" class="mt-1 block w-full dark:bg-neutral-800 border-gray-400 w-4/12 h-8 p-0.5" v-model="form.color" value="#4338ca"
                                          autocomplete="color"/>
                             <BreezeInputError class="mt-2" :message="form.errors.color" />
                         </div>

@@ -3,9 +3,9 @@
         <div class="flex justify-between items-center mx-auto max-w-6xl">
             <Link class="flex" :href="route('frontend.subreddits.show', subreddit.slug)">
                 <div class="avatar">
-                    <img :src="subreddit.subreddit_image" class="md:w-14 md:h-14 rounded-full border-2 p-1 w-10 h-10" :class="'border-' + colorInvert">
+                    <img :src="subreddit.subreddit_image" class="md:w-14 md:h-14 rounded-full border-2 p-1 w-10 h-10" :class="ringInvert">
                 </div>
-                <h2 class="font-semibold md:text-4xl my-auto mx-6 text-white text-xl" :class="'text-' + colorInvert">r/{{ subreddit.name }}</h2>
+                <h2 class="font-semibold md:text-4xl my-auto mx-6 text-white text-xl" :class="colorInvert">r/{{ subreddit.name }}</h2>
             </Link>
 
             <div class="flex justify-end" v-if="$page.props.auth.auth_check">
@@ -55,7 +55,7 @@ const colorInvert = computed(() => {
     if (bgColor) {
         const rgb = bgColor.match(/\d+/g);
         const luminance = getLuminance(rgb);
-        return luminance > 128 ? 'black' : 'white';
+        return luminance > 128 ? '!text-black' : '!text-white';
     }
     return null;
 });
@@ -64,5 +64,7 @@ const colorInvert = computed(() => {
 onMounted(() => {
     colorInvert.value && element.value.classList.add(colorInvert.value);
 });
+
+const ringInvert = colorInvert == '!text-black' ? '!border-black' : '!border-white';
 
 </script>

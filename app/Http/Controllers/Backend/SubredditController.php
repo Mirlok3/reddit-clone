@@ -48,6 +48,7 @@ class SubredditController extends Controller
     public function store(SubredditStoreRequest $request)
     {
         $subreddit = Subreddit::create($request->validated() + ['user_id' => auth()->id()]);
+        $subreddit->color = $request->color ?: '#4338ca';
 
         if ($request->hasFile('subreddit_image')) {
             $imagename = $request->subreddit_image->hashName();

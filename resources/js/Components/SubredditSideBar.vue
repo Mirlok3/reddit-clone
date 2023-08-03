@@ -2,13 +2,13 @@
     <div class="mb-4 ml-3 hidden flex-col md:flex md:w-3/12">
         <Link class="mb-4 rounded-lg border bg-indigo-700 p-4 font-semibold text-white text-large dark:border-x dark:border-t dark:border-neutral-500
                      hover:bg-opacity-75"
-              v-if="auth" :class="'text-' + colorInvert"
+              v-if="auth" :class="colorInvert"
               :style="'background-color:' + subreddit.color + ';'"
               :href="route('subreddit.users', subreddit)">Admin panel
         </Link>
         <div class="rounded-lg shadow-md dark:text-white">
             <h2 class="rounded-t-lg border-b bg-indigo-700 p-4 font-semibold text-white text-large dark:border-x dark:border-t dark:border-neutral-500"
-                ref="element" :class="'text-' + colorInvert" :style="'background-color:' + subreddit.color + ';'" >
+                ref="element" :class="colorInvert" :style="'background-color:' + subreddit.color + ';'" >
                 About {{ subreddit.name }}
             </h2>
             <p class="bg-white p-4 dark:bg-neutral-700 dark:border-x dark:border-neutral-500" >
@@ -64,7 +64,7 @@
         if (bgColor) {
             const rgb = bgColor.match(/\d+/g);
             const luminance = getLuminance(rgb);
-            return luminance > 128 ? 'black' : 'white';
+            return luminance > 128 ? '!text-black' : '!text-white';
         }
         return null;
     });

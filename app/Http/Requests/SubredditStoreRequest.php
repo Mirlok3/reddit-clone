@@ -29,7 +29,6 @@ class SubredditStoreRequest extends FormRequest
         return [
             'name' => 'required|unique:subreddits|max:255',
             'description' => ['required', 'min:5','max:255'],
-            'color' => 'nullable',
             //'subreddit_image' => 'image|mimes:svg,png,jpg' replaced with accept="image/*" in input
         ];
     }
