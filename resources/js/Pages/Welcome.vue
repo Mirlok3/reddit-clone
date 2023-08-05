@@ -1,5 +1,20 @@
 <template>
     <guest-layout>
+<!--        TODO: Sort by-->
+        <div class="flex justify-center" v-if="$page.props.auth.user">
+            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                <BreezeNavLink :href="route('subscribed')"
+                               :active="route().current('subscribed')"
+                               class="text-lg mr-5" >
+                    <span class="mr-1.5">Subscribed Page</span>
+                </BreezeNavLink>
+                <BreezeNavLink :href="route('welcome')"
+                               :active="route().current('welcome')"
+                               class="text-lg mr-5" >
+                    <span class="mr-1.5">Front Page</span>
+                </BreezeNavLink>
+            </div>
+        </div>
         <section class="md:flex md:m-2 md:p-2">
             <div class="w-full md:w-9/12">
                 <Link :href="route('posts.create')"
@@ -14,6 +29,8 @@
                         Create a post....
                     </div>
                 </Link>
+
+                <EmptyState v-if="!posts.data[0]" :message="'You have no subscribed subreddits!'"/>
 
                 <PostCard v-for="post in posts.data"
                     :post="post"
@@ -39,6 +56,8 @@ import PostCard from "@/Components/PostCard.vue";
 import Pagination from "@/Components/Pagination.vue";
 import SubredditList from "@/Components/SubredditList.vue";
 import { Link } from "@inertiajs/inertia-vue3";
+import BreezeNavLink from "@/Components/NavLink.vue";
+import EmptyState from "@/Components/EmptyState.vue";
 
 defineProps({
     subreddits: Object,

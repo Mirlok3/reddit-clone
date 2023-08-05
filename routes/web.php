@@ -19,7 +19,9 @@ Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 Route::get('/r/{slug}', [FrontendSubredditController::class, 'show'])->name('frontend.subreddits.show');
 Route::get('/r/{subreddit_slug}/posts/{post:slug}', [PostController::class, 'show'])->name('frontend.subreddits.posts.show');
 
-Route::group(['middleware' => ['auth', 'verified']], function (){
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/subscribed', [WelcomeController::class, 'subscribed'])->name('subscribed');
+
     Route::resource('/r/{subreddit_slug}/posts/{post:slug}/comments', PostCommentController::class);
     Route::resource('/r/{subreddit_slug}/posts/{post:slug}/comments/{comment:id}/replies', ReplyController::class);
 

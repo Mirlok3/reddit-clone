@@ -48,7 +48,7 @@
                         </div>
 
                         <!--Middle Side -->
-                        <div class="w-full lg:w-8/12 lg:ml-4">
+                        <div class="lg:w-7/12 lg:ml-4">
                             <h2 class="py-2 text-center text-2xl font-bold dark:text-white">Posts</h2>
                             <EmptyState v-if="!user.posts_count" message="You have no posts..." />
 

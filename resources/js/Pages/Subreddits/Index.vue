@@ -1,4 +1,5 @@
 <template>
+<!--    TODO: Subscribed, discover view-->
 
     <Head title="Subreddits"></Head>
 

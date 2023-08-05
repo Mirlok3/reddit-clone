@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/subreddits';
+    public const HOME = '/subscribed';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
