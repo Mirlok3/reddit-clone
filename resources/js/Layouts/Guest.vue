@@ -41,21 +41,45 @@ const showingNavigationDropdown = ref(false);
                                         </Link>
                                     </div>
 
-                                    <h2 class="font-semibold text-xl my-auto ml-10">Reggit</h2>
+                                    <h2 class="font-semibold text-xl my-auto ml-3">Reggit</h2>
 
                                     <!-- Navigation Links -->
-                                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                        <BreezeNavLink :href="route('welcome')"
-                                                       :active="route().current('welcome')">
-                                            Home page
-                                        </BreezeNavLink>
-                                    </div>
-                                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" v-if="$page.props.auth.user != null">
-                                        <BreezeNavLink :href="route('subreddits.index')"
-                                                       :active="route().current('subreddits.index')">
-                                            Your Subreddits
-                                        </BreezeNavLink>
-                                    </div>
+<!--                                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">-->
+<!--                                        <BreezeNavLink :href="route('welcome')"-->
+<!--                                                       :active="route().current('welcome') || route().current('subscribed')">-->
+<!--                                            Home page-->
+<!--                                        </BreezeNavLink>-->
+<!--                                    </div>-->
+
+                                    <BreezeDropdown align="right" width="48" v-if="$page.props.auth.auth_check" class="ml-3 my-auto">
+                                        <template #trigger>
+                                            <span class="inline-flex rounded-md pl-2">
+                                                <button type="button"
+                                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-full text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150
+                                                               bg-neutral-200 dark:bg-neutral-900 dark:text-white dark:hover:text-neutral-200">
+
+                                                    <span class="my-auto pl-2">Subscribed Subreddits</span>
+
+                                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                         viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd"
+                                                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                              clip-rule="evenodd"/>
+                                                    </svg>
+                                                </button>
+                                            </span>
+                                        </template>
+
+                                        <template #content >
+                                            <div v-for="sub in $page.props.subs.subs">
+                                                <BreezeDropdownLink >
+                                                    {{ sub.name }}
+                                                </BreezeDropdownLink>
+                                            </div>
+
+                                        </template>
+                                    </BreezeDropdown>
+
                                 </div>
                             </div>
 
@@ -142,7 +166,7 @@ const showingNavigationDropdown = ref(false);
                     </div>
                 </div>
 
-                <!-- Responsive Navigation Menu --> <!--TODO: Darkmode dropdown button-->
+                <!-- Mobile view Navigation Menu --> <!--TODO: Darkmode dropdown button-->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}"
                      class="sm:hidden dark:bg-neutral-800">
                     <div class="pt-2 pb-3 space-y-1">
@@ -155,7 +179,7 @@ const showingNavigationDropdown = ref(false);
                         <!-- Navigation Links -->
                         <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex dark:bg-neutral-800">
                             <BreezeResponsiveNavLink :href="route('welcome')"
-                                           :active="route().current('welcome')">
+                                           :active="route().current('welcome') || route().current('subscribed')">
                                 Home page
                             </BreezeResponsiveNavLink>
                         </div>

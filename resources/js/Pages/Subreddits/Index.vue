@@ -39,8 +39,6 @@
                                                 </th>
                                                 <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">
                                                     Name</th>
-                                                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                                                    Slug</th>
                                                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 dark:text-white">
                                                     <span class="sr-only">Edit</span>
                                                 </th>

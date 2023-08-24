@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Subscribe;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 use Illuminate\Http\Request;
@@ -39,6 +40,9 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => Auth::user(),
                 'auth_check' => auth()->check(), // Check if user the is logged in
+            ],
+            'subs' => [
+                'subs' => Subscribe::with('subreddits:id,name,slug')->where('user_id', auth()->id())->get()->pluck('subreddits'),
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [

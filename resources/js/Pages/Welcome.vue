@@ -2,7 +2,7 @@
     <guest-layout>
 <!--        TODO: Sort by-->
         <div class="flex justify-center" v-if="$page.props.auth.user">
-            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+            <div class="md:mb-0 mb-4 sm:mt-0 sm:ml-16 sm:flex-none">
                 <BreezeNavLink :href="route('subscribed')"
                                :active="route().current('subscribed')"
                                class="text-lg mr-5" >

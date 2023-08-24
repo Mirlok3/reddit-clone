@@ -47,14 +47,8 @@ const showingNavigationDropdown = ref(false);
                                     <!-- Navigation Links -->
                                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                         <BreezeNavLink :href="route('welcome')"
-                                                       :active="route().current('welcome')">
+                                                       :active="route().current('welcome') || route().current('subscribed')">
                                             Home page
-                                        </BreezeNavLink>
-                                    </div>
-                                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                        <BreezeNavLink :href="route('subreddits.index')"
-                                                       :active="route().current('subreddits.index')">
-                                            Your Subreddits
                                         </BreezeNavLink>
                                     </div>
                                 </div>
@@ -69,7 +63,7 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
-                            <!-- Settings Dropdown -->
+                            <!-- Profile Dropdown -->
                             <div class="ml-3 relative">
                                 <BreezeDropdown align="right" width="48">
                                     <template #trigger>
@@ -147,7 +141,7 @@ const showingNavigationDropdown = ref(false);
 
                         <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex dark:bg-neutral-800">
                             <BreezeResponsiveNavLink :href="route('welcome')"
-                                                     :active="route().current('welcome')">
+                                                     :active="route().current('welcome') || route().current('subscribed')">
                                 Home page
                             </BreezeResponsiveNavLink>
                         </div>
@@ -158,7 +152,6 @@ const showingNavigationDropdown = ref(false);
                                 Your Subreddits
                             </BreezeResponsiveNavLink>
                         </div>
-
 
                         <BreezeResponsiveNavLink :href="route('login')" :active="route().current('login')" v-if="!$page.props.auth.auth_check">
                             Log in
